@@ -60,10 +60,26 @@ body{min-width:0}
  .hero-actions{justify-content:flex-start}
 }
 
-.about-grid{align-items:start}
-.about-identity{min-width:0}
-.about-portrait{max-width:400px;margin:2rem 0 0;border:1px solid var(--glass-border);overflow:hidden}
+.about-grid{align-items:start;column-gap:6vw;row-gap:2rem}
+.about-heading{grid-column:1/-1}
+.about-portrait{width:100%;max-width:400px;margin:0;border:1px solid var(--glass-border);overflow:hidden}
 .about-portrait img{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:4/5}
-@media(max-width:650px){.about-portrait{max-width:400px;margin-top:1.5rem}.about-copy{margin-top:.5rem}}
+@media(max-width:650px){.about-grid{row-gap:1.5rem}.about-copy{margin-top:0}}
 
 .hero-intro h1 span{color:inherit}
+
+/* Working notes and a personal aside replace the repeated numbered cards. */
+.about-notes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6vw;padding-top:1.5rem}
+.about-notes>section{min-width:0}
+.about-notes h3{font-size:.875rem;font-weight:400;letter-spacing:.05em;margin:0 0 1.5rem;color:var(--muted-foreground)}
+.working-style dl{margin:0}
+.working-style dl>div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:1.25rem;padding:1.2rem 0;border-top:1px solid var(--border)}
+.working-style dt{font-size:1rem;color:var(--foreground)}
+.working-style dd{margin:0;font-size:1rem;line-height:1.6;color:var(--muted-foreground)}
+.personal-perspective{padding-left:2rem;border-left:1px solid var(--accent)}
+.perspective-statement{font:600 clamp(1.5rem,2.3vw,2rem)/1.35 var(--font-identity);letter-spacing:-.035em;margin:0;max-width:28rem;text-wrap:pretty}
+.off-clock{margin-top:2rem;padding-top:1.3rem;border-top:1px solid var(--border)}
+.off-clock h4{font-size:.875rem;font-weight:400;color:var(--foreground);margin:0 0 .5rem}
+.off-clock p{font-size:1rem;line-height:1.6;color:var(--muted-foreground);margin:0;max-width:28rem}
+@media(max-width:800px){.about-notes{grid-template-columns:minmax(0,1fr);gap:2.5rem}.personal-perspective{padding-left:1.5rem}.working-style dl>div{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}}
+@media(max-width:380px){.working-style dl>div{grid-template-columns:minmax(0,1fr);gap:.4rem}}
