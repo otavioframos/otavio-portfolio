@@ -2,75 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-
-const vertexSource = `
-attribute vec2 position;
-void main() { gl_Position = vec4(position, 0.0, 1.0); }
-`;
-
-// Smoothly joined spheres form a fluid-like surface; this is a motion study,
-// not a physical fluid solver. Shading and geometry stay entirely on the GPU.
-const fragmentSource = `
-precision mediump float;
-uniform vec2 resolution;
-uniform vec2 pointer;
-uniform vec2 trailing;
-uniform float phase;
-
-float join(float a, float b, float k) {
-  float h = clamp(0.5 + 0.5 * (b - a) / k, 0.0, 1.0);
-  return mix(b, a, h) - k * h * (1.0 - h);
-}
-float surface(vec3 p) {
-  float angle = -0.38 + 0.12 * sin(phase * 0.3);
-  p.xy = mat2(cos(angle), -sin(angle), sin(angle), cos(angle)) * p.xy;
-  p.xy -= pointer * 0.17;
-  float d = length(p * vec3(1.0, 1.14, 1.0)) - 0.56;
-  vec2 pull = (pointer - trailing) * 0.45;
-  d = join(d, length(p - vec3(0.35 + pull.x, 0.38 + pull.y, 0.04)) - 0.39, 0.36);
-  d = join(d, length(p - vec3(-0.35, -0.35 + 0.08 * sin(phase * 0.8), 0.13)) - 0.37, 0.32);
-  d = join(d, length(p - vec3(-0.38 + 0.08 * cos(phase * 0.5), 0.29, -0.02)) - 0.28, 0.25);
-  d += 0.014 * sin(p.x * 7.0 + phase) * sin(p.y * 6.0 - phase * 0.7);
-  return d;
-}
-void main() {
-  vec2 uv = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
-  vec3 origin = vec3(0.0, 0.0, 3.2);
-  vec3 ray = normalize(vec3(uv, -2.6));
-  float travel = 0.0;
-  float distanceToSurface = 0.0;
-  for (int i = 0; i < 48; i++) {
-    distanceToSurface = surface(origin + ray * travel);
-    if (distanceToSurface < 0.002 || travel > 5.0) break;
-    travel += distanceToSurface * 0.75;
-  }
-  if (distanceToSurface > 0.008 || travel > 5.0) {
-    gl_FragColor = vec4(0.0);
-    return;
-  }
-  vec3 p = origin + ray * travel;
-  vec2 e = vec2(0.003, 0.0);
-  vec3 n = normalize(vec3(
-    surface(p + e.xyy) - surface(p - e.xyy),
-    surface(p + e.yxy) - surface(p - e.yxy),
-    surface(p + e.yyx) - surface(p - e.yyx)
-  ));
-  vec3 light = normalize(vec3(-0.6, 0.85, 1.3));
-  vec3 view = -ray;
-  float diffuse = max(dot(n, light), 0.0);
-  float fresnel = pow(1.0 - max(dot(n, view), 0.0), 2.5);
-  float specular = pow(max(dot(n, normalize(light + view)), 0.0), 55.0);
-  vec3 reflection = reflect(ray, n);
-  float softbox = smoothstep(0.86, 0.97, dot(reflection, normalize(vec3(-0.6, 0.85, 1.0))));
-  float ribbon = exp(-pow((reflection.y + reflection.x * 0.3 - 0.4) * 12.0, 2.0));
-  vec3 copper = vec3(0.9, 0.23, 0.075) * (0.24 + diffuse * 0.82);
-  vec3 color = copper + vec3(1.0, 0.78, 0.53) * (softbox * 0.65 + specular * 0.5);
-  color += vec3(1.0, 0.41, 0.17) * fresnel * 0.65;
-  color += vec3(1.0, 0.74, 0.47) * ribbon * 0.17;
-  color = pow(color, vec3(0.87));
-  gl_FragColor = vec4(color, 1.0);
-}
-`;
+import { associateRegions, detectRegions, flowField, type Track } from '@/lib/flow-tracking';
 
 export function LiquidStudy({ lang }: { lang: 'en' | 'pt' }) {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -83,144 +15,174 @@ export function LiquidStudy({ lang }: { lang: 'en' | 'pt' }) {
   const pt = lang === 'pt';
 
   useEffect(() => {
-    const host = hostRef.current;
-    const canvas = canvasRef.current;
+    const host = hostRef.current, canvas = canvasRef.current;
     if (!host || !canvas) return;
-    const gl = canvas.getContext('webgl', { alpha: true, antialias: false, powerPreference: 'low-power' });
-    if (!gl) return;
-    const shaders: WebGLShader[] = [];
-    const makeShader = (type: number, source: string) => {
-      const shader = gl.createShader(type);
-      if (!shader) return null;
-      shaders.push(shader);
-      gl.shaderSource(shader, source);
-      gl.compileShader(shader);
-      return gl.getShaderParameter(shader, gl.COMPILE_STATUS) ? shader : null;
-    };
-    const vertex = makeShader(gl.VERTEX_SHADER, vertexSource);
-    const fragment = makeShader(gl.FRAGMENT_SHADER, fragmentSource);
-    const program = gl.createProgram();
-    if (!vertex || !fragment || !program) {
-      shaders.forEach(s => gl.deleteShader(s));
-      if (program) gl.deleteProgram(program);
-      return;
-    }
-    gl.attachShader(program, vertex);
-    gl.attachShader(program, fragment);
-    gl.linkProgram(program);
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      shaders.forEach(s => gl.deleteShader(s));
-      gl.deleteProgram(program);
-      return;
-    }
-    const buffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW);
-    // oxlint-disable-next-line react/react-compiler -- WebGL's useProgram is not a React hook.
-    gl.useProgram(program);
-    const position = gl.getAttribLocation(program, 'position');
-    gl.enableVertexAttribArray(position);
-    gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
-    const uniforms = {
-      resolution: gl.getUniformLocation(program, 'resolution'),
-      pointer: gl.getUniformLocation(program, 'pointer'),
-      trailing: gl.getUniformLocation(program, 'trailing'),
-      phase: gl.getUniformLocation(program, 'phase'),
-    };
-    const motion = { x: 0, y: 0, tailX: 0, tailY: 0 };
-    const xTo = gsap.quickTo(motion, 'x', { duration: 0.65, ease: 'power3.out' });
-    const yTo = gsap.quickTo(motion, 'y', { duration: 0.65, ease: 'power3.out' });
-    const tailXTo = gsap.quickTo(motion, 'tailX', { duration: 1.2, ease: 'power2.out' });
-    const tailYTo = gsap.quickTo(motion, 'tailY', { duration: 1.2, ease: 'power2.out' });
+    const ctx = canvas.getContext('2d', { alpha: false });
+    const texture = document.createElement('canvas');
+    const tx = texture.getContext('2d', { alpha: false });
+    if (!ctx || !tx) return;
+    const columns = 112, rows = 124;
+    texture.width = columns; texture.height = rows;
+    const pixels = tx.createImageData(columns, rows);
+    const field = new Float32Array(columns * rows);
+    const motion = { x: 0.5, y: 0.5 };
+    const xTo = gsap.quickTo(motion, 'x', { duration: 1, ease: 'power3.out' });
+    const yTo = gsap.quickTo(motion, 'y', { duration: 1, ease: 'power3.out' });
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    let visible = false;
-    let running = false;
-    let lost = false;
-    let phase = 1.6;
-    let elapsed = 0;
+    let visible = false, running = false, elapsed = 0, phase = 3.7, counter = 100;
+    let tracks: Track[] = [];
+    let width = 1, height = 1, ratio = 1, frame = 0;
 
-    const draw = () => {
-      if (lost) return;
-      gl.uniform2f(uniforms.resolution, canvas.width, canvas.height);
-      gl.uniform2f(uniforms.pointer, motion.x, motion.y);
-      gl.uniform2f(uniforms.trailing, motion.tailX, motion.tailY);
-      gl.uniform1f(uniforms.phase, phase);
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
+    const render = (advance = false) => {
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < columns; x++) {
+          field[y * columns + x] = flowField(x / columns, y / rows, phase, motion.x, motion.y);
+        }
+      }
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < columns; x++) {
+          const index = y * columns + x, value = field[index];
+          const dx = field[y * columns + Math.min(x + 1, columns - 1)] - field[y * columns + Math.max(x - 1, 0)];
+          const dy = field[Math.min(y + 1, rows - 1) * columns + x] - field[Math.max(y - 1, 0) * columns + x];
+          const normal = 1 / Math.sqrt(dx * dx * 1100 + dy * dy * 1100 + 1);
+          const light = Math.max(0, (-dx * 24 - dy * 30 + 0.7) * normal);
+          const highlight = Math.pow(Math.max(0, light - 0.15), 7) * 0.18;
+          const ridge = Math.exp(-Math.pow((value - 0.61) * 34, 2)) * 0.27;
+          const shade = Math.min(1, 0.07 + value * 0.23 + light * 0.28 + highlight + ridge);
+          const vignette = 1 - 0.25 * Math.hypot(x / columns - 0.5, y / rows - 0.5);
+          const offset = index * 4;
+          pixels.data[offset] = Math.min(255, shade * 238 * vignette);
+          pixels.data[offset + 1] = Math.min(255, shade * 239 * vignette);
+          pixels.data[offset + 2] = Math.min(255, shade * 212 * vignette);
+          pixels.data[offset + 3] = 255;
+        }
+      }
+      tx.putImageData(pixels, 0, 0);
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      ctx.imageSmoothingEnabled = true;
+      ctx.drawImage(texture, 0, 0, width, height);
+
+      // Marching-square edge intersections trace the same threshold as the boxes.
+      ctx.lineWidth = 0.55;
+      ctx.strokeStyle = 'rgba(210, 231, 153, .48)';
+      ctx.beginPath();
+      const threshold = 0.73;
+      for (let y = 0; y < rows - 2; y += 2) {
+        for (let x = 0; x < columns - 2; x += 2) {
+          const corners = [field[y * columns + x], field[y * columns + x + 2], field[(y + 2) * columns + x + 2], field[(y + 2) * columns + x]];
+          if (corners.every(v => v < threshold) || corners.every(v => v >= threshold)) continue;
+          const positions = [[x, y], [x + 2, y], [x + 2, y + 2], [x, y + 2]];
+          const crossings: number[][] = [];
+          for (let e = 0; e < 4; e++) {
+            const next = (e + 1) % 4;
+            if ((corners[e] < threshold) === (corners[next] < threshold)) continue;
+            const t = (threshold - corners[e]) / (corners[next] - corners[e]);
+            crossings.push([(positions[e][0] + (positions[next][0] - positions[e][0]) * t) / columns * width,
+              (positions[e][1] + (positions[next][1] - positions[e][1]) * t) / rows * height]);
+          }
+          for (let e = 0; e + 1 < crossings.length; e += 2) {
+            ctx.moveTo(crossings[e][0], crossings[e][1]); ctx.lineTo(crossings[e + 1][0], crossings[e + 1][1]);
+          }
+        }
+      }
+      ctx.stroke();
+      if (advance || tracks.length === 0) tracks = associateRegions(detectRegions(field, columns, rows), tracks, () => ++counter);
+
+      // A restrained network connects nearby measured region centroids.
+      ctx.strokeStyle = 'rgba(219, 232, 191, .22)'; ctx.lineWidth = 0.6; ctx.beginPath();
+      tracks.forEach((track, i) => {
+        const near = tracks.slice(i + 1).find(other => Math.hypot(other.cx - track.cx, other.cy - track.cy) < 0.28);
+        if (near) { ctx.moveTo(track.cx * width, track.cy * height); ctx.lineTo(near.cx * width, near.cy * height); }
+      });
+      ctx.stroke();
+      tracks.forEach((track, i) => {
+        const bx = track.x * width, by = track.y * height, bw = track.width * width, bh = track.height * height;
+        ctx.lineWidth = 0.7; ctx.strokeStyle = i < 3 ? '#c8f0bb' : 'rgba(212, 235, 193, .65)';
+        ctx.strokeRect(bx, by, bw, bh);
+        ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx + bw, by + bh); ctx.strokeStyle = 'rgba(212, 235, 193, .24)'; ctx.stroke();
+        ctx.fillStyle = '#ff7547';
+        ctx.beginPath(); ctx.arc(track.cx * width, track.cy * height, 2, 0, Math.PI * 2); ctx.fill();
+        if (i < 4) {
+          ctx.strokeStyle = 'rgba(255, 117, 71, .85)'; ctx.lineWidth = 1.1; ctx.beginPath();
+          track.trail.forEach((p, j) => { if (j === 0) ctx.moveTo(p.x * width, p.y * height); else ctx.lineTo(p.x * width, p.y * height); });
+          ctx.stroke();
+        }
+        const label = `${track.id}  ${Math.round(track.cx * 1000)},${Math.round(track.cy * 1000)}`;
+        ctx.font = '9px monospace';
+        const labelWidth = ctx.measureText(label).width + 7;
+        const lx = Math.max(2, Math.min(bx, width - labelWidth - 2));
+        const ly = Math.max(12, by - 3);
+        ctx.fillStyle = 'rgba(16, 23, 20, .78)'; ctx.fillRect(lx - 2, ly - 10, labelWidth, 13);
+        ctx.fillStyle = '#e3efd4'; ctx.fillText(label, lx + 1, ly);
+      });
+      ctx.fillStyle = 'rgba(16, 23, 20, .8)'; ctx.fillRect(12, height - 30, 153, 18);
+      ctx.fillStyle = '#d9e5c9'; ctx.font = '9px monospace';
+      ctx.fillText(`REGIONS ${String(tracks.length).padStart(2, '0')}  /  T ${phase.toFixed(2)}`, 18, height - 18);
     };
     const tick = (_time: number, delta: number) => {
       elapsed += delta;
-      // Cap only this decorative renderer, without changing GSAP globally.
-      if (elapsed < 1000 / 30) return;
-      phase += Math.min(elapsed, 80) / 1000;
-      elapsed = 0;
-      draw();
+      if (elapsed < 1000 / 24) return;
+      phase += Math.min(elapsed, 90) / 1000;
+      elapsed = 0; frame++;
+      render(frame % 2 === 0);
     };
     const sync = () => {
-      const active = visible && !document.hidden && !media.matches && !pausedRef.current && !lost;
+      const active = visible && !document.hidden && !media.matches && !pausedRef.current;
       if (active && !running) gsap.ticker.add(tick);
       if (!active && running) gsap.ticker.remove(tick);
       running = active;
-      if (!active) [xTo, yTo, tailXTo, tailYTo].forEach(tween => tween.tween.pause());
+      if (!active) { xTo.tween.pause(); yTo.tween.pause(); }
     };
     syncRef.current = sync;
     const resize = () => {
       const bounds = host.getBoundingClientRect();
-      const ratio = Math.min(window.devicePixelRatio || 1, 1.25, 640 / Math.max(bounds.width, bounds.height, 1));
-      canvas.width = Math.max(1, Math.round(bounds.width * ratio));
-      canvas.height = Math.max(1, Math.round(bounds.height * ratio));
-      gl.viewport(0, 0, canvas.width, canvas.height);
-      draw();
+      width = Math.max(1, bounds.width); height = Math.max(1, bounds.height);
+      ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio);
+      render();
     };
     const move = (event: PointerEvent) => {
       if (!running || event.pointerType === 'touch') return;
       const bounds = host.getBoundingClientRect();
-      const x = gsap.utils.clamp(-1, 1, (event.clientX - bounds.left) / bounds.width * 2 - 1);
-      const y = gsap.utils.clamp(-1, 1, 1 - (event.clientY - bounds.top) / bounds.height * 2);
-      xTo(x); yTo(y); tailXTo(x); tailYTo(y);
+      xTo(gsap.utils.clamp(0, 1, (event.clientX - bounds.left) / bounds.width));
+      yTo(gsap.utils.clamp(0, 1, (event.clientY - bounds.top) / bounds.height));
     };
-    const leave = () => { if (running) { xTo(0); yTo(0); tailXTo(0); tailYTo(0); } };
-    const preference = () => { setReduced(media.matches); sync(); draw(); };
-    const contextLost = (event: Event) => { event.preventDefault(); lost = true; setReady(false); sync(); };
+    const leave = () => { if (running) { xTo(0.5); yTo(0.5); } };
+    const preference = () => { setReduced(media.matches); sync(); render(); };
     const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); });
     const sizeObserver = new ResizeObserver(resize);
-    observer.observe(host);
-    sizeObserver.observe(host);
-    const hero = host.closest('.hero') || host;
-    hero.addEventListener('pointermove', move as EventListener, { passive: true });
-    hero.addEventListener('pointerleave', leave);
+    observer.observe(host); sizeObserver.observe(host);
+    host.addEventListener('pointermove', move, { passive: true });
+    host.addEventListener('pointerleave', leave);
     document.addEventListener('visibilitychange', sync);
     media.addEventListener('change', preference);
-    canvas.addEventListener('webglcontextlost', contextLost);
-    preference();
-    resize();
-    setReady(true);
+    preference(); resize(); setReady(true);
     return () => {
       syncRef.current = null;
       observer.disconnect(); sizeObserver.disconnect();
       gsap.ticker.remove(tick); gsap.killTweensOf(motion);
-      hero.removeEventListener('pointermove', move as EventListener);
-      hero.removeEventListener('pointerleave', leave);
+      host.removeEventListener('pointermove', move);
+      host.removeEventListener('pointerleave', leave);
       document.removeEventListener('visibilitychange', sync);
       media.removeEventListener('change', preference);
-      canvas.removeEventListener('webglcontextlost', contextLost);
-      gl.deleteBuffer(buffer); gl.deleteProgram(program);
-      shaders.forEach(s => gl.deleteShader(s));
     };
   }, []);
 
-  return <figure className="liquid-study">
-    <div className="study-topline"><span>CREATIVE CODING / 001</span><span aria-hidden="true">↙</span></div>
+  return <figure className="liquid-study tracking-study">
+    <div className="study-topline"><span>BLOB TRACKING / 001</span><span aria-hidden="true">↙</span></div>
     <div ref={hostRef} className="liquid-stage" data-ready={ready}>
-      <div className="liquid-guides" aria-hidden="true" />
-      <div className="liquid-fallback" aria-hidden="true" />
+      <svg className="tracking-fallback" viewBox="0 0 400 440" aria-hidden="true">
+        <path d="M-30 60C170-40 80 200 300 60S220 240 440 190M-20 190C170 40 120 370 420 250M-10 310C180 170 130 490 430 350" fill="none" stroke="#657567" strokeWidth="48"/>
+        <path d="M-30 60C170-40 80 200 300 60S220 240 440 190M-20 190C170 40 120 370 420 250M-10 310C180 170 130 490 430 350" fill="none" stroke="#cee4b2" strokeWidth="1"/>
+        <g fill="none" stroke="#c8f0bb" strokeWidth="1"><rect x="45" y="70" width="72" height="85"/><rect x="210" y="175" width="90" height="60"/><rect x="90" y="285" width="70" height="90"/><path d="M80 110L255 205L125 330"/></g>
+        <g fill="#ff7547"><circle cx="80" cy="110" r="3"/><circle cx="255" cy="205" r="3"/><circle cx="125" cy="330" r="3"/></g>
+      </svg>
       <canvas ref={canvasRef} aria-hidden="true" />
     </div>
     <figcaption className="study-caption">
-      <div><span>{pt ? 'Ideias em movimento.' : 'Ideas in motion.'}</span><p className="study-pointer-hint">{pt ? 'Mova o cursor para explorar' : 'Move your cursor to explore'}</p></div>
-      {ready && !reduced && <button type="button" aria-pressed={paused} aria-label={paused ? (pt ? 'Retomar animação' : 'Resume animation') : (pt ? 'Pausar animação' : 'Pause animation')} onClick={() => {
-        pausedRef.current = !pausedRef.current;
-        setPaused(pausedRef.current);
-        syncRef.current?.();
+      <div><span>{pt ? 'Um estudo de fluxo e rastreamento.' : 'A study in flow and tracking.'}</span><p className="study-pointer-hint">{pt ? 'Mova o cursor para alterar o fluxo' : 'Move your cursor to shift the flow'}</p></div>
+      {ready && !reduced && <button type="button" aria-label={paused ? (pt ? 'Retomar animação' : 'Resume animation') : (pt ? 'Pausar animação' : 'Pause animation')} onClick={() => {
+        pausedRef.current = !pausedRef.current; setPaused(pausedRef.current); syncRef.current?.();
       }}>{paused ? '▶' : 'Ⅱ'}</button>}
     </figcaption>
   </figure>;
