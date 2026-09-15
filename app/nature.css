@@ -97,3 +97,35 @@ body{min-width:0}
 @media(max-width:1000px){.mind-preview-screen{right:9%;height:99%}.mind-preview-brand{left:6%;width:43%}.mind-preview-label{font-size:.75rem}.mind-preview-caption{font-size:.875rem}}
 @media(max-width:650px){.project-showcase .project-visual.mind-preview{aspect-ratio:1.1}.mind-preview-brand{inset:8% auto 8% 6%;width:45%;gap:.75rem}.mind-preview-brand strong{font-size:10cqw}.mind-preview-brand>img{width:31cqw;max-width:100%;margin-right:0}.mind-preview-label{max-width:9rem;font-size:.75rem;letter-spacing:.04em}.mind-preview-caption{max-width:8rem;font-size:.875rem;line-height:1.4}.mind-preview-screen{top:14%;right:-5%;height:88%;border-width:3px;border-radius:1.25rem}}
 @media(prefers-reduced-motion:reduce){.mind-preview-screen{transition:none}}
+
+/* A smaller shelf of earlier work, between the flagship cases and the biography. */
+.more-work{max-width:1400px;margin:0 auto;padding:0 3rem 6rem}
+.more-work-heading{display:flex;align-items:baseline;justify-content:space-between;gap:1.5rem;padding-top:2rem;border-top:1px solid var(--border);margin-bottom:2rem}
+.more-work-heading h2{font:600 clamp(2rem,3vw,3rem)/1.1 var(--font-identity),sans-serif;letter-spacing:-.05em;margin:0}
+.more-work-heading>p{font-size:1rem;color:var(--muted-foreground);margin:0}
+.more-work-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
+.more-work-card{min-width:0}
+.more-work-card>a{display:block;height:100%;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.more-work-image{aspect-ratio:16/9;overflow:hidden;background:var(--muted);border-radius:3px}
+.more-work-image img{display:block;width:100%;height:100%;object-fit:contain;transition:transform 300ms var(--ease-out)}
+.more-work-meta{display:flex;justify-content:space-between;gap:1rem;font-size:.875rem;color:var(--muted-foreground);margin:1.15rem 0 .65rem}
+.more-work-card h3{display:flex;justify-content:space-between;align-items:baseline;gap:.8rem;font:600 clamp(1.3rem,1.8vw,1.8rem)/1.25 var(--font-identity),sans-serif;letter-spacing:-.035em;margin:0}
+.more-work-card h3>span{font:400 1.25rem/1 var(--font-manrope),sans-serif;flex-shrink:0;transition:transform 180ms var(--ease-out)}
+.more-work-card p{font-size:1rem;line-height:1.65;color:var(--muted-foreground);margin:.75rem 0 0}
+.more-work-card>a:focus-visible{outline-offset:6px}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){.more-work-card>a:hover .more-work-image img{transform:scale(1.035)}.more-work-card>a:hover h3>span{transform:translate(2px,-2px)}}
+.more-work-card>a:hover h3{color:var(--accent)}
+.project-note{width:100%;max-width:1296px;margin:0 auto;padding:2rem 3rem 6rem}
+.project-note-heading{padding:3rem 0 2.5rem;max-width:850px}
+.project-note-heading h1{font:600 clamp(2.8rem,5vw,5rem)/1.1 var(--font-identity),sans-serif;letter-spacing:-.05em;overflow-wrap:break-word;margin:1rem 0}
+.project-note-heading>p:last-child{font-size:clamp(1.1rem,1.8vw,1.4rem);line-height:1.6;color:var(--muted-foreground);max-width:700px;margin:0}
+.project-note figure{margin:0}
+.project-note figure>img{display:block;width:100%;height:auto;border-radius:3px}
+.project-note figcaption{font-size:.875rem;line-height:1.6;color:var(--muted-foreground);margin-top:.9rem;max-width:800px}
+.project-note-context{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6vw;padding:3.5rem 0}
+.project-note-context h2{font:600 1.6rem/1.2 var(--font-identity),sans-serif;letter-spacing:-.035em;margin:0 0 1rem}
+.project-note-context p{font-size:1.125rem;line-height:1.7;color:var(--muted-foreground);margin:0}
+.project-note-source{display:inline-block;margin-top:2rem;white-space:normal}
+@media(max-width:1000px){.more-work,.project-note{padding-inline:4vw}.more-work-grid{gap:1rem}.more-work-meta{flex-wrap:wrap;gap:.25rem .75rem}}
+@media(max-width:700px){.more-work{padding:0 5vw 4rem}.more-work-heading{display:block}.more-work-heading>p{margin-top:.8rem}.more-work-grid{grid-template-columns:minmax(0,1fr);gap:2rem}.more-work-card h3{font-size:1.7rem}.project-note{padding:1.5rem 5vw 4rem}.project-note-heading{padding-top:2rem}.project-note-context{grid-template-columns:minmax(0,1fr);gap:2rem;padding-block:2.5rem}}
+@media(prefers-reduced-motion:reduce){.more-work-image img,.more-work-card h3>span{transition:none}}

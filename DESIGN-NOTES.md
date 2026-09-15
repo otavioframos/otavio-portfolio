@@ -31,3 +31,12 @@ Validation: TypeScript and production build; local route HTTP 200. Pure checks p
 ## Contrast and overflow correction
 The dithered meadow is composited at 45% opacity against a dark base before drawing tracking marks at full opacity. This darkens the photo independently of tracking contrast. Reduced the hero heading from an 8.1rem cap to 6rem, with a smaller mobile scale; removed forced no-wrap. Removed the centered 1000px hero-copy container and reduced its outer inset to a responsive 20–56px.
 Constrained flexible children and grid tracks, enabled narrow-screen wrapping for header/project metadata, and allowed long headings and contact strings to wrap. Decorative horizontal overflow is clipped at the page and hero boundaries. TypeScript/local HTTP checks passed; production build verified before publishing. No browser measurement or visual QA was performed.
+
+## More work — September 15, 2026
+
+Added a compact three-project gallery between the main cases and About, with bilingual short project pages for Chilli Beans Australia, Naluu Activewear, and WRK. Gindie is pending a source link or files; no empty tile or invented case is published. Scope and 2024 dates come from the user's public Notion cases. Employment/agency relationships are not inferred, and commercial metrics are not repeated. WRK's original slide includes a historical performance report, identified as such in its caption.
+
+Original project visuals were downloaded from public Notion image blocks and converted to WebP without cropping or substantive edits. Sources:
+- Chilli Beans: https://citrine-giraffe-448.notion.site/Chilli-Beans-AU-7bee62ee0f7f82bdac0581b7b05f6088 — Frame 96 and Frame 97.
+- Naluu: https://citrine-giraffe-448.notion.site/Naluu-ActiveWear-021e62ee0f7f83c2bcf901964a787411 — Frame 87 and Frame 86(1).
+- WRK: https://citrine-giraffe-448.notion.site/WRK-9efe62ee0f7f83a2898f813e894e39ce — original delivery and wireframe slides.
