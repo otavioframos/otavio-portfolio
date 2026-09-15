@@ -5,3 +5,6 @@ export const alternatesFor = (enPath: string) => ({
   languages: { en: siteUrl + enPath, 'pt-BR': siteUrl + '/pt' + (enPath === '/' ? '' : enPath), 'x-default': siteUrl + enPath },
 });
 export const alternatesForPt = (enPath: string) => ({ ...alternatesFor(enPath), canonical: siteUrl + '/pt' + (enPath === '/' ? '' : enPath) });
+
+/** Set NEXT_PUBLIC_CV_URL to a PDF path (e.g. /otavio-ramos-cv.pdf) to show the résumé link in the footer. */
+export const cvUrl = process.env.NEXT_PUBLIC_CV_URL || '';

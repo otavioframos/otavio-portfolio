@@ -324,3 +324,14 @@ body{min-width:0}
 }
 /* Mobile: keep tracking labels below the hero copy and the MindYoung ribbon clear of the mascot. */
 @media(max-width:650px){.selected-work-feature-ribbon{z-index:2;left:.6rem;bottom:.6rem;font-size:.62rem;padding:.45rem .55rem}.feature-mindyoung .selected-mindyoung-brand{inset:8% auto 22% 6%}}
+
+/* Case evidence blocks: measured results, learnings, next steps. Only render when data exists. */
+.case-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem 2rem;margin:0 0 2rem;padding:1.5rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.case-results>div{display:flex;flex-direction:column;gap:.35rem}
+.case-results dt{font:600 clamp(2rem,3.4vw,3rem)/1 var(--font-identity);letter-spacing:-.04em;color:var(--foreground)}
+.case-results dd{margin:0;font-size:.95rem;line-height:1.5;color:var(--foreground)}
+.case-results small{display:block;margin-top:.25rem;font:.75rem/1.4 var(--font-label);letter-spacing:.04em;color:var(--muted-foreground)}
+.case-learnings,.case-next-steps{margin-top:2rem;max-width:44rem}
+.case-learnings h3,.case-next-steps h3{margin:0 0 .75rem;font:.8rem/1.4 var(--font-label);letter-spacing:.08em;text-transform:uppercase;color:var(--muted-foreground)}
+.case-learnings ul{margin:0;padding-left:1.1rem;display:grid;gap:.5rem}
+.case-learnings li,.case-next-steps p{font-size:1rem;line-height:1.65}

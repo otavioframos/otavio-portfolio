@@ -1,3 +1,17 @@
+export type CaseEvidence = {
+  /** Year or span shown in the case eyebrow, e.g. "2025–2026". Falls back to 2026. */
+  period?: string;
+  /** Answered before the visuals: what was yours, who else was there, how long. */
+  facts?: { team?: string; timeline?: string; platform?: string };
+  /** Measured outcomes. Keep each one falsifiable: instrument + window + sample. */
+  results?: { value: string; label: string; note?: string }[];
+  /** What you would do differently, or what the work taught you. */
+  learnings?: string[];
+  /** Where the work goes next. */
+  next?: string;
+  /** One-line result used as the link text on the home, before the click. */
+  headline?: string;
+};
 export const projects = [
   {
     "slug": "mindyoung",
@@ -258,3 +272,5 @@ export const projects = [
   }
 ] as const;
 export type Lang = "en" | "pt";
+/** Optional evidence per case and language. Fill in lib/case-evidence.ts; nothing renders until it exists. */
+export { caseEvidence } from "./case-evidence";
