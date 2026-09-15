@@ -99,7 +99,9 @@ body{min-width:0}
 @media(prefers-reduced-motion:reduce){.mind-preview-screen{transition:none}}
 
 /* A smaller shelf of earlier work, between the flagship cases and the biography. */
-.more-work{max-width:1400px;margin:0 auto;padding:0 3rem 6rem}
+.portfolio-home .work-index{padding-bottom:3rem}
+.project-showcase .project:last-child{margin-bottom:0}
+.more-work{max-width:1400px;margin:0 auto;padding:0 3rem 4rem}
 .more-work-heading{display:flex;align-items:baseline;justify-content:space-between;gap:1.5rem;padding-top:2rem;border-top:1px solid var(--border);margin-bottom:2rem}
 .more-work-heading h2{font:600 clamp(2rem,3vw,3rem)/1.1 var(--font-identity),sans-serif;letter-spacing:-.05em;margin:0}
 .more-work-heading>p{font-size:1rem;color:var(--muted-foreground);margin:0}
@@ -127,5 +129,5 @@ body{min-width:0}
 .project-note-context p{font-size:1.125rem;line-height:1.7;color:var(--muted-foreground);margin:0}
 .project-note-source{display:inline-block;margin-top:2rem;white-space:normal}
 @media(max-width:1000px){.more-work,.project-note{padding-inline:4vw}.more-work-grid{gap:1rem}.more-work-meta{flex-wrap:wrap;gap:.25rem .75rem}}
-@media(max-width:700px){.more-work{padding:0 5vw 4rem}.more-work-heading{display:block}.more-work-heading>p{margin-top:.8rem}.more-work-grid{grid-template-columns:minmax(0,1fr);gap:2rem}.more-work-card h3{font-size:1.7rem}.project-note{padding:1.5rem 5vw 4rem}.project-note-heading{padding-top:2rem}.project-note-context{grid-template-columns:minmax(0,1fr);gap:2rem;padding-block:2.5rem}}
+@media(max-width:700px){.portfolio-home .work-index{padding-bottom:2rem}.more-work{padding:0 5vw 3rem}.more-work-heading{display:block}.more-work-heading>p{margin-top:.8rem}.more-work-grid{grid-template-columns:minmax(0,1fr);gap:2rem}.more-work-card h3{font-size:1.7rem}.project-note{padding:1.5rem 5vw 4rem}.project-note-heading{padding-top:2rem}.project-note-context{grid-template-columns:minmax(0,1fr);gap:2rem;padding-block:2.5rem}}
 @media(prefers-reduced-motion:reduce){.more-work-image img,.more-work-card h3>span{transition:none}}
