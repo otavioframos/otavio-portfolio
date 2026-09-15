@@ -131,3 +131,33 @@ body{min-width:0}
 @media(max-width:1000px){.more-work,.project-note{padding-inline:4vw}.more-work-grid{gap:1rem}.more-work-meta{flex-wrap:wrap;gap:.25rem .75rem}}
 @media(max-width:700px){.portfolio-home .work-index{padding-bottom:2rem}.more-work{padding:0 5vw 3rem}.more-work-heading{display:block}.more-work-heading>p{margin-top:.8rem}.more-work-grid{grid-template-columns:minmax(0,1fr);gap:2rem}.more-work-card h3{font-size:1.7rem}.project-note{padding:1.5rem 5vw 4rem}.project-note-heading{padding-top:2rem}.project-note-context{grid-template-columns:minmax(0,1fr);gap:2rem;padding-block:2.5rem}}
 @media(prefers-reduced-motion:reduce){.more-work-image img,.more-work-card h3>span{transition:none}}
+
+/* Compact work index with a pointer-following image window. */
+.work-index:has(.selected-work-list) .work-introduction{margin-bottom:0;border-bottom:0}
+.selected-work-list{position:relative}
+.selected-work-row{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr) auto;align-items:center;gap:3rem;min-height:160px;padding:2rem 1.25rem;border-top:1px solid var(--border);isolation:isolate;transition:background-color 180ms ease,border-color 180ms ease}
+.selected-work-row:last-of-type{border-bottom:1px solid var(--border)}
+.selected-work-row::before{content:'';position:absolute;inset:0 auto 0 0;width:2px;background:var(--accent);opacity:0;transition:opacity 180ms ease}
+.selected-work-identity{min-width:0}
+.selected-work-identity>p{font:.875rem/1.5 var(--font-manrope),sans-serif;color:var(--muted-foreground);letter-spacing:.035em;margin:0 0 .55rem}
+.selected-work-identity h3{font:600 clamp(2rem,3.4vw,3.2rem)/1.12 var(--font-identity),sans-serif;letter-spacing:-.055em;margin:0;overflow-wrap:break-word}
+.selected-work-summary{font-size:1rem;line-height:1.65;color:var(--muted-foreground);margin:0;max-width:33rem}
+.selected-work-open{display:flex;align-items:center;gap:1rem;font-size:.875rem;white-space:nowrap}
+.selected-work-open>span:last-child{font-size:1.5rem;color:var(--accent);transition:transform 180ms var(--ease-out)}
+.selected-work-row:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;background:#ff624c0d;transition:none}
+.selected-work-row:focus-visible::before{opacity:1;transition:none}
+.selected-work-row:active{background:#ff624c18}
+@media(hover:hover) and (pointer:fine){.selected-work-row:hover{background:#ff624c0d;border-top-color:#ff624c66}.selected-work-row:hover::before{opacity:1}.selected-work-row:hover .selected-work-open>span:last-child{transform:translate(3px,-3px)}}
+.work-pointer-preview{position:fixed;left:0;top:0;width:min(380px,calc(100vw - 32px));height:272px;z-index:100;pointer-events:none;opacity:0;visibility:hidden;transform:scale(.97);transform-origin:top left;border:1px solid #eeeee638;border-radius:8px;overflow:hidden;background:#171817;box-shadow:0 16px 48px #0008;will-change:transform}
+.work-preview-slide{position:absolute;inset:0;visibility:hidden;display:flex;flex-direction:column}
+.work-preview-image{height:230px;position:relative;overflow:hidden;background:var(--card)}
+.work-preview-art{display:block;width:100%;height:100%;object-fit:contain}
+.work-preview-caption{height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;gap:1rem;font:500 .875rem/1.4 var(--font-manrope),sans-serif;color:var(--foreground);background:#171817}
+.work-preview-caption>span:last-child{color:var(--muted-foreground);font-size:.75rem}
+.preview-mindyoung .work-preview-image{background:#bfd0ec}
+.preview-mindyoung .work-preview-art{position:absolute;right:12%;top:14px;width:auto;height:125%;border:3px solid #152c53;border-radius:16px;transform:rotate(-6deg);box-shadow:0 8px 24px #152c5333}
+.work-preview-owl{position:absolute;left:9%;top:25%;width:34%;height:auto}
+@media(max-width:1000px){.selected-work-row{gap:1.5rem}.selected-work-open>span:first-child{display:none}}
+@media(max-width:650px){.selected-work-row{grid-template-columns:minmax(0,1fr) auto;gap:1rem;min-height:0;padding:1.5rem .8rem}.selected-work-identity h3{font-size:2.2rem}.selected-work-identity>p{font-size:.8rem}.selected-work-summary{grid-column:1;grid-row:2;font-size:1rem}.selected-work-open{grid-column:2;grid-row:1/3}.selected-work-open>span:last-child{font-size:1.6rem}}
+@media(hover:none),(pointer:coarse){.work-pointer-preview{display:none}}
+@media(prefers-reduced-motion:reduce){.selected-work-row,.selected-work-row::before,.selected-work-open>span:last-child{transition:none}.selected-work-row:hover .selected-work-open>span:last-child{transform:none}}
