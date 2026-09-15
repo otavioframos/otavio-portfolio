@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { detectRegions, type Region } from '@/lib/flow-tracking';
+import { scanMarker } from '@/lib/tracking-motion';
 
 export function LandscapeStudy({ lang }: { lang: 'en' | 'pt' }) {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -25,6 +26,7 @@ export function LandscapeStudy({ lang }: { lang: 'en' | 'pt' }) {
     const yTo = gsap.quickTo(pointer, 'y', { duration: 1.2, ease: 'power3.out' });
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
     let width = 1, height = 1, ratio = 1, phase = 0, elapsed = 0;
+    let scanTop = 0, scanBottom = 1;
     let loaded = false, visible = false, running = false, disposed = false;
     let regions: Region[] = [];
     const history = new Map<number, {x:number;y:number}[]>();
@@ -45,25 +47,42 @@ export function LandscapeStudy({ lang }: { lang: 'en' | 'pt' }) {
         const sy = i * slice;
         ctx.drawImage(photo, 0, sy, photo.width, slice, ox + wave((sy + slice / 2) / photo.height), oy + sy * scale, dw, slice * scale + 1);
       }
-      const shown = regions.map((r, i) => ({ ...r, id: 101 + i,
-        px: ox + r.cx * dw + wave(r.cy), py: oy + r.cy * dh,
-        bx: ox + r.x * dw + wave(r.cy), by: oy + r.y * dh, bw: r.width * dw, bh: r.height * dh,
-      })).filter(r => r.px > 12 && r.px < width - 12 && r.py > height * 0.42 && r.py < height - 45);
+      const anchors = regions.map(r => ({
+        x: ox + r.cx * dw + wave(r.cy), y: oy + r.cy * dh,
+        width: r.width * dw, height: r.height * dh,
+      })).filter(r => r.x > 30 && r.x < width - 30);
+      const safeTop = scanTop, safeBottom = scanBottom;
+      // Reproject into the open meadow band so scanners never obscure the copy.
+      const targets = anchors.map((a, i) => ({ ...a, y: safeTop + ((a.y / height + i * .137) % 1) * (safeBottom - safeTop) }));
+      if (targets.length < 3) {
+        for (let i = 0; i < 4; i++) targets.push({ x: width * (.14 + i * .24), y: safeTop + (i % 2 ? .7 : .2) * (safeBottom - safeTop), width: 35, height: 30 });
+      }
+      const shown = Array.from({ length: width < 600 ? 4 : 7 }, (_, i) => {
+        const marker = scanMarker(targets, i, phase)!;
+        return { id: 101 + i, px: marker.x, py: marker.y,
+          bx: marker.x - marker.width / 2, by: marker.y - marker.height / 2,
+          bw: marker.width, bh: marker.height, locked: marker.locked };
+      });
       ctx.lineWidth = .65;
       for (const region of shown) {
         const { id, px, py, bx, by, bw, bh } = region;
-        ctx.strokeStyle = 'rgba(207, 229, 191, .62)';
-        ctx.strokeRect(bx, by, Math.max(9, bw), Math.max(9, bh));
+        ctx.strokeStyle = region.locked ? 'rgba(225, 244, 195, .92)' : 'rgba(207, 229, 191, .7)';
+        ctx.strokeRect(bx, by, bw, bh);
+        ctx.lineWidth = 1.6; ctx.beginPath();
+        const corner = 6;
+        ctx.moveTo(bx, by + corner); ctx.lineTo(bx, by); ctx.lineTo(bx + corner, by);
+        ctx.moveTo(bx + bw - corner, by + bh); ctx.lineTo(bx + bw, by + bh); ctx.lineTo(bx + bw, by + bh - corner);
+        ctx.stroke(); ctx.lineWidth = .65;
         ctx.strokeStyle = 'rgba(207, 229, 191, .24)';
         ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx + bw, by + bh); ctx.stroke();
         ctx.fillStyle = 'rgba(230, 235, 210, .92)';
         ctx.font = '10px monospace';
-        const label = `${id} / ${Math.round(region.cx * 1000)},${Math.round(region.cy * 1000)}`;
+        const label = `${id} / ${Math.round(px)},${Math.round(py)}`;
         const tx = Math.min(width - ctx.measureText(label).width - 10, Math.max(10, bx));
         ctx.fillText(label, tx, Math.max(height * .43, by - 6));
         ctx.fillStyle = '#dc9876'; ctx.fillRect(px - 1.5, py - 1.5, 3, 3);
         const trail = history.get(id) ?? [];
-        if (advance) { trail.push({ x: px, y: py }); if (trail.length > 24) trail.shift(); history.set(id, trail); }
+        if (advance) { trail.push({ x: px, y: py }); if (trail.length > 36) trail.shift(); history.set(id, trail); }
         ctx.strokeStyle = 'rgba(220, 152, 118, .7)'; ctx.beginPath();
         trail.forEach((p, i) => { if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); }); ctx.stroke();
       }
@@ -89,6 +108,12 @@ export function LandscapeStudy({ lang }: { lang: 'en' | 'pt' }) {
     syncRef.current = sync;
     const resize = () => {
       const bounds = host.getBoundingClientRect(); width = bounds.width; height = bounds.height;
+      const hero = host.closest('.nature-hero');
+      const intro = hero?.querySelector('.hero-intro')?.getBoundingClientRect();
+      const card = hero?.querySelector('.personal-notes article')?.getBoundingClientRect();
+      scanTop = Math.min(height - 100, (intro ? intro.bottom - bounds.top : height * .52) + 55);
+      scanBottom = Math.min(height - 35, Math.max(scanTop + 65, (card ? card.top - bounds.top : height * .8) - 50));
+      host.style.setProperty('--scan-top', `${scanTop}px`);
       ratio = Math.min(window.devicePixelRatio || 1, 1.25, 1600 / Math.max(width, 1));
       canvas.width = Math.max(1, Math.round(width * ratio)); canvas.height = Math.max(1, Math.round(height * ratio));
       history.clear(); draw();
