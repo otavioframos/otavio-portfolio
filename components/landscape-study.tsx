@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { detectRegions, type Region } from '@/lib/flow-tracking';
 import { scanMarker } from '@/lib/tracking-motion';
+import { ditherMeadow } from '@/lib/dither';
 
 export function LandscapeStudy({ lang }: { lang: 'en' | 'pt' }) {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -21,6 +22,7 @@ export function LandscapeStudy({ lang }: { lang: 'en' | 'pt' }) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     const photo = new Image();
+    const processed = document.createElement('canvas');
     const pointer = { x: 0, y: 0 };
     const xTo = gsap.quickTo(pointer, 'x', { duration: 1.2, ease: 'power3.out' });
     const yTo = gsap.quickTo(pointer, 'y', { duration: 1.2, ease: 'power3.out' });
@@ -42,22 +44,21 @@ export function LandscapeStudy({ lang }: { lang: 'en' | 'pt' }) {
       const oy = (height - dh) / 2 + pointer.y * 4;
       // A restrained displacement gives the still meadow a gentle sense of motion.
       // The tracking coordinates use the same mapping as the underlying image.
-      const slices = 32, slice = photo.height / slices;
+      ctx.imageSmoothingEnabled = false;
+      const slices = 32, slice = processed.height / slices;
       for (let i = 0; i < slices; i++) {
         const sy = i * slice;
-        ctx.drawImage(photo, 0, sy, photo.width, slice, ox + wave((sy + slice / 2) / photo.height), oy + sy * scale, dw, slice * scale + 1);
+        ctx.drawImage(processed, 0, sy, processed.width, slice, ox + wave((sy + slice / 2) / processed.height), oy + sy / processed.height * dh, dw, dh / slices + 1);
       }
       const anchors = regions.map(r => ({
         x: ox + r.cx * dw + wave(r.cy), y: oy + r.cy * dh,
         width: r.width * dw, height: r.height * dh,
       })).filter(r => r.x > 30 && r.x < width - 30);
-      const safeTop = scanTop, safeBottom = scanBottom;
-      // Reproject into the open meadow band so scanners never obscure the copy.
-      const targets = anchors.map((a, i) => ({ ...a, y: safeTop + ((a.y / height + i * .137) % 1) * (safeBottom - safeTop) }));
-      if (targets.length < 3) {
-        for (let i = 0; i < 4; i++) targets.push({ x: width * (.14 + i * .24), y: safeTop + (i % 2 ? .7 : .2) * (safeBottom - safeTop), width: 35, height: 30 });
-      }
-      const shown = Array.from({ length: width < 600 ? 4 : 7 }, (_, i) => {
+      // Prefer actual visible subjects: markers now settle onto flowers instead
+      // of repositioned points in a generic scan band.
+      const targets = anchors.filter(a => a.y > scanTop && a.y < scanBottom);
+      if (!targets.length) targets.push(...anchors.filter(a => a.y > height * .48 && a.y < height - 45));
+      const shown = Array.from({ length: Math.min(targets.length, width < 600 ? 3 : 5) }, (_, i) => {
         const marker = scanMarker(targets, i, phase)!;
         return { id: 101 + i, px: marker.x, py: marker.y,
           bx: marker.x - marker.width / 2, by: marker.y - marker.height / 2,
@@ -66,7 +67,7 @@ export function LandscapeStudy({ lang }: { lang: 'en' | 'pt' }) {
       ctx.lineWidth = .65;
       for (const region of shown) {
         const { id, px, py, bx, by, bw, bh } = region;
-        ctx.strokeStyle = region.locked ? 'rgba(225, 244, 195, .92)' : 'rgba(207, 229, 191, .7)';
+        ctx.strokeStyle = region.locked ? 'rgba(255, 98, 76, 1)' : 'rgba(236, 222, 199, .7)';
         ctx.strokeRect(bx, by, bw, bh);
         ctx.lineWidth = 1.6; ctx.beginPath();
         const corner = 6;
@@ -80,10 +81,10 @@ export function LandscapeStudy({ lang }: { lang: 'en' | 'pt' }) {
         const label = `${id} / ${Math.round(px)},${Math.round(py)}`;
         const tx = Math.min(width - ctx.measureText(label).width - 10, Math.max(10, bx));
         ctx.fillText(label, tx, Math.max(height * .43, by - 6));
-        ctx.fillStyle = '#dc9876'; ctx.fillRect(px - 1.5, py - 1.5, 3, 3);
+        ctx.fillStyle = '#ff624c'; ctx.fillRect(px - 1.5, py - 1.5, 3, 3);
         const trail = history.get(id) ?? [];
         if (advance) { trail.push({ x: px, y: py }); if (trail.length > 36) trail.shift(); history.set(id, trail); }
-        ctx.strokeStyle = 'rgba(220, 152, 118, .7)'; ctx.beginPath();
+        ctx.strokeStyle = 'rgba(255, 98, 76, .65)'; ctx.beginPath();
         trail.forEach((p, i) => { if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); }); ctx.stroke();
       }
       // Connect nearby flowers sparingly, keeping the center clear for the introduction.
@@ -95,7 +96,7 @@ export function LandscapeStudy({ lang }: { lang: 'en' | 'pt' }) {
     };
     const tick = (_t: number, delta: number) => {
       elapsed += delta;
-      if (elapsed < 1000 / 24) return;
+      if (elapsed < 1000 / 30) return;
       phase += Math.min(elapsed, 90) / 1000; elapsed = 0; draw(true);
     };
     const sync = () => {
@@ -110,9 +111,9 @@ export function LandscapeStudy({ lang }: { lang: 'en' | 'pt' }) {
       const bounds = host.getBoundingClientRect(); width = bounds.width; height = bounds.height;
       const hero = host.closest('.nature-hero');
       const intro = hero?.querySelector('.hero-intro')?.getBoundingClientRect();
-      const card = hero?.querySelector('.personal-notes article')?.getBoundingClientRect();
+
       scanTop = Math.min(height - 100, (intro ? intro.bottom - bounds.top : height * .52) + 55);
-      scanBottom = Math.min(height - 35, Math.max(scanTop + 65, (card ? card.top - bounds.top : height * .8) - 50));
+      scanBottom = height - 55;
       host.style.setProperty('--scan-top', `${scanTop}px`);
       ratio = Math.min(window.devicePixelRatio || 1, 1.25, 1600 / Math.max(width, 1));
       canvas.width = Math.max(1, Math.round(width * ratio)); canvas.height = Math.max(1, Math.round(height * ratio));
@@ -134,6 +135,12 @@ export function LandscapeStudy({ lang }: { lang: 'en' | 'pt' }) {
         }
         regions = detectRegions(field, 192, 108);
       }
+      processed.width = 512; processed.height = Math.round(512 * photo.height / photo.width);
+      const print = processed.getContext('2d');
+      if (!print) return;
+      print.drawImage(photo, 0, 0, processed.width, processed.height);
+      const printData = print.getImageData(0, 0, processed.width, processed.height);
+      ditherMeadow(printData.data, processed.width); print.putImageData(printData, 0, 0);
       loaded = true; resize(); setReady(true); sync();
     };
     const move = (event: PointerEvent) => {
