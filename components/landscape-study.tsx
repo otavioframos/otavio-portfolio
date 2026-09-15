@@ -37,7 +37,8 @@ export function LandscapeStudy({ lang }: { lang: 'en' | 'pt' }) {
     const draw = (advance = false) => {
       if (!loaded) return;
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = '#141614';
+      ctx.fillRect(0, 0, width, height);
       const scale = Math.max(width / photo.width, height / photo.height) * 1.035;
       const dw = photo.width * scale, dh = photo.height * scale;
       const ox = (width - dw) / 2 + pointer.x * 7;
@@ -45,11 +46,13 @@ export function LandscapeStudy({ lang }: { lang: 'en' | 'pt' }) {
       // A restrained displacement gives the still meadow a gentle sense of motion.
       // The tracking coordinates use the same mapping as the underlying image.
       ctx.imageSmoothingEnabled = false;
+      ctx.globalAlpha = .45;
       const slices = 32, slice = processed.height / slices;
       for (let i = 0; i < slices; i++) {
         const sy = i * slice;
         ctx.drawImage(processed, 0, sy, processed.width, slice, ox + wave((sy + slice / 2) / processed.height), oy + sy / processed.height * dh, dw, dh / slices + 1);
       }
+      ctx.globalAlpha = 1;
       const anchors = regions.map(r => ({
         x: ox + r.cx * dw + wave(r.cy), y: oy + r.cy * dh,
         width: r.width * dw, height: r.height * dh,
