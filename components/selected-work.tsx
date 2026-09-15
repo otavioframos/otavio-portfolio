@@ -3,9 +3,10 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
-type Work = { slug: string; name: string; category: string; summary: string; status: string; image: string; href: string };
+export type Work = { slug: string; name: string; category: string; summary: string; status: string; image: string; href: string };
 
-export function SelectedWork({ items, label }: { items: Work[]; label: string }) {
+/** A compact index for secondary work. Images appear in a small pointer-following window on desktop. */
+export function CompactWorkList({ items, label }: { items: Work[]; label: string }) {
   const listRef = useRef<HTMLDivElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
 
@@ -17,7 +18,7 @@ export function SelectedWork({ items, label }: { items: Work[]; label: string })
     media.add({ fine: '(hover: hover) and (pointer: fine)', reduced: '(prefers-reduced-motion: reduce)' }, context => {
       if (!context.conditions?.fine) return;
       const reduced = Boolean(context.conditions.reduced);
-      const rows = Array.from(list.querySelectorAll<HTMLAnchorElement>('.selected-work-row'));
+      const rows = Array.from(list.querySelectorAll<HTMLAnchorElement>('.compact-work-row'));
       const slides = Array.from(preview.querySelectorAll<HTMLElement>('.work-preview-slide'));
       const xTo = gsap.quickTo(preview, 'x', { duration: .22, ease: 'power3.out' });
       const yTo = gsap.quickTo(preview, 'y', { duration: .22, ease: 'power3.out' });
@@ -42,7 +43,6 @@ export function SelectedWork({ items, label }: { items: Work[]; label: string })
         const entering = active === -1;
         if (active !== index) {
           active = index;
-          // Keep the frame mounted while the image changes, including rapid reversals.
           slides.forEach((slide, i) => {
             slide.style.zIndex = i === index ? '1' : '0';
             gsap.to(slide, { autoAlpha: i === index ? 1 : 0, duration: reduced || entering ? 0 : .14, overwrite: true });
@@ -93,11 +93,11 @@ export function SelectedWork({ items, label }: { items: Work[]; label: string })
     return () => media.revert();
   }, [items]);
 
-  return <div className="selected-work-list" ref={listRef}>
-    {items.map(item => <a className="selected-work-row" href={item.href} key={item.slug} aria-labelledby={'work-title-' + item.slug} aria-describedby={'work-summary-' + item.slug}>
-      <div className="selected-work-identity"><p>{item.category}</p><h3 id={'work-title-' + item.slug}>{item.name}</h3></div>
-      <p className="selected-work-summary" id={'work-summary-' + item.slug}>{item.summary}</p>
-      <span className="selected-work-action"><span className="selected-work-status">{item.status}</span><span className="selected-work-open"><span>{label}</span><span aria-hidden="true">↗</span></span></span>
+  return <div className="compact-work-list" ref={listRef}>
+    {items.map(item => <a className="compact-work-row" href={item.href} key={item.slug} aria-labelledby={'compact-title-' + item.slug} aria-describedby={'compact-summary-' + item.slug}>
+      <div className="compact-work-identity"><p>{item.category}</p><h3 id={'compact-title-' + item.slug}>{item.name}</h3></div>
+      <p className="compact-work-summary" id={'compact-summary-' + item.slug}>{item.summary}</p>
+      <span className="compact-work-action"><span className="compact-work-status">{item.status}</span><span className="compact-work-open"><span>{label}</span><span aria-hidden="true">↗</span></span></span>
     </a>)}
     <div ref={previewRef} className="work-pointer-preview" aria-hidden="true">
       {items.map(item => <div className={'work-preview-slide preview-' + item.slug} key={item.slug}>
@@ -108,5 +108,28 @@ export function SelectedWork({ items, label }: { items: Work[]; label: string })
         <div className="work-preview-caption"><span>{item.name}</span><span>{item.status}</span></div>
       </div>)}
     </div>
+  </div>;
+}
+
+/** The flagship cases stay open so a recruiter can understand the work without an extra click. */
+export function SelectedWork({ items, label }: { items: Work[]; label: string }) {
+  return <div className="selected-work-features">
+    {items.map((item, index) => <article className="selected-work-feature" key={item.slug}>
+      <div className="selected-work-feature-head">
+        <div>
+          <p className="eyebrow">{String(index + 1).padStart(2, '0')} / {item.category}</p>
+          <h3>{item.name}</h3>
+        </div>
+        <div className="selected-work-feature-context"><p className="selected-work-feature-status">{item.status}</p><p>{item.summary}</p></div>
+      </div>
+      <a className="selected-work-feature-link" href={item.href} aria-label={`${label}: ${item.name}`}>
+        <figure className={'selected-work-feature-visual feature-' + item.slug}>
+          {item.slug === 'mindyoung' && <div className="selected-mindyoung-brand"><span>A CURIOUS MIND</span><strong>Mind<br/>Young.</strong><img src="/images/mindyoung-owl.webp" width="512" height="512" alt=""/></div>}
+          <img src={item.image} alt="" loading={index === 0 ? 'eager' : 'lazy'} decoding="async"/>
+          <span className="selected-work-feature-ribbon">{item.category} · {item.status}</span>
+        </figure>
+        <span className="selected-work-feature-action">{label} <span aria-hidden="true">↗</span></span>
+      </a>
+    </article>)}
   </div>;
 }

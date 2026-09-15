@@ -6,6 +6,7 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { ditherMeadow } from '@/lib/dither';
 import type { Lang } from '@/lib/projects';
 import { AeonMatrix } from '@/components/aeon-matrix';
+import { TrackingStudy, type TrackingSettings } from '@/components/tracking-study';
 
 export function Playground({ lang }: { lang: Lang }) {
   const pt = lang === 'pt';
@@ -15,6 +16,10 @@ export function Playground({ lang }: { lang: Lang }) {
   const [failed, setFailed] = useState(false);
   const [threshold, setThreshold] = useState(0);
   const [mode, setMode] = useState('red');
+  const [spacing, setSpacing] = useState(4);
+  const [ripple, setRipple] = useState(42);
+  const [rippleOn, setRippleOn] = useState(false);
+  const [tracking, setTracking] = useState<TrackingSettings>({ speed: 46, lockTime: 54, squares: 4, permanence: 52, lineWidth: 2, stability: 68 });
 
   useEffect(() => {
     const image = new Image();
@@ -41,9 +46,11 @@ export function Playground({ lang }: { lang: Lang }) {
     if (!ready || !original || !context || mode === 'original') return;
     // Start with untouched pixels each time; never dither an already processed frame.
     const data = new Uint8ClampedArray(original.data);
-    ditherMeadow(data, original.width, { threshold: threshold / 100, accent: mode === 'green' ? 'green' : 'red' });
+    ditherMeadow(data, original.width, { threshold: threshold / 100, accent: mode === 'green' ? 'green' : 'red', spacing, ripple: rippleOn ? ripple / 100 : 0 });
     context.putImageData(new ImageData(data, original.width, original.height), 0, 0);
-  }, [ready, mode, threshold]);
+  }, [ready, mode, threshold, spacing, ripple, rippleOn]);
+
+  const updateTracking = (key: keyof TrackingSettings, value: number) => setTracking(previous => ({ ...previous, [key]: value }));
 
   return <section className="playground-section" id="playground" aria-labelledby="playground-title">
     <details className="playground-disclosure">
@@ -74,6 +81,11 @@ export function Playground({ lang }: { lang: Lang }) {
           <div><span id="threshold-label">{pt ? 'Limiar' : 'Threshold'}</span><output>{threshold > 0 ? '+' : ''}{threshold}</output></div>
           <Slider aria-labelledby="threshold-label" min={-20} max={20} step={1} value={[threshold]} disabled={!ready || mode === 'original'} onValueChange={value => setThreshold(Array.isArray(value) ? value[0] : value)} />
         </div>
+        <div className="study-control-grid">
+          <label className="study-range"><span>{pt ? 'Espaçamento' : 'Dot spacing'} <output>{spacing}px</output></span><Slider min={1} max={8} step={1} value={[spacing]} disabled={!ready || mode === 'original'} onValueChange={value => setSpacing(Array.isArray(value) ? value[0] : value)} /></label>
+          <label className="study-range"><span>{pt ? 'Intensidade do ripple' : 'Ripple intensity'} <output>{ripple}%</output></span><Slider min={0} max={100} step={1} value={[ripple]} disabled={!ready || mode === 'original'} onValueChange={value => setRipple(Array.isArray(value) ? value[0] : value)} /></label>
+          <button type="button" className="study-control-button" aria-pressed={rippleOn} onClick={() => setRippleOn(value => !value)}>{rippleOn ? (pt ? 'Ripple ativo · simular de novo' : 'Ripple on · simulate again') : (pt ? 'Simular clique' : 'Simulate click')}</button>
+        </div>
         <p className="study-footnote">{failed ? (pt ? 'Não foi possível carregar o estudo.' : 'The study could not load.') : (pt ? 'Estudo visual deste portfólio · 2026' : 'A visual study from this portfolio · 2026')}</p>
       </div>
       </div>
@@ -84,6 +96,22 @@ export function Playground({ lang }: { lang: Lang }) {
           <h3>{pt ? 'Um campo que respira.' : 'A field that breathes.'}</h3>
           <p>{pt ? 'Aeon é um app de planejamento financeiro que desenhei e construí sozinho para uso pessoal. O fundo em matriz de pixels responde ao toque e ao movimento do mouse.' : 'Aeon is a financial-planning app I designed and built solo for personal use. Its pixel matrix breathes with the field and responds to touch and mouse movement.'}</p>
           <a className="text-link" href="https://github.com/otavioframos/aeon">{pt ? 'Ver no GitHub' : 'View on GitHub'} ↗</a>
+        </div>
+      </div>
+      <div className="tracking-study">
+        <div className="tracking-study-visual"><TrackingStudy settings={tracking}/><span className="tracking-study-label">TRACKING / FIELD STUDY</span></div>
+        <div className="tracking-study-copy">
+          <p className="eyebrow">{pt ? 'MOVIMENTO E SISTEMAS' : 'MOTION & SYSTEMS'}</p>
+          <h3>{pt ? 'Quando o sistema encontra o gesto.' : 'When the system finds the gesture.'}</h3>
+          <p>{pt ? 'Um rastreador visual para testar ritmo, estabilidade e resposta. Ajuste cada variável e observe a linha encontrar o movimento.' : 'A visual tracker for testing rhythm, stability, and response. Tune each variable and watch the line find the movement.'}</p>
+          <div className="study-control-grid tracking-controls">
+            <label className="study-range"><span>{pt ? 'Velocidade' : 'Speed'} <output>{tracking.speed}</output></span><Slider min={0} max={100} step={1} value={[tracking.speed]} onValueChange={value => updateTracking('speed', Array.isArray(value) ? value[0] : value)}/></label>
+            <label className="study-range"><span>{pt ? 'Tempo para travar' : 'Time to lock'} <output>{tracking.lockTime}</output></span><Slider min={0} max={100} step={1} value={[tracking.lockTime]} onValueChange={value => updateTracking('lockTime', Array.isArray(value) ? value[0] : value)}/></label>
+            <label className="study-range"><span>{pt ? 'Quantidade de quadrados' : 'Squares'} <output>{tracking.squares}</output></span><Slider min={1} max={8} step={1} value={[tracking.squares]} onValueChange={value => updateTracking('squares', Array.isArray(value) ? value[0] : value)}/></label>
+            <label className="study-range"><span>{pt ? 'Permanência' : 'Permanence'} <output>{tracking.permanence}</output></span><Slider min={0} max={100} step={1} value={[tracking.permanence]} onValueChange={value => updateTracking('permanence', Array.isArray(value) ? value[0] : value)}/></label>
+            <label className="study-range"><span>{pt ? 'Largura da linha' : 'Line width'} <output>{tracking.lineWidth}px</output></span><Slider min={1} max={6} step={1} value={[tracking.lineWidth]} onValueChange={value => updateTracking('lineWidth', Array.isArray(value) ? value[0] : value)}/></label>
+            <label className="study-range"><span>{pt ? 'Estabilidade' : 'Stability'} <output>{tracking.stability}</output></span><Slider min={0} max={100} step={1} value={[tracking.stability]} onValueChange={value => updateTracking('stability', Array.isArray(value) ? value[0] : value)}/></label>
+          </div>
         </div>
       </div>
       </div>
