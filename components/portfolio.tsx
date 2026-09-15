@@ -27,12 +27,12 @@ export function Portfolio({lang}:{lang:Lang}){return <div className="portfolio-h
 <section className="nature-hero">
   <LandscapeStudy lang={lang}/>
   <div className="hero-intro">
-    <p className="hero-kicker">{tr(lang,'FOUNDING PRODUCT DESIGNER / BRAZIL','FOUNDING PRODUCT DESIGNER / BRASIL')}</p>
+    <p className="hero-kicker">{tr(lang,'FOUNDING PRODUCT DESIGNER / CAMPINAS, BRAZIL · REMOTE','FOUNDING PRODUCT DESIGNER / CAMPINAS, BRASIL · REMOTO')}</p>
     <h1>Otávio Ramos<span>.</span></h1>
     <p className="hero-position">{tr(lang,'Building the design practice @ A3Lab. Making apps and tools with AI and code.','Estruturando a prática de design @ A3Lab. Criando apps e ferramentas com IA e código.')}</p>
     <div className="hero-actions"><ActionLink href="#work" label={tr(lang,'See my work','Ver projetos')}/><ActionLink href="mailto:otavio.fr1@gmail.com" label={tr(lang,'Get in touch','Conversar')} secondary/></div>
-    <p className="hero-location">{tr(lang,'Open to relocation with visa support.','Aberto a conversar sobre mudança de país com apoio para o visto.')}</p>
-    <div className="hero-ribbon" aria-label={tr(lang,'Focus areas','Áreas de foco')}><span>A3LAB / FOUNDING DESIGNER</span><span>CONSUMER APPS</span><span>AI TOOLING</span><span>DESIGN SYSTEMS</span></div>
+    <p className="hero-location">{tr(lang,'Remote-first from Brazil (GMT−3), fluent in English. Open to relocation with visa support.','Remote-first a partir do Brasil (GMT−3), inglês fluente. Aberto a mudança de país com apoio para o visto.')}</p>
+    <div className="hero-ribbon" aria-label={tr(lang,'Focus areas','Áreas de foco')}><span>A3LAB / FOUNDING DESIGNER</span><span>CONSUMER APPS</span><span>AI TOOLING</span><span>DESIGN SYSTEMS</span><span>DESIGN IN CODE</span></div>
   </div>
 
 </section>
