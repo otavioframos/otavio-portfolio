@@ -34,7 +34,7 @@ body{min-width:0}
 .portfolio-home,main,.site-header,.site-footer{min-width:0;max-width:100%}
 .nature-hero{padding-inline:clamp(20px,3vw,56px);overflow-x:clip}
 .hero-intro{max-width:none;min-width:0;margin-inline:0}
-.hero-intro h1{font-family:var(--font-barlow),sans-serif;font-weight:300;font-size:clamp(2.5rem,6.4vw,6rem);max-width:100%;white-space:normal;text-wrap:balance;line-height:1.08;letter-spacing:-.02em}
+.hero-intro h1{font-family:var(--font-editorial),serif;font-weight:400;font-size:clamp(2.5rem,6.4vw,6rem);max-width:100%;white-space:normal;text-wrap:balance;line-height:1.08;letter-spacing:-.02em}
 .hero-position,.hero-location{overflow-wrap:break-word}
 .landscape-surface>img{filter:grayscale(1) contrast(1.7) brightness(.28)}
 .site-header{width:100%;max-width:1280px;flex-wrap:wrap}
@@ -65,3 +65,5 @@ body{min-width:0}
 .about-portrait{max-width:400px;margin:2rem 0 0;border:1px solid var(--glass-border);overflow:hidden}
 .about-portrait img{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:4/5}
 @media(max-width:650px){.about-portrait{max-width:400px;margin-top:1.5rem}.about-copy{margin-top:.5rem}}
+
+.hero-intro h1 span{color:inherit}
