@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
-type Work = { slug: string; name: string; category: string; summary: string; image: string; href: string };
+type Work = { slug: string; name: string; category: string; summary: string; status: string; image: string; href: string };
 
 export function SelectedWork({ items, label }: { items: Work[]; label: string }) {
   const listRef = useRef<HTMLDivElement>(null);
@@ -19,8 +19,8 @@ export function SelectedWork({ items, label }: { items: Work[]; label: string })
       const reduced = Boolean(context.conditions.reduced);
       const rows = Array.from(list.querySelectorAll<HTMLAnchorElement>('.selected-work-row'));
       const slides = Array.from(preview.querySelectorAll<HTMLElement>('.work-preview-slide'));
-      const xTo = gsap.quickTo(preview, 'x', { duration: .26, ease: 'power3.out' });
-      const yTo = gsap.quickTo(preview, 'y', { duration: .26, ease: 'power3.out' });
+      const xTo = gsap.quickTo(preview, 'x', { duration: .22, ease: 'power3.out' });
+      const yTo = gsap.quickTo(preview, 'y', { duration: .22, ease: 'power3.out' });
       let active = -1;
       let width = 0;
       let height = 0;
@@ -42,18 +42,23 @@ export function SelectedWork({ items, label }: { items: Work[]; label: string })
         const entering = active === -1;
         if (active !== index) {
           active = index;
-          slides.forEach((slide, i) => { slide.style.visibility = i === index ? 'visible' : 'hidden'; });
+          // Keep the frame mounted while the image changes, including rapid reversals.
+          slides.forEach((slide, i) => {
+            slide.style.zIndex = i === index ? '1' : '0';
+            gsap.to(slide, { autoAlpha: i === index ? 1 : 0, duration: reduced || entering ? 0 : .14, overwrite: true });
+          });
         }
         if (entering) {
           width = preview.offsetWidth; height = preview.offsetHeight;
           position(event, true);
-          gsap.to(preview, { autoAlpha: 1, scale: 1, duration: reduced ? 0 : .18, ease: 'power2.out', overwrite: 'auto' });
+          gsap.to(preview, { autoAlpha: 1, duration: reduced ? 0 : .14, ease: 'power2.out', overwrite: 'auto' });
+          gsap.to(preview, { scale: 1, duration: reduced ? 0 : .24, ease: 'back.out(1.15)', overwrite: 'auto' });
         } else position(event, false);
       };
       const hide = () => {
         active = -1;
         xTo.tween.pause(); yTo.tween.pause();
-        gsap.to(preview, { autoAlpha: 0, scale: reduced ? 1 : .97, duration: reduced ? 0 : .12, overwrite: 'auto' });
+        gsap.to(preview, { autoAlpha: 0, scale: reduced ? 1 : .98, duration: reduced ? 0 : .1, overwrite: 'auto' });
       };
       const keyboard = (event: KeyboardEvent) => { if (event.key === 'Escape' || event.key === 'Tab') hide(); };
       const handlers = rows.map((row, index) => {
@@ -82,7 +87,7 @@ export function SelectedWork({ items, label }: { items: Work[]; label: string })
         window.removeEventListener('blur', hide);
         window.removeEventListener('keydown', keyboard);
         xTo.tween.kill(); yTo.tween.kill();
-        gsap.killTweensOf(preview);
+        gsap.killTweensOf([preview, ...slides]);
       };
     });
     return () => media.revert();
@@ -92,7 +97,7 @@ export function SelectedWork({ items, label }: { items: Work[]; label: string })
     {items.map(item => <a className="selected-work-row" href={item.href} key={item.slug} aria-labelledby={'work-title-' + item.slug} aria-describedby={'work-summary-' + item.slug}>
       <div className="selected-work-identity"><p>{item.category}</p><h3 id={'work-title-' + item.slug}>{item.name}</h3></div>
       <p className="selected-work-summary" id={'work-summary-' + item.slug}>{item.summary}</p>
-      <span className="selected-work-open"><span>{label}</span><span aria-hidden="true">↗</span></span>
+      <span className="selected-work-action"><span className="selected-work-status">{item.status}</span><span className="selected-work-open"><span>{label}</span><span aria-hidden="true">↗</span></span></span>
     </a>)}
     <div ref={previewRef} className="work-pointer-preview" aria-hidden="true">
       {items.map(item => <div className={'work-preview-slide preview-' + item.slug} key={item.slug}>
@@ -100,7 +105,7 @@ export function SelectedWork({ items, label }: { items: Work[]; label: string })
           {item.slug === 'mindyoung' && <img className="work-preview-owl" src="/images/mindyoung-owl.webp" width="512" height="512" alt="" decoding="async"/>}
           <img className="work-preview-art" src={item.image} alt="" decoding="async"/>
         </div>
-        <div className="work-preview-caption"><span>{item.name}</span><span>{label} ↗</span></div>
+        <div className="work-preview-caption"><span>{item.name}</span><span>{item.status}</span></div>
       </div>)}
     </div>
   </div>;

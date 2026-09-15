@@ -9,11 +9,12 @@ export const projects = [
     "url": "https://mindyoung.app/",
     "en": {
       "category": "CONSUMER PRODUCT",
-      "title": "A place to put a curious mind.",
-      "summary": "Designing a cognitive-training product, from visual identity and design systems to screens and acquisition.",
+      "title": "Identity, interface and daily cognitive training.",
+      "summary": "Designed the identity, design system and app screens alongside development.",
       "role": "Sole designer · Partnered with development",
       "scope": "Brand identity / UX & UI / Design system / Acquisition",
       "status": "Live product",
+      "decision": "Use one visual system across acquisition and in-app training.",
       "lead": "A3Lab was created to explore new consumer products within A3Media. MindYoung brings cognitive assessment and ongoing training into one product. As the team’s sole designer, I worked across its identity, interface, and acquisition experience alongside the developer.",
       "sections": [
         {
@@ -43,11 +44,12 @@ export const projects = [
     },
     "pt": {
       "category": "PRODUTO B2C",
-      "title": "Um lugar para exercitar a curiosidade.",
-      "summary": "Design de um produto de treino cognitivo: identidade visual, design system, telas e aquisição.",
+      "title": "Identidade, interface e treino cognitivo no dia a dia.",
+      "summary": "Desenhei a identidade, o design system e as telas do app junto a desenvolvimento.",
       "role": "Único designer · Em parceria com desenvolvimento",
       "scope": "Identidade / UX e UI / Design system / Aquisição",
       "status": "Produto no ar",
+      "decision": "Usar um mesmo sistema visual na aquisição e no treino dentro do app.",
       "lead": "A A3Lab nasceu para explorar novos produtos B2C dentro da A3Media. O MindYoung reúne avaliação cognitiva e treino contínuo em um produto. Como único designer do time, trabalhei na identidade, na interface e na aquisição, junto ao desenvolvedor.",
       "sections": [
         {
@@ -86,11 +88,12 @@ export const projects = [
     "url": null,
     "en": {
       "category": "AI & INTERNAL TOOLING",
-      "title": "Turning a research bottleneck into a product.",
-      "summary": "An internal content-intelligence tool that grew from an automation into a system used across products.",
+      "title": "From manual content research to a shared tool.",
+      "summary": "Designed and built an internal tool for researching content across products.",
       "role": "Product design · Architecture · AI-assisted implementation",
       "scope": "Discovery / Workflow design / Interface / Prototyping",
       "status": "Internal tool",
+      "decision": "Replace the initial automation with Python collection and a browser interface as usage grew.",
       "lead": "Content Radar began with a practical problem: researching relevant content for Avela, one video at a time, was difficult to sustain. I built an initial workflow to collect and analyze material, then evolved it into a product when other teams needed the same intelligence.",
       "sections": [
         {
@@ -125,11 +128,12 @@ export const projects = [
     },
     "pt": {
       "category": "IA E FERRAMENTAS INTERNAS",
-      "title": "De um gargalo de pesquisa a um produto.",
-      "summary": "Uma ferramenta interna de inteligência de conteúdo que evoluiu de uma automação para um sistema usado por múltiplos produtos.",
+      "title": "Da pesquisa manual de conteúdo a uma ferramenta compartilhada.",
+      "summary": "Desenhei e construí uma ferramenta interna de pesquisa de conteúdo para múltiplos produtos.",
       "role": "Product design · Arquitetura · Implementação com IA",
       "scope": "Discovery / Fluxos / Interface / Prototipação",
       "status": "Ferramenta interna",
+      "decision": "Substituir a automação inicial por coleta em Python e uma interface no navegador conforme o uso cresceu.",
       "lead": "O Content Radar nasceu de um problema prático: pesquisar conteúdo relevante para o Avela, vídeo a vídeo, era difícil de manter. Construí um fluxo de coleta e análise e o transformei em produto quando outros times passaram a precisar da mesma inteligência.",
       "sections": [
         {
@@ -173,11 +177,12 @@ export const projects = [
     "url": null,
     "en": {
       "category": "AI & CONSUMER EXPERIENCE",
-      "title": "Designing support into the experience.",
-      "summary": "An AI nutrition experience designed around a supportive tone, everyday choices, and women navigating perimenopause.",
+      "title": "Exploring an AI nutrition companion for perimenopause.",
+      "summary": "Explored onboarding, meal-photo flows and a design system for an AI nutrition app.",
       "role": "Product design · UX & UI · Design system",
       "scope": "Discovery / Onboarding / Design system / Acquisition",
-      "status": "Design case study",
+      "status": "Design exploration",
+      "decision": "Use a supportive tone and everyday meal contexts to shape onboarding and feedback.",
       "lead": "Avela explores an AI nutrition experience for women navigating perimenopause. My design work centered on how the product should speak, respond, and fit into a person’s day. That direction shaped onboarding, the core flows, the design system, and the acquisition page.",
       "sections": [
         {
@@ -212,11 +217,12 @@ export const projects = [
     },
     "pt": {
       "category": "IA E EXPERIÊNCIA B2C",
-      "title": "Projetar acolhimento na experiência.",
-      "summary": "Uma experiência de nutrição com IA para mulheres na perimenopausa, centrada em acolhimento e escolhas do dia a dia.",
+      "title": "Explorando um assistente de nutrição com IA para a perimenopausa.",
+      "summary": "Explorei onboarding, fluxos com fotos de refeições e um design system para um app de nutrição com IA.",
       "role": "Product design · UX e UI · Design system",
       "scope": "Discovery / Onboarding / Design system / Aquisição",
-      "status": "Case de design",
+      "status": "Exploração de design",
+      "decision": "Usar um tom acolhedor e situações reais de alimentação para orientar onboarding e feedbacks.",
       "lead": "O Avela explora uma experiência de nutrição com IA para mulheres na perimenopausa. Meu trabalho se concentrou em como o produto conversa, responde e se encaixa na rotina. Essa direção orientou onboarding, fluxos principais, design system e aquisição.",
       "sections": [
         {
