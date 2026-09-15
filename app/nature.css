@@ -83,3 +83,17 @@ body{min-width:0}
 .off-clock p{font-size:1rem;line-height:1.6;color:var(--muted-foreground);margin:0;max-width:28rem}
 @media(max-width:800px){.about-notes{grid-template-columns:minmax(0,1fr);gap:2.5rem}.personal-perspective{padding-left:1.5rem}.working-style dl>div{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}}
 @media(max-width:380px){.working-style dl>div{grid-template-columns:minmax(0,1fr);gap:.4rem}}
+
+/* A clear brand-and-product composition for the MindYoung cover. */
+.hero-intro h1{font-size:clamp(3rem,4.8vw,4.8rem)}
+.project-showcase .project-visual.mind-preview{display:block;padding:0;container-type:inline-size;background:#bfd0ec;color:#152c53}
+.mind-preview-brand{position:absolute;inset:10% auto 10% 7%;width:46%;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:1rem}
+.mind-preview-label{display:block;font:500 .875rem/1.4 var(--font-manrope),sans-serif;letter-spacing:.1em}
+.mind-preview-brand strong{display:block;font:600 clamp(2.5rem,8cqw,7rem)/1 var(--font-barlow),sans-serif;letter-spacing:-.035em;margin-top:.16em}
+.mind-preview-brand>img{display:block;width:clamp(100px,19cqw,245px);height:auto;max-width:70%;align-self:center;margin-right:15%}
+.mind-preview-caption{font:500 1rem/1.5 var(--font-manrope),sans-serif}
+.mind-preview-screen{position:absolute;top:9%;right:12%;height:105%;width:auto;max-width:none;border:5px solid #152c53;border-radius:2rem;transform:rotate(-5deg);box-shadow:0 24px 48px #152c532b;transition:transform 400ms var(--ease-out)}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){.visual-link:hover .mind-preview-screen{transform:rotate(-2deg) translateY(-1%)}}
+@media(max-width:1000px){.mind-preview-screen{right:9%;height:99%}.mind-preview-brand{left:6%;width:43%}.mind-preview-label{font-size:.75rem}.mind-preview-caption{font-size:.875rem}}
+@media(max-width:650px){.project-showcase .project-visual.mind-preview{aspect-ratio:1.1}.mind-preview-brand{inset:8% auto 8% 6%;width:45%;gap:.75rem}.mind-preview-brand strong{font-size:10cqw}.mind-preview-brand>img{width:31cqw;max-width:100%;margin-right:0}.mind-preview-label{max-width:9rem;font-size:.75rem;letter-spacing:.04em}.mind-preview-caption{max-width:8rem;font-size:.875rem;line-height:1.4}.mind-preview-screen{top:14%;right:-5%;height:88%;border-width:3px;border-radius:1.25rem}}
+@media(prefers-reduced-motion:reduce){.mind-preview-screen{transition:none}}

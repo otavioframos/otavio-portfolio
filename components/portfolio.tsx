@@ -6,7 +6,17 @@ const tr=(lang:Lang,en:string,pt:string)=>lang==='pt'?pt:en;
 const path=(lang:Lang)=>lang==='pt'?'/pt':'';
 export function Header({lang,slug}:{lang:Lang;slug?:string}){const base=path(lang),alternate=lang==='en'?'/pt':'';return <><a className="skip-link" href="#main">{tr(lang,'Skip to content','Pular para o conteúdo')}</a><header className="site-header"><a className="wordmark" href={base||'/'} aria-label="Otávio Ramos — home">otávio ramos<span>↗</span></a><nav aria-label={tr(lang,'Main navigation','Navegação principal')}><a href={base+'/#work'}>{tr(lang,'Work','Projetos')}</a><a href={base+'/#about'}>{tr(lang,'About','Sobre')}</a><a className="language-link" href={alternate+(slug?'/work/'+slug:'/')} hrefLang={lang==='en'?'pt-BR':'en'}>{lang==='en'?'PT':'EN'} <span aria-hidden="true">↗</span></a></nav></header></>}
 export function Footer({lang}:{lang:Lang}){return <footer id="contact" className="site-footer"><div className="section-label"><span>03 / {tr(lang,'NEXT CONVERSATION','PRÓXIMA CONVERSA')}</span><span>{tr(lang,'BASED IN BRAZIL','NO BRASIL')}</span></div><a className="contact-title" href="mailto:otavio.fr1@gmail.com">{tr(lang,'Have something in mind?','Tem algo em mente?')}<br/><span>{tr(lang,'Let’s talk.','Vamos conversar.')}</span></a><div className="footer-bottom"><a href="mailto:otavio.fr1@gmail.com">otavio.fr1@gmail.com</a><div><a href="https://www.linkedin.com/in/otaviofr/">LinkedIn ↗</a><a href="https://github.com/otavioframos">GitHub ↗</a><a href={path(lang)+'/#main'}>{tr(lang,'Back to top ↑','Voltar ao topo ↑')}</a></div><p>© 2026 Otávio Ramos</p></div></footer>}
-export function ProjectVisual({project,detail=false,lang='en'}:{project:typeof projects[number];detail?:boolean;lang?:Lang}){return <div className={'project-visual '+project.theme+(detail?' detail-visual':'')}>
+export function ProjectVisual({project,detail=false,lang='en'}:{project:typeof projects[number];detail?:boolean;lang?:Lang}){
+if(project.slug==='mindyoung'&&!detail)return <div className="project-visual mindyoung mind-preview">
+  <div className="mind-preview-brand">
+    <div><span className="mind-preview-label">{tr(lang,'A CURIOUS MIND','UMA MENTE CURIOSA')}</span><strong>MindYoung.</strong></div>
+    <img src="/images/mindyoung-owl.webp" alt="" width="512" height="512" loading="lazy"/>
+    <span className="mind-preview-caption">{tr(lang,'Cognitive training, daily.','Treino cognitivo, todo dia.')}</span>
+  </div>
+  <img className="mind-preview-screen" src={project.image} alt={project[lang].caption} width="780" height="1688" loading="lazy"/>
+  <span className="image-corner" aria-hidden="true">↗</span>
+</div>;
+return <div className={'project-visual '+project.theme+(detail?' detail-visual':'')}>
 {project.slug==='mindyoung'?<><div className="visual-word"><span className="eyebrow">{tr(lang,'A CURIOUS MIND','UMA MENTE CURIOSA')}</span><strong>Mind<br/>Young.</strong><img className="owl" src="/images/mindyoung-owl.webp" alt="" width="512" height="512" loading="lazy"/></div><img className="mind-screen" src={project.image} alt={project[lang].caption} width="780" height="1688" loading={detail?'eager':'lazy'}/></>:<img className="landscape" src={project.image} alt={project[lang].caption} width={project.slug==='avela'?1920:1440} height={project.slug==='avela'?1080:1024} loading="lazy"/>}
 <span className="image-corner" aria-hidden="true">↗</span></div>}
 export function Portfolio({lang}:{lang:Lang}){return <div className="portfolio-home" lang={lang==='pt'?'pt-BR':'en'}><Header lang={lang}/><main id="main">
