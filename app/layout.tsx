@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Barlow_Condensed, Manrope, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
+import './refinements.css';
 const display=Barlow_Condensed({variable:'--font-barlow',weight:['500','600'],subsets:['latin']});
 const body=Manrope({variable:'--font-manrope',subsets:['latin']});
 const mono=IBM_Plex_Mono({variable:'--font-ibm',weight:['400','500'],subsets:['latin']});
