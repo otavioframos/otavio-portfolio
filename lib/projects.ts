@@ -83,8 +83,8 @@ export const projects = [
     "name": "Content Radar",
     "number": "02",
     "theme": "radar",
-    "image": "/images/radar-overview.png",
-    "extra": "/images/radar-detail.png",
+    "image": "/images/radar-overview.webp",
+    "extra": "/images/radar-detail.webp",
     "url": null,
     "en": {
       "category": "AI & INTERNAL TOOLING",
@@ -172,8 +172,8 @@ export const projects = [
     "name": "Avela",
     "number": "03",
     "theme": "avela",
-    "image": "/images/avela-cover.png",
-    "extra": "/images/avela-flow.png",
+    "image": "/images/avela-cover.webp",
+    "extra": "/images/avela-flow.webp",
     "url": null,
     "en": {
       "category": "AI & CONSUMER EXPERIENCE",

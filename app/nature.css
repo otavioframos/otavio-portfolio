@@ -322,3 +322,5 @@ body{min-width:0}
  .selected-mindyoung-brand strong{font-size:10cqw;line-height:.95}
  .selected-mindyoung-brand>img{display:none}
 }
+/* Mobile: keep tracking labels below the hero copy and the MindYoung ribbon clear of the mascot. */
+@media(max-width:650px){.selected-work-feature-ribbon{z-index:2;left:.6rem;bottom:.6rem;font-size:.62rem;padding:.45rem .55rem}.feature-mindyoung .selected-mindyoung-brand{inset:8% auto 22% 6%}}

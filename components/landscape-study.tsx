@@ -83,7 +83,7 @@ export function LandscapeStudy({ lang }: { lang: 'en' | 'pt' }) {
         ctx.font = '10px monospace';
         const label = `${id} / ${Math.round(px)},${Math.round(py)}`;
         const tx = Math.min(width - ctx.measureText(label).width - 10, Math.max(10, bx));
-        ctx.fillText(label, tx, Math.max(height * .43, by - 6));
+        ctx.fillText(label, tx, Math.max(scanTop + 14, by - 6));
         ctx.fillStyle = '#ff624c'; ctx.fillRect(px - 1.5, py - 1.5, 3, 3);
         const trail = history.get(id) ?? [];
         if (advance) { trail.push({ x: px, y: py }); if (trail.length > 36) trail.shift(); history.set(id, trail); }
@@ -115,7 +115,7 @@ export function LandscapeStudy({ lang }: { lang: 'en' | 'pt' }) {
       const hero = host.closest('.nature-hero');
       const intro = hero?.querySelector('.hero-intro')?.getBoundingClientRect();
 
-      scanTop = Math.min(height - 100, (intro ? intro.bottom - bounds.top : height * .52) + 55);
+      scanTop = Math.min(height - 100, (intro ? intro.bottom - bounds.top : height * .52) + 80);
       scanBottom = height - 55;
       host.style.setProperty('--scan-top', `${scanTop}px`);
       ratio = Math.min(window.devicePixelRatio || 1, 1.25, 1600 / Math.max(width, 1));
@@ -157,6 +157,7 @@ export function LandscapeStudy({ lang }: { lang: 'en' | 'pt' }) {
     const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); });
     const sizeObserver = new ResizeObserver(resize);
     observer.observe(host); sizeObserver.observe(host);
+    const intro = host.closest('.nature-hero')?.querySelector('.hero-intro'); if (intro) sizeObserver.observe(intro);
     const hero = host.closest('.nature-hero') || host;
     hero.addEventListener('pointermove', move as EventListener, { passive: true }); hero.addEventListener('pointerleave', leave);
     media.addEventListener('change', preference); document.addEventListener('visibilitychange', sync);
