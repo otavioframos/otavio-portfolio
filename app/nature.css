@@ -59,3 +59,9 @@ body{min-width:0}
  .project-showcase .project-heading h2{font-size:clamp(2rem,8vw,2.6rem)}
  .hero-actions{justify-content:flex-start}
 }
+
+.about-grid{align-items:start}
+.about-identity{min-width:0}
+.about-portrait{max-width:400px;margin:2rem 0 0;border:1px solid var(--glass-border);overflow:hidden}
+.about-portrait img{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:4/5}
+@media(max-width:650px){.about-portrait{max-width:400px;margin-top:1.5rem}.about-copy{margin-top:.5rem}}
