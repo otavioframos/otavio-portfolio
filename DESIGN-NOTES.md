@@ -12,3 +12,8 @@ Assets: original public portfolio and product images, copied locally. Content Ra
 Draft remains private and noindex. No social-preview image requested or created.
 
 Tracking revision validation: production build, TypeScript, targeted lint; synthetic checks of region bounds, identity continuity, unique IDs, and finite field samples. Browser visual/interaction QA has not been run. User-supplied tracking images informed the style; they are not used as site assets.
+
+## Nature / computation revision
+The user's own draft now anchors the art direction: Instrument Serif display type, Pixelify Sans accents, Manrope body text, a blue-hour poppy meadow, and restrained glass surfaces. DFII: 5 impact + 5 fit + 4 feasibility + 4 performance - 3 consistency risk = 15. Hero leads with Otávio's name, original design philosophy, and explicit A3Lab product-design scope. The user's personal notes return with concise copy. Three compact cards lead into the existing full case studies; all education remains.
+One original generated meadow image is optimized to a 392 KB JPEG. Its red/bright flower regions are measured once from image pixels, and boxes follow the same gentle displacement applied to the image. This is an animated still-image study, not live-video tracking. Animation pauses offscreen, in hidden tabs, for reduced motion, and via the visible pause control. No camera, uploaded reference screenshots, or unverified brand logos are used.
+Validation: TypeScript and production build passed. Local home route returned HTTP 200. Flower-region detection and desktop/mobile cover-coordinate checks passed. No browser visual QA was requested or performed.
