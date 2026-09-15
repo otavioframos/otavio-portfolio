@@ -180,9 +180,17 @@ body{min-width:0}
 .work-preview-caption{padding-inline:10px;background:var(--preview-surface)}
 .work-preview-caption>span:last-child{font-size:.8125rem}
 .playground-section{padding-bottom:var(--section-gap)}
-.playground-heading{display:flex;align-items:baseline;justify-content:space-between;gap:2rem;border-top:1px solid var(--border);padding-top:2rem;margin-bottom:2rem}
+.playground-disclosure{border-top:1px solid var(--border)}
+.playground-heading{list-style:none;display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;padding-top:2rem;margin:0;cursor:pointer}
+.playground-heading::-webkit-details-marker{display:none}
+.playground-heading .eyebrow{display:block;margin-bottom:.7rem}
 .playground-heading h2{font:600 clamp(2rem,3vw,3rem)/1.1 var(--font-identity);letter-spacing:-.05em;margin:0}
-.playground-heading>p{font-size:1rem;color:var(--muted-foreground);margin:0}
+.playground-summary-action{display:flex;align-items:center;gap:.8rem;color:var(--muted-foreground);font-size:.875rem}
+.playground-summary-action>span{display:grid;place-items:center;width:2rem;height:2rem;border:1px solid var(--border);font-size:1.4rem;line-height:1;transition:transform var(--motion-feedback) var(--ease-out),background var(--motion-fast) ease,color var(--motion-fast) ease}
+.playground-disclosure[open] .playground-summary-action>span{transform:rotate(45deg);background:var(--foreground);color:var(--background)}
+.playground-heading:hover .playground-summary-action{color:var(--foreground)}
+.playground-heading:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
+.playground-body{padding-top:2rem}
 .playground-study{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(2rem,5vw,4.5rem);align-items:center}
 .dither-study-image{position:relative;margin:0;aspect-ratio:4/3;overflow:hidden;background:var(--preview-surface);border:1px solid var(--border)}
 .dither-study-image>img,.dither-study-image>canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -207,6 +215,15 @@ body{min-width:0}
 .dither-threshold [data-slot='slider-range']{background:var(--accent)}
 .dither-threshold [data-slot='slider-thumb']{width:16px;height:16px;border:1px solid var(--foreground);border-radius:2px;background:var(--foreground)}
 .dither-study-controls>.study-footnote{font-size:.8125rem!important;margin:1rem 0 0}
+.aeon-study{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(2rem,5vw,4.5rem);align-items:center;border-top:1px solid var(--border);margin-top:var(--section-gap);padding-top:var(--section-gap)}
+.aeon-matrix-frame{position:relative;aspect-ratio:16/9;border:1px solid #869d943d;background:#111512;overflow:hidden}
+.aeon-matrix-canvas{display:block;width:100%;height:100%;image-rendering:pixelated;touch-action:none}
+.aeon-matrix-label{position:absolute;left:1rem;bottom:1rem;font:.8125rem/1.4 var(--font-body);letter-spacing:.07em;padding:.5rem .65rem;background:#111512;color:var(--foreground)}
+.aeon-study-copy{min-width:0}
+.aeon-study-copy>.eyebrow{font:.8125rem/1.4 var(--font-body);letter-spacing:.06em;margin:0 0 1rem}
+.aeon-study-copy h3{font:600 clamp(1.7rem,2.6vw,2.5rem)/1.15 var(--font-identity);letter-spacing:-.045em;margin:0 0 1rem}
+.aeon-study-copy>p:not(.eyebrow){font-size:1rem;line-height:1.65;color:var(--muted-foreground);max-width:29rem;margin:0 0 1.5rem}
+.aeon-study-copy .text-link{display:inline-block}
 .about-section{padding-bottom:var(--section-gap)}
 .about-grid{column-gap:clamp(2rem,6vw,5rem);padding-block:2.5rem 3rem}
 .about-notes{gap:clamp(2rem,6vw,5rem)}
@@ -236,12 +253,16 @@ body{min-width:0}
  .selected-work-open>span:first-child{display:none}
  .selected-work-status{font-size:.8125rem}
  .work-introduction h2{font-size:clamp(2.4rem,8vw,3.5rem)}
- .more-work-heading,.playground-heading{display:block}
- .playground-heading>p{margin-top:.75rem}
+ .more-work-heading{display:block}
+ .playground-heading{align-items:center}
+ .playground-summary-action{font-size:.8125rem}
+ .playground-summary-action>span{width:1.8rem;height:1.8rem}
+ .playground-body{padding-top:1.5rem}
  .playground-study{grid-template-columns:minmax(0,1fr);gap:1.5rem}
  .dither-study-image{aspect-ratio:4/3}
  .dither-study-controls{padding:0}
  .dither-threshold{max-width:none}
+ .aeon-study{grid-template-columns:minmax(0,1fr);gap:1.5rem;margin-top:2.5rem;padding-top:2.5rem}
  .about-grid{grid-template-columns:minmax(0,1fr);gap:1.5rem}
  .case-lead{grid-template-columns:minmax(0,1fr);gap:1rem;padding-block:2rem}
  .case-main .case-intro h1{font-size:clamp(2.7rem,10vw,4.5rem)}

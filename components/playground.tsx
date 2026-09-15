@@ -5,6 +5,7 @@ import { Slider } from '@/components/ui/slider';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { ditherMeadow } from '@/lib/dither';
 import type { Lang } from '@/lib/projects';
+import { AeonMatrix } from '@/components/aeon-matrix';
 
 export function Playground({ lang }: { lang: Lang }) {
   const pt = lang === 'pt';
@@ -45,11 +46,13 @@ export function Playground({ lang }: { lang: Lang }) {
   }, [ready, mode, threshold]);
 
   return <section className="playground-section" id="playground" aria-labelledby="playground-title">
-    <div className="playground-heading">
-      <h2 id="playground-title">Playground</h2>
-      <p>{pt ? 'Pequenos experimentos com imagem e interação.' : 'Small experiments with images and interaction.'}</p>
-    </div>
-    <div className="playground-study">
+    <details className="playground-disclosure">
+      <summary className="playground-heading">
+        <span><span className="eyebrow">04 / {pt ? 'EXPERIMENTOS' : 'EXPERIMENTS'}</span><h2 id="playground-title">Playground</h2></span>
+        <span className="playground-summary-action">{pt ? 'Abrir estudos' : 'Open studies'} <span aria-hidden="true">+</span></span>
+      </summary>
+      <div className="playground-body">
+      <div className="playground-study">
       <figure className="dither-study-image">
         <img src="/images/meadow.jpg" alt={pt ? 'Campo de flores usado no estudo de dithering.' : 'A flower meadow used for the dithering study.'} width="1672" height="941" loading="lazy"/>
         <canvas ref={canvasRef} aria-hidden="true" hidden={!ready || mode === 'original'}/>
@@ -73,6 +76,17 @@ export function Playground({ lang }: { lang: Lang }) {
         </div>
         <p className="study-footnote">{failed ? (pt ? 'Não foi possível carregar o estudo.' : 'The study could not load.') : (pt ? 'Estudo visual deste portfólio · 2026' : 'A visual study from this portfolio · 2026')}</p>
       </div>
-    </div>
+      </div>
+      <div className="aeon-study">
+        <div className="aeon-matrix-frame"><AeonMatrix/><span className="aeon-matrix-label">AEON / PIXEL FIELD</span></div>
+        <div className="aeon-study-copy">
+          <p className="eyebrow">{pt ? 'CÓDIGO E INTERAÇÃO' : 'CODE & INTERACTION'}</p>
+          <h3>{pt ? 'Um campo que respira.' : 'A field that breathes.'}</h3>
+          <p>{pt ? 'Aeon é um app de planejamento financeiro que desenhei e construí sozinho para uso pessoal. O fundo em matriz de pixels responde ao toque e ao movimento do mouse.' : 'Aeon is a financial-planning app I designed and built solo for personal use. Its pixel matrix breathes with the field and responds to touch and mouse movement.'}</p>
+          <a className="text-link" href="https://github.com/otavioframos/aeon">{pt ? 'Ver no GitHub' : 'View on GitHub'} ↗</a>
+        </div>
+      </div>
+      </div>
+    </details>
   </section>;
 }
