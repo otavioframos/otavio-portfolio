@@ -3,7 +3,7 @@ import { Barlow_Condensed, Manrope, Instrument_Serif, Pixelify_Sans, Syne } from
 import './globals.css';
 import './refinements.css';
 import './nature.css';
-const display=Barlow_Condensed({variable:'--font-barlow',weight:['500','600'],subsets:['latin']});
+const display=Barlow_Condensed({variable:'--font-barlow',weight:['300','500','600'],subsets:['latin']});
 const body=Manrope({variable:'--font-manrope',subsets:['latin']});
 const identity=Syne({variable:'--font-identity',weight:['600','700','800'],subsets:['latin']});
 const editorial=Instrument_Serif({variable:'--font-editorial',weight:'400',subsets:['latin']});
