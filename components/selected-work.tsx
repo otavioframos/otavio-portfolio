@@ -126,7 +126,6 @@ export function SelectedWork({ items, label }: { items: Work[]; label: string })
         <figure className={'selected-work-feature-visual feature-' + item.slug}>
           {item.slug === 'mindyoung' && <div className="selected-mindyoung-brand"><span>A CURIOUS MIND</span><strong>Mind<br/>Young.</strong><img src="/images/mindyoung-owl.webp" width="512" height="512" alt=""/></div>}
           <img src={item.image} alt="" loading={index === 0 ? 'eager' : 'lazy'} decoding="async"/>
-          <span className="selected-work-feature-ribbon">{item.category} · {item.status}</span>
         </figure>
         <span className="selected-work-feature-action">{label} <span aria-hidden="true">↗</span></span>
       </a>
