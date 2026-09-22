@@ -164,6 +164,9 @@ body{min-width:0}
 
 /* Shared editorial grid; the tracking frame is the recurring interaction cue. */
 .site-header,.work-index,.more-work,.about-section,.playground-section,.case-main,.project-note{max-width:var(--page-width);padding-inline:var(--page-gutter);margin-inline:auto;width:100%}
+/* Match the centered content grid while keeping the landscape full width. */
+.nature-hero{--hero-gutter:max(var(--page-gutter),calc((100% - var(--page-width))/2 + var(--page-gutter)));padding-inline:var(--hero-gutter)}
+.nature-hero .landscape-caption{left:var(--hero-gutter);right:var(--hero-gutter)}
 .site-footer{padding-inline:var(--page-gutter)}
 .site-footer>.section-label,.site-footer>.footer-bottom,.contact-title{max-width:calc(var(--page-width) - var(--page-gutter)*2)}
 .work-introduction{padding-bottom:2rem;gap:var(--page-gutter)}
