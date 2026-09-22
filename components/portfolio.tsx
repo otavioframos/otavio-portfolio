@@ -28,7 +28,7 @@ export function Portfolio({lang}:{lang:Lang}){return <div className="portfolio-h
   <div className="hero-intro">
     <p className="hero-kicker">{tr(lang,'FOUNDING PRODUCT DESIGNER / BRAZIL','FOUNDING PRODUCT DESIGNER / BRASIL')}</p>
     <h1>Otávio Ramos<span>.</span></h1>
-    <p className="hero-position">{tr(lang,'I build consumer apps at A3Lab. Right now, I’m exploring AI and creative coding.','Construo apps B2C na A3Lab. Agora, exploro IA e creative coding.')}</p>
+    <p className="hero-position">{tr(lang,'Building the design practice @ A3Lab. Making apps and tools with AI and code.','Estruturando a prática de design @ A3Lab. Criando apps e ferramentas com IA e código.')}</p>
     <div className="hero-actions"><ActionLink href="#work" label={tr(lang,'See my work','Ver projetos')}/><ActionLink href="mailto:otavio.fr1@gmail.com" label={tr(lang,'Get in touch','Conversar')} secondary/></div>
     <p className="hero-location">{tr(lang,'Open to relocation with visa support.','Aberto a conversar sobre mudança de país com apoio para o visto.')}</p>
     <div className="hero-ribbon" aria-label={tr(lang,'Focus areas','Áreas de foco')}><span>A3LAB / FOUNDING DESIGNER</span><span>CONSUMER APPS</span><span>AI TOOLING</span><span>DESIGN SYSTEMS</span></div>
