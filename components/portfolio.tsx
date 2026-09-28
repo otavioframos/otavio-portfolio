@@ -13,6 +13,7 @@ import { SiteHeader } from '@/components/site-header';
 import { ScrollWords } from '@/components/scroll-words';
 import { MoreWorks } from '@/components/more-works';
 import { Gallery } from '@/components/gallery';
+import { Marquee } from '@/components/marquee';
 import { OwnershipBlueprint, CollaborationBlueprint, BuildingBlueprint, OffClockBlueprint } from '@/components/blueprints';
 
 const tr = (lang: Lang, en: string, pt: string) => (lang === 'pt' ? pt : en);
@@ -118,13 +119,12 @@ function HowIWork({ lang }: { lang: Lang }) {
     { Art: BuildingBlueprint, t: tr(lang, 'Building', 'Construção'), d: tr(lang, 'Take an idea beyond the prototype.', 'Levar uma ideia além do protótipo.') },
     { Art: OffClockBlueprint, t: tr(lang, 'Off the clock', 'Além do trabalho'), d: tr(lang, 'Coffee, creative coding, and the occasional late night in Figma.', 'Café, creative coding e uma ou outra noite até tarde no Figma.') },
   ];
-  // The list is rendered twice so the loop can scroll forever; the copy is hidden from assistive tech.
-  const row = (copy: boolean) => cards.map(({ Art, t, d }) => <li className="hw-card" key={(copy ? 'b-' : 'a-') + t} aria-hidden={copy || undefined}>
+  const list = <ul className="hw-list">{cards.map(({ Art, t, d }) => <li className="hw-card" key={t}>
     <div className="hw-media"><Art title={t} /></div>
     <h3>{t}</h3>
     <p>{d}</p>
-  </li>);
-  return <div className="hw-marquee"><ul className="hw-track">{row(false)}{row(true)}</ul></div>;
+  </li>)}</ul>;
+  return <Marquee label={tr(lang, 'How I work', 'Como trabalho')} copy={list}>{list}</Marquee>;
 }
 
 export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {

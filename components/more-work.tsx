@@ -12,7 +12,6 @@ export function MoreWork({ lang }: { lang: Lang }) {
     <div className="grid shead ruled">
       <h2 id="more-work-title" className="label">{pt ? 'Outros projetos' : 'More work'}</h2>
       <p className="shead-note">{pt ? 'Projetos pessoais, e-commerce e web.' : 'Personal projects, e-commerce, and web.'}</p>
-      <p className="shead-meta label">({String(rows.length).padStart(2, '0')})</p>
     </div>
     <ul className="more-list">
       {rows.map(row => <li key={row.key}>

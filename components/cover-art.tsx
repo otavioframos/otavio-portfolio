@@ -18,6 +18,8 @@ function RadarArt() {
       <radialGradient id="radar-core"><stop offset="0" stopColor="#2F6BFF" stopOpacity=".35" /><stop offset="1" stopColor="#2F6BFF" stopOpacity="0" /></radialGradient>
     </defs>
     <circle r="250" fill="url(#radar-core)" />
+    {/* A3Lab mark, dithered, sitting under the radar. */}
+    <image className="radar-mark" href="/images/a3lab-mark-dither.webp" x="-170" y="-170" width="340" height="340" />
     {[60, 120, 180, 240].map(r => <circle key={r} r={r} fill="none" stroke="#8FB8FF" strokeOpacity=".32" strokeWidth="1.2" />)}
     <path d="M-250 0H250M0-250V250" stroke="#8FB8FF" strokeOpacity=".2" strokeWidth="1" />
     {Array.from({ length: 36 }, (_, i) => {
@@ -44,17 +46,18 @@ function RadarArt() {
 /** MindYoung: the mascot scales up into place, then keeps a gentle loop. */
 function MindYoungArt() {
   return <div className="art art-owl">
+    <img className="art-owl-phone" src="/images/mindyoung-train.webp" alt="" width="780" height="1688" />
     <span className="art-owl-shadow" />
-    <img src="/images/mindyoung-owl.webp" alt="" width="512" height="512" />
+    <img className="art-owl-mascot" src="/images/mindyoung-owl.webp" alt="" width="512" height="512" />
   </div>;
 }
 
 /** Avela: the app mark in the centre of a slow, breathing glow. */
 function AvelaArt() {
   return <div className="art art-avela">
+    <img className="art-avela-dither" src="/images/avela-glow-dither.webp" alt="" width="900" height="900" />
     <span className="art-avela-glow" />
-    <span className="art-avela-glow art-avela-glow-2" />
-    <img src="/images/avela-mark.webp" alt="" width="360" height="360" />
+    <img className="art-avela-mark" src="/images/avela-mark.webp" alt="" width="360" height="360" />
   </div>;
 }
 
