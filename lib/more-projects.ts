@@ -27,13 +27,17 @@ export const moreProjects: MoreProject[] = [
     slug: 'chilli-beans', name: 'Chilli Beans Australia', year: '2024',
     source: 'https://citrine-giraffe-448.notion.site/Chilli-Beans-AU-7bee62ee0f7f82bdac0581b7b05f6088',
     images: ['/images/chilli-cover.webp', '/images/chilli-detail.webp'],
+    process: [
+      { src: '/images/chilli-kit.webp', width: 1600, height: 682, at: 'afterApproach', en: 'The modular UI kit: product and category cards, the type scale and benchmark boards for home and product pages.', pt: 'O kit de UI modular: cards de produto e categoria, escala tipográfica e quadros de benchmark para home e página de produto.' },
+      { src: '/images/chilli-devices.webp', width: 1600, height: 682, at: 'afterApproach', en: 'The redesigned storefront across desktop and mobile: campaign-led home, product page and card-based navigation.', pt: 'A loja redesenhada no desktop e no celular: home guiada por campanha, página de produto e navegação em cards.' },
+    ],
     en: {
       category: 'E-commerce · UX/UI',
       contribution: 'Redesigned navigation, product discovery, and checkout for the Australian storefront.',
       context: 'Chilli Beans, Latin America’s largest eyewear and accessories brand, was entering Australia. The existing store had high cart abandonment, little of the brand’s personality, and a buying flow that did not fit how Australians shop.',
       approach: 'Stakeholder interviews and heatmaps pointed to three pain points: weak filters, too many checkout steps, and nothing to inspire a purchase. I redesigned navigation around cards, shortened checkout, reordered the product page around those pain points, and added small interactions to make the store feel less bureaucratic. I delivered high-fidelity prototypes, a modular UI kit and documentation for a Shopify/VTEX build, and followed the implementation with the development team.',
       captions: ['Mobile storefront and product-page mockups from the original case study.', 'Previous storefront alongside the proposed navigation and product categories.'],
-      results: [{ value: '2.8% → 4.0%', label: 'mobile conversion after launch' }, { value: '−10%', label: 'cart abandonment' }],
+      results: [{ value: '2.8% → 4.0%', label: 'mobile conversion after launch' }, { value: '−10%', label: 'cart abandonment over two months' }],
       resultsNote: 'Post-launch tracking reported in the original case study.',
     },
     pt: {
@@ -42,7 +46,7 @@ export const moreProjects: MoreProject[] = [
       context: 'A Chilli Beans, maior marca de óculos e acessórios da América Latina, estava entrando na Austrália. A loja existente tinha alto abandono de carrinho, pouco da personalidade da marca e um fluxo de compra que não combinava com o jeito australiano de comprar.',
       approach: 'Entrevistas com stakeholders e heatmaps apontaram três dores: filtros insuficientes, etapas demais no checkout e falta de conteúdo que inspirasse a compra. Redesenhei a navegação em cards, encurtei o checkout, reorganizei a página de produto em torno dessas dores e adicionei microinterações para a loja parecer menos burocrática. Entreguei protótipos de alta fidelidade, kit de UI modular e documentação para Shopify/VTEX, e acompanhei a implementação com o time de desenvolvimento.',
       captions: ['Mockups da loja mobile e da página de produto, do case original.', 'Loja anterior ao lado da proposta de navegação e categorias de produtos.'],
-      results: [{ value: '2,8% → 4,0%', label: 'conversão mobile após o lançamento' }, { value: '−10%', label: 'abandono de carrinho' }],
+      results: [{ value: '2,8% → 4,0%', label: 'conversão mobile após o lançamento' }, { value: '−10%', label: 'abandono de carrinho em dois meses' }],
       resultsNote: 'Acompanhamento pós-lançamento registrado no case original.',
     },
   },
@@ -50,6 +54,9 @@ export const moreProjects: MoreProject[] = [
     slug: 'naluu', name: 'Naluu Activewear', year: '2024',
     source: 'https://citrine-giraffe-448.notion.site/Naluu-ActiveWear-021e62ee0f7f83c2bcf901964a787411',
     images: ['/images/naluu-cover.webp', '/images/naluu-detail.webp'],
+    process: [
+      { src: '/images/naluu-delivery.webp', width: 1400, height: 1125, at: 'afterApproach', en: 'The delivered store on desktop and mobile, with the collection showcases and campaign space the brand asked for.', pt: 'A loja entregue no desktop e no celular, com as vitrines por coleção e o espaço para campanhas que a marca pedia.' },
+    ],
     en: {
       category: 'E-commerce · Design system',
       contribution: 'Designed the first online store, its reusable components, and the development handoff.',
