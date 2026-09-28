@@ -36,6 +36,13 @@ export function ProjectNote({ project, lang }: { project: MoreProject; lang: Lan
         <h2 className="label">{pt ? 'Minha contribuição' : 'My contribution'}</h2>
         <div className="prose"><p className="lead">{copy.approach}</p></div>
       </section>
+      {copy.results && <section className="grid block ruled">
+        <h2 className="label">{pt ? 'Resultado' : 'Outcome'}</h2>
+        <div className="prose">
+          <dl className="case-results">{copy.results.map(r => <div key={r.label}><dt>{r.value}</dt><dd>{r.label}</dd></div>)}</dl>
+          {copy.resultsNote && <p className="note-source">{copy.resultsNote}</p>}
+        </div>
+      </section>}
       <Gallery items={[{ src: project.images[1], width: 1920, height: 1080, span: 12, field: spec.extraField }]} caption={copy.captions[1]} />
       <MoreWorks current={project.slug} lang={lang} />
     </main>
