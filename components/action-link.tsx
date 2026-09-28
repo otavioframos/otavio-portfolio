@@ -24,7 +24,7 @@ export function ActionLink({ href, label, secondary = false }: { href: string; l
     });
     return () => media.revert();
   }, []);
-  return <a ref={ref} className={'action-link' + (secondary ? ' action-secondary' : '')} href={href}>
+  return <a ref={ref} className={'action-link' + (secondary ? ' action-secondary' : '')} href={href} aria-label={label}>
     <span className="action-label"><span>{label}</span><span aria-hidden="true">{label}</span></span>
     <span className="action-icon" aria-hidden="true"><span>↗</span></span>
   </a>;
