@@ -4,7 +4,7 @@ import { cvUrl } from '@/lib/site';
 import { SelectedWork } from '@/components/selected-work';
 import { MoreWork } from '@/components/more-work';
 import { Education } from '@/components/education';
-import { LandscapeStudy } from '@/components/landscape-study';
+import { RibbonGlow } from '@/components/ribbon-glow';
 import { ActionLink } from '@/components/action-link';
 const tr=(lang:Lang,en:string,pt:string)=>lang==='pt'?pt:en;
 const path=(lang:Lang)=>lang==='pt'?'/pt':'';
@@ -24,17 +24,15 @@ return <div className={'project-visual '+project.theme+(detail?' detail-visual':
 {project.slug==='mindyoung'?<><div className="visual-word"><span className="eyebrow">{tr(lang,'A CURIOUS MIND','UMA MENTE CURIOSA')}</span><strong>Mind<br/>Young.</strong><img className="owl" src="/images/mindyoung-owl.webp" alt="" width="512" height="512" loading="lazy"/></div><img className="mind-screen" src={project.image} alt={project[lang].caption} width="780" height="1688" loading={detail?'eager':'lazy'}/></>:<img className="landscape" src={project.image} alt={project[lang].caption} width={project.slug==='avela'?1920:1440} height={project.slug==='avela'?1080:1024} loading="lazy"/>}
 <span className="image-corner" aria-hidden="true">↗</span></div>}
 export function Portfolio({lang}:{lang:Lang}){return <div className="portfolio-home" lang={lang==='pt'?'pt-BR':'en'}><Header lang={lang}/><main id="main">
-<section className="nature-hero">
-  <LandscapeStudy lang={lang}/>
-  <div className="hero-intro">
-    <p className="hero-kicker">{tr(lang,'FOUNDING PRODUCT DESIGNER / CAMPINAS, BRAZIL · REMOTE','FOUNDING PRODUCT DESIGNER / CAMPINAS, BRASIL · REMOTO')}</p>
-    <h1>Otávio Ramos<span>.</span></h1>
-    <p className="hero-position">{tr(lang,'Building the design practice @ A3Lab. Making apps and tools with AI and code.','Estruturando a prática de design @ A3Lab. Criando apps e ferramentas com IA e código.')}</p>
-    <div className="hero-actions"><ActionLink href="#work" label={tr(lang,'See my work','Ver projetos')}/><ActionLink href="mailto:otavio.fr1@gmail.com" label={tr(lang,'Get in touch','Conversar')} secondary/></div>
-    <p className="hero-location">{tr(lang,'Remote-first from Brazil (GMT−3), fluent in English. Open to relocation with visa support.','Remote-first a partir do Brasil (GMT−3), inglês fluente. Aberto a mudança de país com apoio para o visto.')}</p>
-    <div className="hero-ribbon" aria-label={tr(lang,'Focus areas','Áreas de foco')}><span>A3LAB / FOUNDING DESIGNER</span><span>CONSUMER APPS</span><span>AI TOOLING</span><span>DESIGN SYSTEMS</span><span>DESIGN IN CODE</span></div>
+<section className="ribbon-hero">
+  <RibbonGlow className="ribbon-hero-field"/>
+  <div className="ribbon-hero-copy">
+    <p className="ribbon-hero-tag">{tr(lang,'FOUNDING PRODUCT DESIGNER','FOUNDING PRODUCT DESIGNER')}</p>
+    <h1>Otávio Ramos.</h1>
+    <p className="ribbon-hero-lead">{tr(lang,'Building the design practice at A3Lab. Consumer apps and internal tools, designed and shipped with AI and code.','Estruturando a prática de design na A3Lab. Apps B2C e ferramentas internas, desenhados e colocados no ar com IA e código.')}</p>
+    <div className="ribbon-hero-actions"><ActionLink href="#work" label={tr(lang,'See my work','Ver projetos')}/><ActionLink href="mailto:otavio.fr1@gmail.com" label={tr(lang,'Get in touch','Conversar')} secondary/></div>
   </div>
-
+  <p className="ribbon-hero-meta">{tr(lang,'CAMPINAS, BRAZIL · REMOTE-FIRST · GMT−3','CAMPINAS, BRASIL · REMOTE-FIRST · GMT−3')}</p>
 </section>
 <section id="work" className="work-index"><div className="work-introduction"><div><p className="eyebrow">01 / {tr(lang,'SELECTED WORK','PROJETOS SELECIONADOS')}</p><h2>{tr(lang,'Selected work','Projetos selecionados')}</h2></div><p>{tr(lang,'Consumer apps and internal tools where I owned the design direction.','Apps B2C e ferramentas internas em que conduzi a direção de design.')}</p></div><SelectedWork items={projects.map(p=>({slug:p.slug,name:p.name,category:p[lang].category,summary:caseEvidence[p.slug]?.[lang]?.headline??p[lang].summary,status:p[lang].status,image:p.image,href:path(lang)+'/work/'+p.slug}))} label={tr(lang,'View project','Ver projeto')}/></section>
 <MoreWork lang={lang}/>

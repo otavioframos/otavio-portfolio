@@ -1,0 +1,36 @@
+/* Neutral type system: Arimo for display, Inter for reading, mono for labels. */
+:root{--font-editorial:var(--font-identity);--font-barlow:var(--font-identity);--font-display:var(--font-identity);--font-body:var(--font-manrope);--font-label:var(--font-pixel)}
+body{font-family:var(--font-manrope),'Helvetica Neue',Arial,sans-serif;font-feature-settings:'ss01','cv11'}
+h1,h2,h3{font-family:var(--font-identity),'Helvetica Neue',Arial,sans-serif;font-weight:700;letter-spacing:-.035em}
+
+/* Hero: full-bleed shader field, copy anchored bottom-left. */
+.ribbon-hero{position:relative;isolation:isolate;min-height:min(100svh,980px);margin-top:-94px;padding:0 var(--page-gutter) clamp(2.5rem,6vw,4.5rem);display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;color:#fff}
+.ribbon-hero-field{position:absolute;inset:0;z-index:-1}
+.ribbon-hero-field canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .8s ease}
+.ribbon-hero-field[data-ready='true'] canvas{opacity:1}
+.ribbon-hero::after{content:'';position:absolute;inset:auto 0 0;height:45%;z-index:-1;background:linear-gradient(180deg,transparent,#050a1cb3);pointer-events:none}
+.ribbon-hero-copy{max-width:52rem}
+.ribbon-hero-tag{display:inline-block;margin:0 0 1.4rem;padding:.35rem .6rem;background:#000;color:#fff;font:500 .78rem/1.2 var(--font-pixel),ui-monospace,monospace;letter-spacing:.06em}
+.ribbon-hero h1{margin:0;font:600 clamp(3.2rem,8.4vw,7.4rem)/.94 var(--font-identity),'Helvetica Neue',Arial,sans-serif;letter-spacing:-.055em;color:#fff}
+.ribbon-hero-lead{max-width:38rem;margin:1.4rem 0 1.8rem;font:400 clamp(1rem,1.3vw,1.15rem)/1.55 var(--font-manrope),sans-serif;color:#dfe6ff}
+.ribbon-hero-actions{display:flex;flex-wrap:wrap;gap:.6rem}
+.ribbon-hero-meta{position:absolute;right:var(--page-gutter);bottom:clamp(2.5rem,6vw,4.5rem);margin:0;font:500 .72rem/1.4 var(--font-pixel),monospace;letter-spacing:.08em;color:#c5d2ff}
+
+/* Square mono buttons with an arrow cell, as in the reference. */
+.ribbon-hero .action-link{--action-surface:#fff;--action-ink:#0b1440;gap:0;min-height:44px;padding:0;border-radius:0;border:1px solid #fff;font:500 .82rem/1 var(--font-pixel),monospace;letter-spacing:.06em;text-transform:uppercase;backdrop-filter:none}
+.ribbon-hero .action-label{padding:0 .9rem}
+.ribbon-hero .action-icon{width:44px;height:44px;border-radius:0;border-left:1px solid currentColor;background:transparent;color:inherit}
+.ribbon-hero .action-secondary{--action-surface:transparent;--action-ink:#fff;border-color:#ffffff66}
+.ribbon-hero .action-secondary .action-icon{border-left-color:#ffffff66}
+.ribbon-hero .action-link::before,.ribbon-hero .action-link::after{border-color:#fff}
+
+@media(max-width:700px){
+  .ribbon-hero{margin-top:-82px;min-height:92svh}
+  .ribbon-hero-meta{position:static;margin-top:1.6rem}
+}
+
+/* Header floats over the hero on the home page, at any width. */
+.portfolio-home .site-header{position:absolute;top:0;left:0;right:0;margin:0 auto;background:transparent}
+.portfolio-home .ribbon-hero{margin-top:0}
+.ribbon-hero .action-label{height:1.25em;line-height:1.25;align-self:center}
+.ribbon-hero .action-label>span{line-height:1.25}
