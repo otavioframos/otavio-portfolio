@@ -1,1 +1,7 @@
-export default function NotFound(){return <main className="hero"><p className="eyebrow">404 / PAGE NOT FOUND</p><h1>A different<br/><em>direction.</em></h1><a className="text-link" href="/">Back to selected work ↗</a></main>}
+export default function NotFound() {
+  return <main className="grid notfound">
+    <p className="label">404 / Page not found</p>
+    <h1>A different direction.</h1>
+    <a className="inline-link" href="/">Back to the portfolio →</a>
+  </main>;
+}

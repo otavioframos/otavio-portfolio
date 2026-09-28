@@ -2,9 +2,7 @@ import type { Metadata } from 'next';
 import { Arimo, Inter, JetBrains_Mono } from 'next/font/google';
 import { siteUrl, indexable, alternatesFor } from '@/lib/site';
 import './globals.css';
-import './refinements.css';
-import './nature.css';
-import './hero.css';
+import './site.css';
 // Neutral, Helvetica-adjacent system: Arimo for display, Inter for reading, a mono for labels.
 const identity=Arimo({variable:'--font-identity',weight:['400','500','600','700'],subsets:['latin']});
 const body=Inter({variable:'--font-manrope',subsets:['latin']});
@@ -20,4 +18,4 @@ export const metadata:Metadata={
   twitter:{card:'summary_large_image',title,description,images:['/og.jpg']},
   robots:indexable?{index:true,follow:true}:{index:false,follow:false},
 };
-export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body className={`${body.variable} ${pixel.variable} ${identity.variable}`}>{children}</body></html>}
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en" className={`${body.variable} ${pixel.variable} ${identity.variable}`}><body>{children}</body></html>}
