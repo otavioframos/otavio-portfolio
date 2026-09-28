@@ -17,7 +17,6 @@ import { MindYoungSystem, MindYoungFunnel, MindYoungTests } from '@/components/m
 import { RadarEvolution, RadarCluster, RadarCard } from '@/components/radar';
 import { AvelaMatrix, AvelaQuiz, AvelaOnboarding, AvelaSystem } from '@/components/avela';
 import { VelaPrinciples, VelaJobs, VelaMetric } from '@/components/vela';
-import { Marquee } from '@/components/marquee';
 import { OwnershipDiagram, CollaborationDiagram, BuildingDiagram, OffClockDiagram } from '@/components/diagrams';
 
 const tr = (lang: Lang, en: string, pt: string) => (lang === 'pt' ? pt : en);
@@ -62,7 +61,7 @@ export function Portfolio({ lang }: { lang: Lang }) {
         <div className="grid hero-grid">
           <div className="hero-id">
             <p className="hero-tag">FOUNDING PRODUCT DESIGNER</p>
-            <h1><span className="mask-in">Otávio Ramos.</span></h1>
+            <h1><span className="mask-in">Otávio Ramos</span></h1>
           </div>
           <div className="hero-copy">
             <p className="hero-lead">{tr(lang, 'Building the design practice at A3Lab. Consumer apps and internal tools, designed and shipped with AI and code.', 'Estruturando a prática de design na A3Lab. Apps B2C e ferramentas internas, desenhados e colocados no ar com IA e código.')}</p>
@@ -128,7 +127,7 @@ function HowIWork({ lang }: { lang: Lang }) {
     <h3>{t}</h3>
     <p>{d}</p>
   </li>)}</ul>;
-  return <Marquee label={tr(lang, 'How I work', 'Como trabalho')} copy={list}>{list}</Marquee>;
+  return <section className="marquee hw-scroll" aria-label={tr(lang, 'How I work', 'Como trabalho')}><div className="marquee-set">{list}</div></section>;
 }
 
 const FIGURES = { system: MindYoungSystem, funnel: MindYoungFunnel, tests: MindYoungTests, 'radar-evolution': RadarEvolution, 'radar-cluster': RadarCluster, 'radar-card': RadarCard, 'avela-matrix': AvelaMatrix, 'avela-quiz': AvelaQuiz, 'avela-onboarding': AvelaOnboarding, 'avela-system': AvelaSystem, 'vela-principles': VelaPrinciples, 'vela-jobs': VelaJobs, 'vela-metric': VelaMetric };
