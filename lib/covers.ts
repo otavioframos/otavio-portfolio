@@ -22,6 +22,8 @@ export type CoverSpec = {
   kind?: Record<Lang, string>;
   /** Field colour behind the case study's second image. */
   extraField?: string;
+  /** Cover drawn and animated in code (components/cover-art.tsx) instead of an image or video. */
+  art?: boolean;
   /** Muted loop that replaces the image; `image` must then be its first frame. */
   video?: string;
   /** Case-page gallery, laid out on the 12-column grid by `span`. */
@@ -30,7 +32,7 @@ export type CoverSpec = {
 
 export const covers: Record<string, CoverSpec> = {
   mindyoung: {
-    image: '/videos/mindyoung-poster.webp', width: 780, height: 1400, video: '/videos/mindyoung.mp4', fit: 'phone', field: '#BFD0EC', ink: '#0B1640',
+    image: '/images/mindyoung-owl.webp', width: 512, height: 512, art: true, fit: 'phone', field: '#BFD0EC', ink: '#0B1640',
     kind: { en: 'Consumer app', pt: 'App B2C' }, extraField: '#BFD0EC',
     gallery: [
       { src: '/images/mindyoung-owl.webp', width: 512, height: 512, span: 5, field: '#BFD0EC' },
@@ -38,12 +40,12 @@ export const covers: Record<string, CoverSpec> = {
     ],
   },
   'content-radar': {
-    image: '/videos/content-radar-poster.webp', width: 1440, height: 1024, video: '/videos/content-radar.mp4', fit: 'screen', field: '#0B1640', ink: '#EEF2FF', frame: true,
+    image: '/images/radar-overview.webp', width: 1440, height: 1024, art: true, fit: 'screen', field: '#0B1640', ink: '#EEF2FF', frame: true,
     kind: { en: 'AI research tool', pt: 'Ferramenta de pesquisa com IA' }, extraField: '#0B1640',
     gallery: [{ src: '/images/radar-detail.webp', width: 1440, height: 1024, span: 12, field: '#0B1640' }],
   },
   avela: {
-    image: '/videos/avela-poster.webp', width: 1600, height: 900, video: '/videos/avela.mp4', fit: 'screen', field: '#0E1A16', ink: '#EEF2FF',
+    image: '/images/avela-mark.webp', width: 360, height: 360, art: true, fit: 'screen', field: '#0E1A16', ink: '#EEF2FF',
     kind: { en: 'AI nutrition app', pt: 'App de nutrição com IA' }, extraField: '#E8EDE0',
     gallery: [{ src: '/images/avela-flow.webp', width: 1920, height: 1080, span: 12, field: '#E8EDE0' }],
   },

@@ -2,6 +2,7 @@ import type { CSSProperties } from 'react';
 import { projects, type Lang } from '@/lib/projects';
 import { moreProjects } from '@/lib/more-projects';
 import { covers } from '@/lib/covers';
+import { CoverArt } from '@/components/cover-art';
 
 type Item = { slug: string; name: string; kind: string; meta: string };
 
@@ -21,8 +22,8 @@ export function MoreWorks({ current, lang }: { current: string; lang: Lang }) {
         const spec = covers[item.slug];
         return <li key={item.slug} className="mw-card">
           <a href={(pt ? '/pt' : '') + '/work/' + item.slug} aria-label={item.name}>
-            <div className={`mw-media cover-${spec.fit}`} style={{ '--field': spec.field } as CSSProperties}>
-              <img src={spec.image} alt="" width={spec.width} height={spec.height} loading="lazy" decoding="async" data-frame={spec.frame ? 'true' : undefined} />
+            <div className={`mw-media ${spec.art ? 'cover-art' : 'cover-' + spec.fit}`} style={{ '--field': spec.field } as CSSProperties}>
+              {spec.art ? <CoverArt slug={item.slug} /> : <img src={spec.image} alt="" width={spec.width} height={spec.height} loading="lazy" decoding="async" data-frame={spec.frame ? 'true' : undefined} />}
             </div>
             <div className="mw-row"><span className="mw-name">{item.name}</span><span className="mw-kind">{item.kind}</span></div>
           </a>

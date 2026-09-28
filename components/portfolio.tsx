@@ -13,6 +13,7 @@ import { SiteHeader } from '@/components/site-header';
 import { ScrollWords } from '@/components/scroll-words';
 import { MoreWorks } from '@/components/more-works';
 import { Gallery } from '@/components/gallery';
+import { OwnershipBlueprint, CollaborationBlueprint, BuildingBlueprint, OffClockBlueprint } from '@/components/blueprints';
 
 const tr = (lang: Lang, en: string, pt: string) => (lang === 'pt' ? pt : en);
 const path = (lang: Lang) => (lang === 'pt' ? '/pt' : '');
@@ -74,7 +75,7 @@ export function Portfolio({ lang }: { lang: Lang }) {
         {projects.map((p, i) => {
           const c = p[lang];
           const spec = covers[p.slug];
-          return <Cover key={p.slug} spec={spec} alt={c.caption} name={p.name} kind={spec.kind?.[lang] ?? c.category} meta={c.status} href={base + '/work/' + p.slug} priority={i === 0} />;
+          return <Cover key={p.slug} slug={p.slug} spec={spec} alt={c.caption} name={p.name} kind={spec.kind?.[lang] ?? c.category} meta={c.status} href={base + '/work/' + p.slug} priority={i === 0} />;
         })}
       </section>
 
@@ -100,18 +101,7 @@ export function Portfolio({ lang }: { lang: Lang }) {
         </div>
         <div className="hw">
           <div className="grid hw-head"><h2 data-reveal="">{tr(lang, 'How I work', 'Como trabalho')}</h2></div>
-          <ul className="grid hw-list">
-            {[
-              { img: '/images/mindyoung-owl.webp', w: 512, h: 512, field: '#BFD0EC', t: tr(lang, 'Ownership', 'Responsabilidade'), d: tr(lang, 'Brand, product, and the connections between them.', 'Marca, produto e as conexões entre eles.') },
-              { img: '/images/radar-detail.webp', w: 1440, h: 1024, field: '#EFEFEF', t: tr(lang, 'Collaboration', 'Colaboração'), d: tr(lang, 'Work through the details with development.', 'Resolver os detalhes junto a desenvolvimento.') },
-              { img: '/images/avela-flow.webp', w: 1920, h: 1080, field: '#E8EDE0', t: tr(lang, 'Building', 'Construção'), d: tr(lang, 'Take an idea beyond the prototype.', 'Levar uma ideia além do protótipo.') },
-              { img: '/images/meadow.jpg', w: 1672, h: 941, field: '#111', t: tr(lang, 'Off the clock', 'Além do trabalho'), d: tr(lang, 'Coffee, creative coding, and the occasional late night in Figma.', 'Café, creative coding e uma ou outra noite até tarde no Figma.') },
-            ].map(card => <li className="hw-card" key={card.t}>
-              <div className="hw-media" style={{ background: card.field }}><img src={card.img} alt="" width={card.w} height={card.h} loading="lazy" decoding="async" /></div>
-              <h3 data-reveal="">{card.t}</h3>
-              <p>{card.d}</p>
-            </li>)}
-          </ul>
+          <HowIWork lang={lang} />
         </div>
         <Education lang={lang} />
       </section>
@@ -119,6 +109,22 @@ export function Portfolio({ lang }: { lang: Lang }) {
     <Footer lang={lang} />
     <RevealObserver />
   </div>;
+}
+
+function HowIWork({ lang }: { lang: Lang }) {
+  const cards = [
+    { Art: OwnershipBlueprint, t: tr(lang, 'Ownership', 'Responsabilidade'), d: tr(lang, 'Brand, product, and the connections between them.', 'Marca, produto e as conexões entre eles.') },
+    { Art: CollaborationBlueprint, t: tr(lang, 'Collaboration', 'Colaboração'), d: tr(lang, 'Work through the details with development.', 'Resolver os detalhes junto a desenvolvimento.') },
+    { Art: BuildingBlueprint, t: tr(lang, 'Building', 'Construção'), d: tr(lang, 'Take an idea beyond the prototype.', 'Levar uma ideia além do protótipo.') },
+    { Art: OffClockBlueprint, t: tr(lang, 'Off the clock', 'Além do trabalho'), d: tr(lang, 'Coffee, creative coding, and the occasional late night in Figma.', 'Café, creative coding e uma ou outra noite até tarde no Figma.') },
+  ];
+  // The list is rendered twice so the loop can scroll forever; the copy is hidden from assistive tech.
+  const row = (copy: boolean) => cards.map(({ Art, t, d }) => <li className="hw-card" key={(copy ? 'b-' : 'a-') + t} aria-hidden={copy || undefined}>
+    <div className="hw-media"><Art title={t} /></div>
+    <h3>{t}</h3>
+    <p>{d}</p>
+  </li>);
+  return <div className="hw-marquee"><ul className="hw-track">{row(false)}{row(true)}</ul></div>;
 }
 
 export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
@@ -140,7 +146,7 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
   return <div className="page" lang={lang === 'pt' ? 'pt-BR' : 'en'}>
     <Header lang={lang} slug={slug} progress />
     <main id="main" className="case">
-      <Cover spec={spec} alt={c.caption} name={p.name} kind={spec.kind?.[lang] ?? c.category} meta={ev?.period ?? '2026'} priority nameAs="p" />
+      <Cover slug={slug} spec={spec} alt={c.caption} name={p.name} kind={spec.kind?.[lang] ?? c.category} meta={ev?.period ?? '2026'} priority nameAs="p" />
       <div className="grid case-head">
         <div className="case-title">
           <a className="case-back" href={base + '/#work'}>← {tr(lang, 'Selected work', 'Projetos selecionados')}</a>

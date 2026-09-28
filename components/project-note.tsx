@@ -14,7 +14,7 @@ export function ProjectNote({ project, lang }: { project: MoreProject; lang: Lan
   return <div className="page" lang={pt ? 'pt-BR' : 'en'}>
     <Header lang={lang} slug={project.slug} progress />
     <main id="main" className="case note">
-      <Cover spec={spec} alt={copy.captions[0]} name={project.name} kind={copy.category} meta={project.year} priority nameAs="p" />
+      <Cover slug={project.slug} spec={spec} alt={copy.captions[0]} name={project.name} kind={copy.category} meta={project.year} priority nameAs="p" />
       <div className="grid case-head">
         <div className="case-title">
           <a className="case-back" href={(pt ? '/pt' : '') + '/#more-work'}>← {pt ? 'Outros projetos' : 'More work'}</a>
