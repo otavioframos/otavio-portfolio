@@ -144,3 +144,101 @@ export function AvelaOnboarding({ lang }: { lang: Lang }) {
     </figcaption>
   </figure>;
 }
+
+/* ───────────────────────── Design system ───────────────────────── */
+
+/* Production tokens from the app (src/design/tokens.js). */
+const AV_COLORS = [
+  { name: 'Charcoal', hex: '#24312E', en: 'Text', pt: 'Texto' },
+  { name: 'Olive', hex: '#66736F', en: 'Muted text', pt: 'Texto secundário' },
+  { name: 'Sage', hex: '#5E8C83', en: 'Brand and actions', pt: 'Marca e ações' },
+  { name: 'Sage light', hex: '#E8F0EE', en: 'Coach and selection', pt: 'Coach e seleção' },
+  { name: 'Coral', hex: '#D98B73', en: 'Warmth and cravings', pt: 'Acolhimento e vontades' },
+  { name: 'Gold', hex: '#D6A24A', en: 'Fibre and gentle warnings', pt: 'Fibras e alertas leves' },
+  { name: 'Sand', hex: '#EADFCF', en: 'Borders and tracks', pt: 'Bordas e trilhas' },
+  { name: 'Cream', hex: '#FAF7F2', en: 'Paper ground', pt: 'Fundo papel' },
+];
+
+const FEELINGS = [
+  { en: 'Satisfied', pt: 'Satisfeita', score: 82, coachEn: 'Nice balance. The fibre here will carry you to the afternoon.', coachPt: 'Bom equilíbrio. As fibras daqui te levam até a tarde.' },
+  { en: 'Still hungry', pt: 'Ainda com fome', score: 64, coachEn: 'Good to know. Tomorrow we can add a little more protein at lunch.', coachPt: 'Bom saber. Amanhã podemos colocar um pouco mais de proteína no almoço.' },
+  { en: 'Too full', pt: 'Cheia demais', score: 71, coachEn: 'That happens. A lighter dinner will balance the day, no need to skip it.', coachPt: 'Acontece. Um jantar mais leve equilibra o dia, sem precisar pular.' },
+];
+
+export function AvelaSystem({ lang }: { lang: Lang }) {
+  const [copied, setCopied] = useState<string | null>(null);
+  const [weight, setWeight] = useState(500);
+  const [soft, setSoft] = useState(100);
+  const [feel, setFeel] = useState(0);
+  const [pressed, setPressed] = useState(false);
+  const f = FEELINGS[feel];
+  const C = 2 * Math.PI * 27;
+
+  const copy = (hex: string) => {
+    navigator.clipboard?.writeText(hex).catch(() => {});
+    setCopied(hex);
+    window.setTimeout(() => setCopied(c => (c === hex ? null : c)), 1400);
+  };
+
+  return <figure className="my-ds av-ds" aria-label={tr(lang, 'Avela design system', 'Design system do Avela')}>
+    {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+    <link rel="stylesheet" precedence="default" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..800,0..100&family=Manrope:wght@400;500;600;700&display=swap" />
+
+    <div className="my-ds-cell my-ds-colors">
+      <p className="my-ds-k">{tr(lang, 'Colour', 'Cor')}</p>
+      <ul>{AV_COLORS.map(c => <li key={c.hex}>
+        <button type="button" onClick={() => copy(c.hex)} aria-label={tr(lang, `Copy ${c.name} ${c.hex}`, `Copiar ${c.name} ${c.hex}`)}>
+          <span className="my-sw" style={{ background: c.hex }} />
+          <span className="my-sw-name">{c.name}</span>
+          <span className="my-sw-hex">{copied === c.hex ? tr(lang, 'Copied', 'Copiado') : c.hex}</span>
+          <span className="my-sw-use">{tr(lang, c.en, c.pt)}</span>
+        </button>
+      </li>)}</ul>
+    </div>
+
+    <div className="my-ds-cell my-ds-type">
+      <p className="my-ds-k">{tr(lang, 'Type', 'Tipografia')}</p>
+      <p className="my-type-display" style={{ fontWeight: weight, fontVariationSettings: `'SOFT' ${soft}, 'opsz' 96` }}>{tr(lang, 'Room for imperfect days.', 'Espaço para dias imperfeitos.')}</p>
+      <p className="my-type-meta">Fraunces · {tr(lang, 'display', 'títulos')} · {weight} / SOFT {soft}</p>
+      <div className="my-sliders">
+        <label>{tr(lang, 'Weight', 'Peso')}<input type="range" min={300} max={800} step={10} value={weight} onChange={e => setWeight(+e.target.value)} /></label>
+        <label>{tr(lang, 'Softness', 'Suavidade')}<input type="range" min={0} max={100} value={soft} onChange={e => setSoft(+e.target.value)} /></label>
+      </div>
+      <p className="my-type-body">{tr(lang, 'Manrope carries everything you read and tap: clear at small sizes, friendly without being cute. Fraunces, soft and warm, is saved for the moments that should feel human.', 'Manrope cuida de tudo que se lê e toca: clara em tamanhos pequenos, simpática sem ser infantil. A Fraunces, suave e calorosa, fica para os momentos que devem soar humanos.')}</p>
+      <p className="my-type-meta">Manrope · {tr(lang, 'body', 'texto')} · 400 / 500 / 600 / 700</p>
+    </div>
+
+    <div className="my-ds-cell my-ds-shape">
+      <p className="my-ds-k">{tr(lang, 'Shape', 'Forma')}</p>
+      <ul className="my-radii">{[{ t: 'bubble', v: 18 }, { t: 'card', v: 20 }, { t: 'option', v: 20 }, { t: 'pill', v: 999 }].map(r => <li key={r.t}><span style={{ borderRadius: Math.min(r.v, 40) }} /><b>{r.t}</b><i>{r.v}px</i></li>)}</ul>
+      <p className="my-ds-note">{tr(lang, 'One 20px radius for everything you hold, flat surfaces with a hairline of sand instead of shadows, and the coach set apart in sage.', 'Um raio de 20px para tudo que se segura, superfícies planas com um fio de areia no lugar de sombras e o coach destacado em sálvia.')}</p>
+    </div>
+
+    <div className="my-ds-cell my-ds-grid">
+      <p className="my-ds-k">{tr(lang, 'Components', 'Componentes')}</p>
+      <div className="my-phone">
+        <div className="my-phone-col">
+          <div className="av-meal">
+            <svg className="av-ring" viewBox="0 0 64 64" aria-hidden="true">
+              <circle className="t" cx="32" cy="32" r="27" />
+              <circle className="v" cx="32" cy="32" r="27" strokeDasharray={C} strokeDashoffset={C * (1 - f.score / 100)} transform="rotate(-90 32 32)" />
+              <text x="32" y="39" textAnchor="middle">{f.score}</text>
+            </svg>
+            <div className="av-meal-k"><b>{tr(lang, 'Lunch · grain bowl', 'Almoço · bowl de grãos')}</b>
+              <div className="av-bars">
+                {[{ k: tr(lang, 'Protein', 'Proteína'), w: feel === 1 ? 38 : 62, c: '#5E8C83' }, { k: tr(lang, 'Fibre', 'Fibras'), w: 78, c: '#D6A24A' }].map(b => <span key={b.k} className="av-bar">{b.k}<i><span style={{ width: `${b.w}%`, background: b.c }} /></i></span>)}
+              </div>
+            </div>
+          </div>
+          <p className="av-bubble" aria-live="polite">{tr(lang, f.coachEn, f.coachPt)}</p>
+          <p className="my-q">{tr(lang, 'How did it feel?', 'Como você se sentiu?')}</p>
+          <div className="my-opts">
+            {FEELINGS.map((o, i) => <button key={o.en} type="button" aria-pressed={feel === i} className="my-opt" onClick={() => setFeel(i)}><span className="my-radio" />{tr(lang, o.en, o.pt)}</button>)}
+          </div>
+          <button type="button" className={'my-cta' + (pressed ? ' is-pressed' : '')} onPointerDown={() => setPressed(true)} onPointerUp={() => setPressed(false)} onPointerLeave={() => setPressed(false)}>{tr(lang, 'Save meal', 'Salvar refeição')}</button>
+        </div>
+      </div>
+      <p className="my-ds-note">{tr(lang, 'Pick how the meal felt: the score, the bars and the coach respond, never with a warning.', 'Escolha como a refeição foi: a nota, as barras e o coach respondem, nunca com uma bronca.')}</p>
+    </div>
+  </figure>;
+}

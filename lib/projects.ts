@@ -269,6 +269,7 @@ export const projects = [
         },
         {
           "label": "05 / PRODUCT FLOWS",
+          "figure": "avela-system",
           "title": "Meet the moment people are in.",
           "body": "I designed paths around photographing a meal, exploring options from a refrigerator, and understanding a restaurant menu. Personalisation arrives through the interaction itself, not a settings page.",
           "points": [
@@ -323,6 +324,7 @@ export const projects = [
         },
         {
           "label": "05 / FLUXOS DO PRODUTO",
+        "figure": "avela-system",
           "title": "Encontrar as pessoas no momento em que estão.",
           "body": "Desenhei caminhos para fotografar uma refeição, explorar opções a partir da geladeira e entender um cardápio de restaurante. A personalização chega pela própria interação, não por uma tela de configurações.",
           "points": [
