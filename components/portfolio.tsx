@@ -13,6 +13,7 @@ import { SiteHeader } from '@/components/site-header';
 import { ScrollWords } from '@/components/scroll-words';
 import { MoreWorks } from '@/components/more-works';
 import { Gallery } from '@/components/gallery';
+import { MindYoungSystem, MindYoungFunnel, MindYoungTests } from '@/components/mindyoung';
 import { Marquee } from '@/components/marquee';
 import { OwnershipDiagram, CollaborationDiagram, BuildingDiagram, OffClockDiagram } from '@/components/diagrams';
 
@@ -127,6 +128,8 @@ function HowIWork({ lang }: { lang: Lang }) {
   return <Marquee label={tr(lang, 'How I work', 'Como trabalho')} copy={list}>{list}</Marquee>;
 }
 
+const FIGURES = { system: MindYoungSystem, funnel: MindYoungFunnel, tests: MindYoungTests };
+
 export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
   const p = projects.find(item => item.slug === slug);
   if (!p) return null;
@@ -161,7 +164,11 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
         <h2 className="label">{tr(lang, 'Context', 'Contexto')}</h2>
         <div className="prose">
           <p className="lead">{c.lead}</p>
-          <div className="decision"><h3 className="label">{tr(lang, 'A key decision', 'Uma decisão importante')}</h3><p>{c.decision}</p></div>
+          <aside className="decision">
+            <p className="decision-k"><span className="label">{tr(lang, 'Key decision', 'Decisão-chave')}</span><span className="decision-mark" aria-hidden="true">↳</span></p>
+            <p className="decision-v">{c.decision}</p>
+            {'why' in c && <p className="decision-why"><span className="label">{tr(lang, 'Why', 'Por quê')}</span>{c.why}</p>}
+          </aside>
         </div>
       </section>
 
@@ -173,8 +180,9 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
             <p>{s.body}</p>
             {'points' in s && <ul>{s.points.map(point => <li key={point}>{point}</li>)}</ul>}
           </div>
+          {'figure' in s && FIGURES[s.figure as keyof typeof FIGURES] && <div className="case-fig">{(() => { const F = FIGURES[s.figure as keyof typeof FIGURES]; return <F lang={lang} />; })()}</div>}
         </section>
-        {i === 1 && <Gallery items={spec.gallery ?? [{ src: p.extra, width: extraSize[0], height: extraSize[1], span: 12, field: spec.extraField }]} caption={c.extraCaption} />}
+        {i === (slug === 'mindyoung' ? 0 : 1) && <Gallery items={spec.gallery ?? [{ src: p.extra, width: extraSize[0], height: extraSize[1], span: 12, field: spec.extraField }]} caption={c.extraCaption} />}
       </Fragment>)}
 
       <section className="grid block ruled">

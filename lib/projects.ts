@@ -29,27 +29,36 @@ export const projects = [
       "scope": "Brand identity / UX & UI / Design system / Acquisition",
       "status": "Live product",
       "decision": "Use one visual system across acquisition and in-app training.",
+      "why": "The first contact is a quiz opened from an ad; the relationship is daily training. If they looked like two products, the trust built in the assessment would reset at the paywall.",
       "lead": "A3Lab was created to explore new consumer products within A3Media. MindYoung brings cognitive assessment and ongoing training into one product. As the team’s sole designer, I worked across its identity, interface, and acquisition experience alongside the developer.",
       "sections": [
         {
           "label": "01 / RESPONSIBILITY",
           "title": "One product. Many connected decisions.",
-          "body": "My work covered MindYoung’s logo, design system, and screens. I also contributed to shaping features and evolving the product with development. Working across these surfaces meant considering how the acquisition experience introduces the product and how the app follows through on that introduction."
+          "body": "MindYoung is a cognitive assessment that turns into daily training. As the only designer, I owned the logo, the design system and every screen, from the ad-driven quiz to the app, and shaped features with the developer as the product evolved."
         },
         {
-          "label": "02 / THE EXPERIENCE",
-          "title": "From an assessment to an ongoing habit.",
-          "body": "The public journey begins with a cognitive assessment, followed by an offer for the report and ongoing training. Inside the product, the experience includes daily exercises, a personal skill profile, and practice progress. My acquisition work and app design sit within this connected journey.",
-          "points": [
-            "Acquisition: introduce the product and guide people into the assessment.",
-            "Product: organize training, skill profiles, and progress into understandable screens.",
-            "System: establish a visual language that carries across features."
-          ]
+          "label": "02 / THE SYSTEM",
+          "title": "One language, from the ad to the app.",
+          "body": "People meet MindYoung in a quiz opened from a social ad and stay for training inside the app. I built one system for both: a warm paper ground, deep ink, a single blue for action, and generous shapes that read as physical keys on a phone. The specimen below uses the production tokens.",
+          "figure": "system"
         },
         {
-          "label": "03 / COLLABORATION",
+          "label": "03 / THE FUNNEL",
+          "title": "Where people actually stop.",
+          "body": "Once it went live on August 19, 2026, the journey could be measured end to end. Most people finish the test once they start it, and almost everyone who finishes sees the offer. The steep drops are before the test and at payment, which moved my attention away from the screens I had been polishing.",
+          "figure": "funnel"
+        },
+        {
+          "label": "04 / TESTING",
+          "title": "Two tests that changed nothing, and a finding that did.",
+          "body": "I ran live A/B tests on details I expected to matter: showing the score band before payment and the position of a hard question. At about 1,500 people per arm, neither moved. The real gap was where checkout opens: inside Instagram and Facebook's in-app browsers, without Apple Pay or autofill, conversion is half of a regular browser.",
+          "figure": "tests"
+        },
+        {
+          "label": "05 / COLLABORATION",
           "title": "Design and development, in conversation.",
-          "body": "I collaborated with the developer on features and implementation while remaining responsible for design across the product. The work continued beyond the initial screens through product evolution and refinement of the acquisition experience."
+          "body": "I worked with the developer on features and implementation while staying responsible for design across the product. The work continued past the first release through experiments, pricing tests and refinement of the acquisition experience."
         }
       ],
       "outcome": "MindYoung is live. My contribution spans its identity, design system, screens, and acquisition experience.",
@@ -64,27 +73,36 @@ export const projects = [
       "scope": "Identidade / UX e UI / Design system / Aquisição",
       "status": "Produto no ar",
       "decision": "Usar um mesmo sistema visual na aquisição e no treino dentro do app.",
+      "why": "O primeiro contato é um quiz aberto a partir de um anúncio; a relação é o treino diário. Se parecessem dois produtos, a confiança criada na avaliação se perderia no paywall.",
       "lead": "A A3Lab nasceu para explorar novos produtos B2C dentro da A3Media. O MindYoung reúne avaliação cognitiva e treino contínuo em um produto. Como único designer do time, trabalhei na identidade, na interface e na aquisição, junto ao desenvolvedor.",
       "sections": [
         {
           "label": "01 / RESPONSABILIDADE",
           "title": "Um produto. Muitas decisões conectadas.",
-          "body": "Meu trabalho incluiu o logo, o design system e as telas do MindYoung. Também contribuí para a definição de funcionalidades e a evolução do produto com desenvolvimento. Atuar nessas frentes exigiu considerar como a aquisição apresenta o produto e como o app dá continuidade a essa experiência."
+          "body": "O MindYoung é uma avaliação cognitiva que vira treino diário. Como único designer, fui responsável pelo logo, pelo design system e por todas as telas, do quiz vindo de anúncios até o app, e defini funcionalidades com o desenvolvedor conforme o produto evoluía."
         },
         {
-          "label": "02 / A EXPERIÊNCIA",
-          "title": "Da avaliação a um hábito contínuo.",
-          "body": "A jornada pública começa com uma avaliação cognitiva, seguida de uma oferta para acessar o relatório e continuar treinando. O produto inclui exercícios diários, perfil de habilidades e acompanhamento da prática. Meu trabalho de aquisição e de design do app faz parte dessa jornada.",
-          "points": [
-            "Aquisição: apresentar o produto e conduzir à avaliação.",
-            "Produto: organizar treinos, habilidades e progresso em telas compreensíveis.",
-            "Sistema: estabelecer uma linguagem visual consistente entre funcionalidades."
-          ]
+          "label": "02 / O SISTEMA",
+          "title": "Uma linguagem, do anúncio ao app.",
+          "body": "As pessoas conhecem o MindYoung num quiz aberto a partir de um anúncio e ficam pelo treino dentro do app. Criei um sistema para os dois: fundo papel quente, tinta profunda, um único azul para ação e formas generosas que parecem teclas físicas no celular. O espécime abaixo usa os tokens de produção.",
+          "figure": "system"
         },
         {
-          "label": "03 / COLABORAÇÃO",
+          "label": "03 / O FUNIL",
+          "title": "Onde as pessoas realmente param.",
+          "body": "Com o produto no ar desde 19 de agosto de 2026, a jornada passou a ser medida de ponta a ponta. A maioria termina o teste depois de começar, e quase todos que terminam veem a oferta. As quedas fortes estão antes do teste e no pagamento, o que tirou meu foco das telas que eu vinha polindo.",
+          "figure": "funnel"
+        },
+        {
+          "label": "04 / TESTES",
+          "title": "Dois testes que não mudaram nada, e uma descoberta que mudou.",
+          "body": "Rodei testes A/B em detalhes que eu achava decisivos: mostrar a faixa do resultado antes do pagamento e a posição de uma questão difícil. Com cerca de 1.500 pessoas por braço, nenhum moveu o número. A diferença real estava em onde o checkout abre: dentro dos navegadores do Instagram e do Facebook, sem Apple Pay nem preenchimento automático, a conversão é metade da de um navegador comum.",
+          "figure": "tests"
+        },
+        {
+          "label": "05 / COLABORAÇÃO",
           "title": "Design e desenvolvimento em diálogo.",
-          "body": "Colaborei com o desenvolvedor nas funcionalidades e na implementação, mantendo a responsabilidade pelo design do produto. O trabalho continuou além das primeiras telas, com a evolução do app e o refinamento da aquisição."
+          "body": "Trabalhei com o desenvolvedor nas funcionalidades e na implementação, mantendo a responsabilidade pelo design do produto. O trabalho seguiu depois do lançamento, com experimentos, testes de preço e refinamento da aquisição."
         }
       ],
       "outcome": "O MindYoung está no ar. Minha contribuição inclui identidade, design system, telas e experiência de aquisição.",
