@@ -69,6 +69,10 @@ export const moreProjects: MoreProject[] = [
     slug: 'homerunpet', name: 'HomeRunPet Brasil', year: '2024',
     source: 'https://citrine-giraffe-448.notion.site/HomeRunPet-c7de62ee0f7f83739ff301e3cc0e5071',
     images: ['/images/homerun-cover.webp', '/images/homerun-detail.webp'],
+    process: [
+      { src: '/images/homerun-before.webp', width: 780, height: 654, at: 'afterContext', en: 'The previous page: a price-led offer with no hierarchy or story, and nothing about why the product is different.', pt: 'A página anterior: uma oferta de preço sem hierarquia nem narrativa, e nada sobre o que torna o produto diferente.' },
+      { src: '/images/homerun-sections.webp', width: 626, height: 794, at: 'afterApproach', en: 'The new page built from the system: the pains from the research first, then the technology as answers to them.', pt: 'A nova página montada com o sistema: primeiro as dores da pesquisa, depois a tecnologia como resposta a elas.' },
+    ],
     en: {
       category: 'Brand launch · Design system',
       contribution: 'Researched, localised and systemised the Brazilian launch of a global pet-tech brand.',
