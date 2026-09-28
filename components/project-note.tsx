@@ -3,6 +3,7 @@ import { Cover } from '@/components/cover';
 import { RevealObserver } from '@/components/reveal';
 import { Gallery } from '@/components/gallery';
 import { HomeRunSystem } from '@/components/homerun-system';
+import { PrecatoMetrics } from '@/components/precato-metrics';
 import { MoreWorks } from '@/components/more-works';
 import { covers } from '@/lib/covers';
 import type { MoreProject } from '@/lib/more-projects';
@@ -44,8 +45,8 @@ export function ProjectNote({ project, lang }: { project: MoreProject; lang: Lan
           {copy.resultsNote && <p className="note-source">{copy.resultsNote}</p>}
         </div>
       </section>}
-      {copy.specimen
-        ? <div className="grid note-fig"><HomeRunSystem lang={lang} /></div>
+      {copy.figure
+        ? <div className="grid note-fig">{copy.figure === 'homerun' ? <HomeRunSystem lang={lang} /> : <PrecatoMetrics lang={lang} />}</div>
         : <Gallery items={[{ src: project.images[1], width: 1920, height: 1080, span: 12, field: spec.extraField }]} caption={copy.captions[1]} />}
       <MoreWorks current={project.slug} lang={lang} />
     </main>

@@ -634,3 +634,26 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-2);outline-off
 .hr-cap{grid-column:1/-1;font-size:12px;line-height:1.45;color:var(--fg-3)}
 @media(max-width:900px){.hr-ds{grid-template-columns:1fr}.hr-grid{grid-template-columns:repeat(2,max-content)}}
 @media(max-width:560px){.hr-grid{grid-template-columns:1fr}.hr-grid .hr-btn:nth-child(4n+2),.hr-grid .hr-btn:nth-child(4n+4){display:none}.hr-card{grid-template-columns:1fr}.hr-card img{aspect-ratio:4/3}}
+
+/* Precato · PageSpeed before/after, drawn in code */
+.pm{grid-column:1/-1;margin:0;display:grid;gap:24px;padding:clamp(20px,3vw,40px);border-radius:20px;background:#0E2F5A;color:#fff}
+.pm-head{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(16px,3vw,40px)}
+.pm-title{flex:1 1 240px;font:600 clamp(20px,2vw,28px)/1.15 var(--f-display);letter-spacing:-.03em;text-align:right}
+.pm-arrow{font:500 28px/1 var(--f-display);color:rgba(255,255,255,.5)}
+.pm-gauge{position:relative;width:clamp(96px,11vw,132px);aspect-ratio:1;display:grid;place-items:center}
+.pm-gauge svg{position:absolute;inset:0}
+.pm-gauge circle{fill:none;stroke-width:7}.pm-gauge .t{stroke:rgba(255,255,255,.1)}.pm-gauge .v{stroke-linecap:round}
+.pm-bad .v{stroke:#FF4E42}.pm-bad b{color:#FF8A80}.pm-mid .v{stroke:#FFA400}.pm-good .v{stroke:#0CCE6B}.pm-good b{color:#5BE39A}
+.pm-gauge b{font:600 clamp(30px,3.4vw,42px)/1 var(--f-display);letter-spacing:-.04em;margin-top:-12px}
+.pm-gauge span{position:absolute;bottom:22%;font:600 11px/1 var(--f-display);text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.6)}
+.pm-rows{display:grid;margin:0}
+.pm-rows>div{display:grid;grid-template-columns:minmax(150px,1fr) 2fr;gap:16px;align-items:center;padding:12px 0;border-top:1px solid rgba(255,255,255,.12)}
+.pm-rows dt{font:600 14px/1.3 var(--f-display)}
+.pm-rows dd{margin:0;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.pm-bar{position:relative;height:10px}
+.pm-bar i{position:absolute;left:0;top:0;height:100%;width:calc(var(--w)*100%);min-width:3px;border-radius:5px;background:rgba(255,78,66,.35)}
+.pm-bar i.a{background:#0CCE6B}
+.pm-v{font:500 14px/1 var(--f-display);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pm-v s{color:rgba(255,255,255,.45);margin-right:6px}
+.pm figcaption{font-size:12px;color:rgba(255,255,255,.55)}
+@media(max-width:600px){.pm-title{text-align:left}.pm-rows>div{grid-template-columns:1fr}}
