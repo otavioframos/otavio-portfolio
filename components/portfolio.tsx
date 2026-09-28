@@ -10,16 +10,19 @@ import { ActionLink } from '@/components/action-link';
 import { Cover } from '@/components/cover';
 import { RevealObserver } from '@/components/reveal';
 import { SiteHeader } from '@/components/site-header';
+import { ScrollWords } from '@/components/scroll-words';
+import { MoreWorks } from '@/components/more-works';
+import { Gallery } from '@/components/gallery';
 
 const tr = (lang: Lang, en: string, pt: string) => (lang === 'pt' ? pt : en);
 const path = (lang: Lang) => (lang === 'pt' ? '/pt' : '');
 const EMAIL = 'otavio.fr1@gmail.com';
 
-export function Header({ lang, slug }: { lang: Lang; slug?: string }) {
+export function Header({ lang, slug, home, progress }: { lang: Lang; slug?: string; home?: boolean; progress?: boolean }) {
   return <>
     {lang === 'pt' && <script dangerouslySetInnerHTML={{ __html: "document.documentElement.lang='pt-BR'" }} />}
     <a className="skip-link" href="#main">{tr(lang, 'Skip to content', 'Pular para o conteúdo')}</a>
-    <SiteHeader lang={lang} slug={slug} />
+    <SiteHeader lang={lang} slug={slug} home={home} progress={progress} />
   </>;
 }
 
@@ -46,14 +49,14 @@ export function Footer({ lang }: { lang: Lang }) {
 export function Portfolio({ lang }: { lang: Lang }) {
   const base = path(lang);
   return <div className="page" lang={lang === 'pt' ? 'pt-BR' : 'en'}>
-    <Header lang={lang} />
+    <Header lang={lang} home />
     <main id="main">
       <section className="hero">
         <RibbonGlow className="hero-field" />
         <div className="grid hero-grid">
           <div className="hero-id">
             <p className="hero-tag">FOUNDING PRODUCT DESIGNER</p>
-            <h1>Otávio Ramos.</h1>
+            <h1><span className="mask-in">Otávio Ramos.</span></h1>
           </div>
           <div className="hero-copy">
             <p className="hero-lead">{tr(lang, 'Building the design practice at A3Lab. Consumer apps and internal tools, designed and shipped with AI and code.', 'Estruturando a prática de design na A3Lab. Apps B2C e ferramentas internas, desenhados e colocados no ar com IA e código.')}</p>
@@ -80,7 +83,7 @@ export function Portfolio({ lang }: { lang: Lang }) {
       <section id="about" className="about" aria-labelledby="about-title">
         <div className="grid block ruled about-top">
           <h2 id="about-title" className="label">{tr(lang, 'My ethos', 'Meu ethos')}</h2>
-          <p className="about-statement" data-reveal="">{tr(lang, 'Making things that are easy to understand and useful in everyday life.', 'Fazer coisas fáceis de entender e úteis no dia a dia.')}</p>
+          <ScrollWords className="about-statement" text={tr(lang, 'Making things that are easy to understand and useful in everyday life.', 'Fazer coisas fáceis de entender e úteis no dia a dia.')} />
           <figure className="about-portrait"><img src="/images/otavio-portrait.webp" alt="Otávio Ramos" width="800" height="1000" loading="lazy" decoding="async" /></figure>
           <div className="about-text">
             <p>{tr(lang, 'I’m the founding product designer at A3Lab, A3Media’s consumer-app studio. I joined at its launch and remain the only designer on the team. My work includes the brand, our first two apps, and internal tools.', 'Sou Founding Product Designer na A3Lab, estúdio de apps B2C da A3Media. Entrei na criação do estúdio e continuo sendo o único designer do time. Trabalho na marca, nos dois primeiros apps e em ferramentas internas.')}</p>
@@ -124,7 +127,6 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
   const c = p[lang];
   const spec = covers[slug];
   const ev = caseEvidence[slug]?.[lang];
-  const next = projects[(projects.indexOf(p) + 1) % projects.length];
   const base = path(lang);
   const extraSize = p.slug === 'mindyoung' ? [512, 512] : p.slug === 'avela' ? [1920, 1080] : [1440, 1024];
   const facts: [string, string][] = [
@@ -136,13 +138,13 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
     ['Status', c.status],
   ];
   return <div className="page" lang={lang === 'pt' ? 'pt-BR' : 'en'}>
-    <Header lang={lang} slug={slug} />
+    <Header lang={lang} slug={slug} progress />
     <main id="main" className="case">
       <Cover spec={spec} alt={c.caption} name={p.name} kind={spec.kind?.[lang] ?? c.category} meta={ev?.period ?? '2026'} priority nameAs="p" />
       <div className="grid case-head">
         <div className="case-title">
           <a className="case-back" href={base + '/#work'}>← {tr(lang, 'Selected work', 'Projetos selecionados')}</a>
-          <h1>{p.name}</h1>
+          <h1><span className="mask-in">{p.name}</span></h1>
           <p className="case-sub">{c.title}</p>
         </div>
         <dl className="case-facts">{facts.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
@@ -166,12 +168,7 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
             {'points' in s && <ul>{s.points.map(point => <li key={point}>{point}</li>)}</ul>}
           </div>
         </section>
-        {i === 1 && <figure className="grid case-figure" data-reveal="">
-          <div className="case-figure-media" style={{ background: spec.extraField ?? spec.field }}>
-            <img src={p.extra} alt={c.extraCaption} width={extraSize[0]} height={extraSize[1]} loading="lazy" decoding="async" />
-          </div>
-          <figcaption>{c.extraCaption}</figcaption>
-        </figure>}
+        {i === 1 && <Gallery items={spec.gallery ?? [{ src: p.extra, width: extraSize[0], height: extraSize[1], span: 12, field: spec.extraField }]} caption={c.extraCaption} />}
       </Fragment>)}
 
       <section className="grid block ruled">
@@ -185,11 +182,7 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
         </div>
       </section>
 
-      <a className="grid next ruled" href={base + '/work/' + next.slug}>
-        <span className="label">{tr(lang, 'Next project', 'Próximo projeto')}</span>
-        <span className="next-name" data-reveal="">{next.name}</span>
-        <span className="next-arrow" aria-hidden="true">→</span>
-      </a>
+      <MoreWorks current={slug} lang={lang} />
     </main>
     <Footer lang={lang} />
     <RevealObserver />
