@@ -18,6 +18,8 @@ export type MoreProject = {
   year: string;
   source: string;
   images: [string, string];
+  /** Process images: `afterContext` shows under the problem, `afterApproach` under the work. */
+  process?: { src: string; width: number; height: number; at: 'afterContext' | 'afterApproach'; en: string; pt: string }[];
 } & Record<Lang, ProjectCopy>;
 
 export const moreProjects: MoreProject[] = [
@@ -92,6 +94,10 @@ export const moreProjects: MoreProject[] = [
     slug: 'precato', name: 'Precato', year: '2025',
     source: 'https://citrine-giraffe-448.notion.site/Precato-3b4e62ee0f7f82129e8881c62acfac61',
     images: ['/images/precato-cover.webp', '/images/precato-cover.webp'],
+    process: [
+      { src: '/images/precato-before.webp', width: 1600, height: 1088, at: 'afterContext', en: 'Starting point in PageSpeed Insights: performance 40 on the main page and 68 on the São Paulo page (reports in Portuguese).', pt: 'Ponto de partida no PageSpeed Insights: desempenho 40 na página principal e 68 na página de São Paulo.' },
+      { src: '/images/precato-diagnosis.webp', width: 1600, height: 957, at: 'afterApproach', en: 'Diagnosis board: Core Web Vitals history next to my note on the root cause, the hero form hand-coded in HTML/CSS, and the three reasons for the drop (in Portuguese).', pt: 'Quadro de diagnóstico: histórico de Core Web Vitals ao lado da minha nota sobre a causa, o formulário do hero codado em HTML/CSS, e as três razões da queda.' },
+    ],
     en: {
       category: 'Performance · Accessibility',
       contribution: 'Rebuilt the landing pages of Brazil’s leading court-debt buyer for speed and accessibility.',

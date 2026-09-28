@@ -34,10 +34,12 @@ export function ProjectNote({ project, lang }: { project: MoreProject; lang: Lan
         <h2 className="label">{pt ? 'O projeto' : 'The project'}</h2>
         <div className="prose"><p className="lead">{copy.context}</p></div>
       </section>
+      {project.process?.filter(x => x.at === 'afterContext').map(x => <Gallery key={x.src} items={[{ src: x.src, width: x.width, height: x.height, span: 12, field: spec.extraField }]} caption={x[lang]} />)}
       <section className="grid block ruled">
         <h2 className="label">{pt ? 'Minha contribuição' : 'My contribution'}</h2>
         <div className="prose"><p className="lead">{copy.approach}</p></div>
       </section>
+      {project.process?.filter(x => x.at === 'afterApproach').map(x => <Gallery key={x.src} items={[{ src: x.src, width: x.width, height: x.height, span: 12, field: spec.extraField }]} caption={x[lang]} />)}
       {copy.results && <section className="grid block ruled">
         <h2 className="label">{pt ? 'Resultado' : 'Outcome'}</h2>
         <div className="prose">
