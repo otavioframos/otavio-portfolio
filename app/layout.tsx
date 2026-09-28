@@ -8,6 +8,7 @@ const title='Otávio Ramos — Founding Product Designer';
 const description='Founding Product Designer at A3Lab, A3Media’s consumer-app studio. Consumer products, AI experiences, design systems, and hands-on building. Based in Brazil.';
 export const metadata:Metadata={
   metadataBase:new URL(siteUrl),
+  icons:{icon:[{url:'/favicon.svg',type:'image/svg+xml'},{url:'/icon.png',type:'image/png',sizes:'32x32'}],apple:'/apple-touch-icon.png'},
   title,
   description,
   alternates:alternatesFor('/'),
