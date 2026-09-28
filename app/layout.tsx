@@ -4,7 +4,7 @@ import { siteUrl, indexable, alternatesFor } from '@/lib/site';
 import './globals.css';
 import './site.css';
 const body=Inter({variable:'--font-manrope',subsets:['latin']});
-const title='Otávio Ramos — Founding Product Designer';
+const title='Otávio Ramos | Product Designer · Design & Code';
 const description='Founding Product Designer at A3Lab, A3Media’s consumer-app studio. Consumer products, AI experiences, design systems, and hands-on building. Based in Brazil.';
 export const metadata:Metadata={
   metadataBase:new URL(siteUrl),
