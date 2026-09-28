@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import type { Lang } from '@/lib/projects';
 
 /**
@@ -119,7 +119,7 @@ const TAGS = [
 ];
 const BEAM = 6;
 const VIDEOS = 10;
-const W = 900, H = 580, CX = 450, CY = 290;
+const CX = 450, CY = 290;
 
 // Deterministic video → tag edges that add up to each tag's frequency.
 const EDGES: [number, number][] = TAGS.flatMap((tag, ti) => Array.from({ length: tag.f }, (_, k) => [(ti * 3 + k * 7) % VIDEOS, ti] as [number, number]));
@@ -140,52 +140,87 @@ const STEPS = [
   { en: 'Repeat, one hop further.', pt: 'Repita, um salto adiante.', dEn: 'Each path runs the same rule again. Clusters form around the seed: related content no one had to search for by hand.', dPt: 'Cada caminho roda a mesma regra de novo. Clusters se formam em volta da semente: conteúdo relacionado que ninguém precisou buscar à mão.' },
 ];
 
+/** Metrics shown beside each step; the card updates as the story advances. */
+const METRICS: { v: string; en: string; pt: string }[][] = [
+  [{ v: '1', en: 'seed hashtag', pt: 'hashtag semente' }, { v: '4', en: 'platforms it can search', pt: 'plataformas onde pode buscar' }],
+  [{ v: '10', en: 'videos carrying the seed', pt: 'vídeos com a semente' }, { v: '1', en: 'hop from the seed', pt: 'salto a partir da semente' }],
+  [{ v: '12', en: 'co-occurring hashtags counted', pt: 'hashtags vizinhas contadas' }, { v: '×7', en: 'strongest co-occurrence', pt: 'coocorrência mais forte' }],
+  [{ v: '6', en: 'paths followed', pt: 'caminhos seguidos' }, { v: '6', en: 'kept as evidence only', pt: 'mantidas só como evidência' }],
+  [{ v: '43', en: 'paths from one seed, by default', pt: 'caminhos a partir de uma semente, no padrão' }, { v: '1,885', en: 'paths at the ceiling: 3 hops, 12 wide', pt: 'caminhos no limite: 3 saltos, 12 de largura' }],
+];
+
 export function RadarCluster({ lang }: { lang: Lang }) {
   const [step, setStep] = useState(0);
+  const track = useRef<HTMLDivElement>(null);
+
+  // The track is tall; the card sticks while scroll progress picks the step.
+  useEffect(() => {
+    const el = track.current;
+    if (!el) return;
+    let frame = 0;
+    const read = () => {
+      frame = 0;
+      const r = el.getBoundingClientRect();
+      const span = r.height - window.innerHeight;
+      const p = span > 0 ? Math.min(0.999, Math.max(0, -r.top / span)) : 0;
+      setStep(Math.floor(p * STEPS.length));
+    };
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(read); };
+    read();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); cancelAnimationFrame(frame); };
+  }, []);
+
+  const go = (i: number) => {
+    const el = track.current;
+    if (!el) return;
+    const span = el.offsetHeight - window.innerHeight;
+    const top = el.getBoundingClientRect().top + window.scrollY + span * ((i + 0.5) / STEPS.length);
+    window.scrollTo({ top, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  };
+
   const s = STEPS[step];
-  const nf = (n: number) => n.toLocaleString(lang === 'pt' ? 'pt-BR' : 'en-US');
-  return <figure className="my-chart rd-cluster" data-step={step}>
-    <div className="my-chart-head">
-      <p className="label">{tr(lang, 'How a cluster is found · illustrative', 'Como um cluster é encontrado · ilustrativo')}</p>
-      <fieldset className="my-seg" aria-label={tr(lang, 'Step', 'Etapa')}>
-        {STEPS.map((_, i) => <button key={i} type="button" aria-pressed={i === step} onClick={() => setStep(i)}>{i + 1}</button>)}
-      </fieldset>
-    </div>
-    <svg className="rd-graph" viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
-      <g className="rd-l rd-l-hop2">
-        {HOP2.map((p, i) => <line key={`h${i}`} x1={tPos[p.ti].x} y1={tPos[p.ti].y} x2={p.x} y2={p.y} className="rd-edge rd-edge-2" />)}
-        {HOP2.map((p, i) => <rect key={`d${i}`} x={p.x - 4} y={p.y - 4} width="8" height="8" rx="2" className={`rd-vid2 c${p.ti % 3}`} />)}
-      </g>
-      <g className="rd-l rd-l-edges">
-        {EDGES.map(([v, t], i) => <line key={i} x1={vPos[v].x} y1={vPos[v].y} x2={tPos[t].x} y2={tPos[t].y} className={'rd-edge' + (t < BEAM ? ' is-beam' : '')} />)}
-      </g>
-      <g className="rd-l rd-l-videos">
-        {vPos.map((p, i) => <g key={i}><line x1={CX} y1={CY} x2={p.x} y2={p.y} className="rd-edge rd-edge-seed" /><rect x={p.x - 7} y={p.y - 7} width="14" height="14" rx="3" className="rd-vid" /></g>)}
-      </g>
-      <g className="rd-l rd-l-tags">
-        {TAGS.map((tag, i) => { const r = 5 + tag.f * 2.4, p = tPos[i], below = p.y <= CY + 20; return <g key={tag.t} className={'rd-tag' + (i < BEAM ? ' is-beam' : '')}>
-          <circle cx={p.x} cy={p.y} r={r} />
-          {/* Label sits on the side facing the seed; the next hop grows outward. */}
-          <text x={p.x} y={below ? p.y + r + 18 : p.y - r - 9} textAnchor="middle">{tag.t}<tspan className="rd-f"> ×{tag.f}</tspan></text>
-        </g>; })}
-      </g>
-      <g className="rd-seed">
-        <circle cx={CX} cy={CY} r="34" className="rd-seed-halo" />
-        <circle cx={CX} cy={CY} r="9" />
-        <text x={CX} y={CY + 56} textAnchor="middle">{SEED}</text>
-      </g>
-    </svg>
-    <div className="rd-cluster-foot">
-      <p className="rd-loop-read" aria-live="polite"><b>{tr(lang, s.en, s.pt)}</b>{tr(lang, s.dEn, s.dPt)}</p>
-      <div className="rd-cluster-nav">
-        <button type="button" className="my-toggle rd-btn" disabled={step === 0} onClick={() => setStep(v => v - 1)}>←</button>
-        <button type="button" className="my-toggle rd-btn" onClick={() => setStep(v => (v + 1) % STEPS.length)}>{step === STEPS.length - 1 ? tr(lang, 'Restart', 'Recomeçar') : tr(lang, 'Next', 'Próximo')} →</button>
+  const pt = lang === 'pt';
+  return <div ref={track} className="rd-scrolly" style={{ '--steps': STEPS.length } as CSSProperties}>
+    <figure className="my-chart rd-cluster" data-step={step}>
+      <div className="rd-cluster-stage">
+    <svg className="rd-graph" viewBox="40 30 820 540" aria-hidden="true">
+        <g className="rd-l rd-l-hop2">
+          {HOP2.map((p, i) => <line key={`h${i}`} x1={tPos[p.ti].x} y1={tPos[p.ti].y} x2={p.x} y2={p.y} className="rd-edge rd-edge-2" />)}
+          {HOP2.map((p, i) => <rect key={`d${i}`} x={p.x - 4} y={p.y - 4} width="8" height="8" rx="2" className={`rd-vid2 c${p.ti % 3}`} />)}
+        </g>
+        <g className="rd-l rd-l-edges">
+          {EDGES.map(([v, t], i) => <line key={i} x1={vPos[v].x} y1={vPos[v].y} x2={tPos[t].x} y2={tPos[t].y} className={'rd-edge' + (t < BEAM ? ' is-beam' : '')} />)}
+        </g>
+        <g className="rd-l rd-l-videos">
+          {vPos.map((p, i) => <g key={i}><line x1={CX} y1={CY} x2={p.x} y2={p.y} className="rd-edge rd-edge-seed" /><rect x={p.x - 7} y={p.y - 7} width="14" height="14" rx="3" className="rd-vid" /></g>)}
+        </g>
+        <g className="rd-l rd-l-tags">
+          {TAGS.map((tag, i) => { const r = 5 + tag.f * 2.4, p = tPos[i], below = p.y <= CY + 20; return <g key={tag.t} className={'rd-tag' + (i < BEAM ? ' is-beam' : '')}>
+            <circle cx={p.x} cy={p.y} r={r} />
+            {/* Label sits on the side facing the seed; the next hop grows outward. */}
+            <text x={p.x} y={below ? p.y + r + 18 : p.y - r - 9} textAnchor="middle">{tag.t}<tspan className="rd-f"> ×{tag.f}</tspan></text>
+          </g>; })}
+        </g>
+        <g className="rd-seed">
+          <circle cx={CX} cy={CY} r="34" className="rd-seed-halo" />
+          <circle cx={CX} cy={CY} r="9" />
+          <text x={CX} y={CY + 56} textAnchor="middle">{SEED}</text>
+        </g>
+      </svg>
       </div>
-    </div>
-    <dl className="rd-capacity">
-      <div><dt>{nf(43)}</dt><dd>{tr(lang, 'discovery paths from one seed, by default (1 → 6 → 36)', 'caminhos de descoberta a partir de uma semente, no padrão (1 → 6 → 36)')}</dd></div>
-      <div><dt>{nf(1885)}</dt><dd>{tr(lang, 'paths at the ceiling: three hops, twelve wide', 'caminhos no limite máximo: três saltos, doze de largura')}</dd></div>
-      <div><dt>4</dt><dd>{tr(lang, 'platforms searched with the same rule', 'plataformas buscadas com a mesma regra')}</dd></div>
-    </dl>
-  </figure>;
+      <div className="rd-cluster-side">
+        <p className="label">{tr(lang, 'How a cluster is found · illustrative', 'Como um cluster é encontrado · ilustrativo')}</p>
+        <ol className="rd-dots" aria-label={tr(lang, 'Steps', 'Etapas')}>
+          {STEPS.map((x, i) => <li key={i}><button type="button" aria-current={i === step ? 'step' : undefined} className={i <= step ? 'is-done' : ''} onClick={() => go(i)}><span>{String(i + 1).padStart(2, '0')}</span>{tr(lang, x.en, x.pt)}</button></li>)}
+        </ol>
+        <p className="rd-now" key={'n' + step}><span>{String(step + 1).padStart(2, '0')} / {String(STEPS.length).padStart(2, '0')}</span>{tr(lang, s.en, s.pt)}</p>
+        <p className="rd-cluster-desc" aria-live="polite" key={step}>{tr(lang, s.dEn, s.dPt)}</p>
+        <div className="rd-metrics decision"><div className="decision-card">
+          {METRICS[step].map(m => <div key={m.en + step} className="rd-metric"><b>{pt ? m.v.replace(',', '.') : m.v}</b><span>{tr(lang, m.en, m.pt)}</span></div>)}
+        </div></div>
+      </div>
+    </figure>
+  </div>;
 }
