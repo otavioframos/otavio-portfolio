@@ -161,6 +161,8 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
         <p className="case-caption">{c.caption}</p>
       </div>
 
+      {ev?.headline && <p className="grid case-statement"><span data-reveal="">{ev.headline}</span></p>}
+
       <section className="grid block ruled">
         <h2 className="label">{tr(lang, 'Context', 'Contexto')}</h2>
         <div className="prose">

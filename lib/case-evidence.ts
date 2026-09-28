@@ -44,8 +44,10 @@ export const caseEvidence: Record<string, Partial<Record<Lang, CaseEvidence>>> =
   'content-radar': {
     en: {
       period: '2025–2026',
+      headline: 'From a single example, it finds up to ~1,300 videos in about 3 minutes and catalogues them into an inbox the team can review.',
       facts: { team: 'Me and a developer', platform: 'Web app + background worker' },
       results: [
+        { value: '~1,300', label: 'videos found and catalogued from one seed', note: 'In about 3 minutes, with Jev' },
         { value: '3', label: 'products researching with it', note: 'Shared workspace, one folder per product' },
         { value: '4', label: 'sources in one inbox', note: 'TikTok, Reels, Shorts, Meta Ad Library' },
         { value: '5 min', label: 'to 30 days: refresh on a schedule', note: 'Recurring runs per folder' },
@@ -59,8 +61,10 @@ export const caseEvidence: Record<string, Partial<Record<Lang, CaseEvidence>>> =
     },
     pt: {
       period: '2025–2026',
+      headline: 'A partir de um único exemplo, busca até ~1.300 vídeos em cerca de 3 minutos e os cataloga numa caixa pronta para o time revisar.',
       facts: { team: 'Eu e um desenvolvedor', platform: 'Web app + worker em segundo plano' },
       results: [
+        { value: '~1.300', label: 'vídeos encontrados e catalogados a partir de uma semente', note: 'Em cerca de 3 minutos, com o Jev' },
         { value: '3', label: 'produtos pesquisando com ele', note: 'Workspace compartilhado, uma pasta por produto' },
         { value: '4', label: 'fontes numa só caixa', note: 'TikTok, Reels, Shorts, Biblioteca de Anúncios da Meta' },
         { value: '5 min', label: 'a 30 dias: atualização agendada', note: 'Rodadas recorrentes por pasta' },

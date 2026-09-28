@@ -506,3 +506,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-2);outline-off
   .rd-metrics .decision-card{padding:14px;gap:12px}.rd-metric b{font-size:28px}.rd-metric span{font-size:12px}
   .rd-tag text{font-size:26px}.rd-tag .rd-f{display:none}.rd-seed text{font-size:28px}
 }
+
+/* One-line impact statement under the case head. */
+.case-statement{margin-top:var(--space)}
+.case-statement span{grid-column:4/span 8;font:500 clamp(28px,3.4vw,52px)/1.08 var(--f-display);letter-spacing:-.045em;color:var(--fg);text-wrap:balance}
+@media(max-width:760px){.case-statement span{grid-column:1/-1}}
