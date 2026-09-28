@@ -15,6 +15,7 @@ import { MoreWorks } from '@/components/more-works';
 import { Gallery } from '@/components/gallery';
 import { MindYoungSystem, MindYoungFunnel, MindYoungTests } from '@/components/mindyoung';
 import { RadarEvolution, RadarLoop, RadarCluster } from '@/components/radar';
+import { AvelaMatrix, AvelaQuiz, AvelaOnboarding } from '@/components/avela';
 import { Marquee } from '@/components/marquee';
 import { OwnershipDiagram, CollaborationDiagram, BuildingDiagram, OffClockDiagram } from '@/components/diagrams';
 
@@ -129,7 +130,7 @@ function HowIWork({ lang }: { lang: Lang }) {
   return <Marquee label={tr(lang, 'How I work', 'Como trabalho')} copy={list}>{list}</Marquee>;
 }
 
-const FIGURES = { system: MindYoungSystem, funnel: MindYoungFunnel, tests: MindYoungTests, 'radar-evolution': RadarEvolution, 'radar-loop': RadarLoop, 'radar-cluster': RadarCluster };
+const FIGURES = { system: MindYoungSystem, funnel: MindYoungFunnel, tests: MindYoungTests, 'radar-evolution': RadarEvolution, 'radar-loop': RadarLoop, 'radar-cluster': RadarCluster, 'avela-matrix': AvelaMatrix, 'avela-quiz': AvelaQuiz, 'avela-onboarding': AvelaOnboarding };
 
 export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
   const p = projects.find(item => item.slug === slug);

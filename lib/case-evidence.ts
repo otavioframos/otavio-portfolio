@@ -77,5 +77,38 @@ export const caseEvidence: Record<string, Partial<Record<Lang, CaseEvidence>>> =
       next: 'Entregar as melhores referências novas no Telegram, para os times agirem sem abrir a ferramenta.',
     },
   },
-  avela: {},
+  avela: {
+    en: {
+      period: '2026',
+      facts: { platform: 'Web quiz funnel + iOS app' },
+      results: [
+        { value: '7×', label: 'quiz completion after the rebuild', note: 'Same paid traffic, June vs July 2026' },
+        { value: '4×', label: 'people passing the first question', note: 'PostHog, same window' },
+        { value: '18×', label: 'engagement behind ads that promised the quiz', note: 'Same quiz, compared by ad' },
+        { value: '48/55', label: 'review score for the new onboarding', note: 'vs 34/55 for the previous order' },
+      ],
+      learnings: [
+        'The first screen is decided before it loads. Most of the drop was the ad not promising what the page delivered.',
+        'Order is a design decision. Asking for weight before safety was a structural problem no copy could fix.',
+        'Separate what you know from what you hope. The matrix kept unvalidated claims out of the product.',
+      ],
+      next: 'Ship the First Session onboarding in the app and test its opening against a goals-first version.',
+    },
+    pt: {
+      period: '2026',
+      facts: { platform: 'Quiz web + app iOS' },
+      results: [
+        { value: '7×', label: 'conclusão do quiz depois da reconstrução', note: 'Mesmo tráfego pago, junho vs julho de 2026' },
+        { value: '4×', label: 'pessoas passando da primeira pergunta', note: 'PostHog, mesma janela' },
+        { value: '18×', label: 'engajamento com anúncios que prometiam o quiz', note: 'Mesmo quiz, comparado por anúncio' },
+        { value: '48/55', label: 'nota de revisão do novo onboarding', note: 'vs 34/55 da ordem anterior' },
+      ],
+      learnings: [
+        'A primeira tela é decidida antes de carregar. A maior parte da queda era o anúncio não prometer o que a página entregava.',
+        'Ordem é decisão de design. Pedir peso antes da segurança era um problema estrutural que nenhum texto resolveria.',
+        'Separar o que se sabe do que se espera. A matriz manteve promessas não validadas fora do produto.',
+      ],
+      next: 'Lançar o onboarding da Primeira Sessão no app e testar sua abertura contra uma versão que começa pelos objetivos.',
+    },
+  },
 };

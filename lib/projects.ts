@@ -239,24 +239,38 @@ export const projects = [
       "summary": "Explored onboarding, meal-photo flows and a design system for an AI nutrition app.",
       "role": "Product design · UX & UI · Design system",
       "scope": "Discovery / Onboarding / Design system / Acquisition",
-      "status": "Design exploration",
+      "status": "App in design · Web funnel live-tested",
       "decision": "Use a supportive tone and everyday meal contexts to shape onboarding and feedback.",
+      "why": "This audience already carries guilt about food and the body. A coach that scolds loses people on the first imperfect day, so support had to shape the flow, not just the wording.",
       "lead": "Avela explores an AI nutrition experience for women navigating perimenopause. My design work centered on how the product should speak, respond, and fit into a person’s day. That direction shaped onboarding, the core flows, the design system, and the acquisition page.",
       "sections": [
         {
           "label": "01 / FRAMING",
           "title": "Name what is known. Expose the assumptions.",
-          "body": "I used a certainties, assumptions, and doubts matrix to distinguish evidence from design hypotheses. That made open questions visible before they became embedded in the interface, including questions about clinical validation and repeat engagement."
+          "body": "Before drawing screens, I sorted what we knew from what we hoped. A certainties, assumptions and doubts matrix kept design hypotheses from quietly becoming product claims, and kept open questions, like clinical validation and repeat use, out of the interface until they had answers.",
+          "figure": "avela-matrix"
         },
         {
           "label": "02 / DESIGN PRINCIPLE",
           "title": "Tone changes the structure.",
-          "body": "I chose a supportive approach with less emphasis on weight-centered messaging. That decision shaped how onboarding introduces the product, how feedback is expressed, and how the experience responds to a disrupted routine. The intended experience makes room for imperfect days."
+          "body": "I chose a supportive voice with less weight-centred messaging. It was not only copy: it decided what onboarding asks first, how feedback is phrased, and how the product responds to a disrupted routine. The experience makes room for imperfect days."
         },
         {
-          "label": "03 / PRODUCT FLOWS",
+          "label": "03 / THE QUIZ",
+          "title": "Fix the promise, not just the screen.",
+          "body": "Paid traffic arrived at a web quiz and most people left on the first question. I rebuilt the quiz around one idea people could picture, their eating window, and read the data by ad. The same quiz performed eighteen times better behind ads that promised it, so the fix was matching the message end to end, from ad to first screen.",
+          "figure": "avela-quiz"
+        },
+        {
+          "label": "04 / ONBOARDING",
+          "title": "Earn the hard questions.",
+          "body": "For the app, I reviewed the onboarding against 31 flows from 26 products and redesigned the order. The First Session opens by reconstructing her day, shows a pattern she recognises within about ninety seconds, checks safety before asking for any number, and ends on a plan she can edit.",
+          "figure": "avela-onboarding"
+        },
+        {
+          "label": "05 / PRODUCT FLOWS",
           "title": "Meet the moment people are in.",
-          "body": "I designed paths around photographing a meal, exploring options from a refrigerator, and understanding a restaurant menu. The onboarding builds a companion as the person answers questions, introducing personalization through the interaction itself.",
+          "body": "I designed paths around photographing a meal, exploring options from a refrigerator, and understanding a restaurant menu. Personalisation arrives through the interaction itself, not a settings page.",
           "points": [
             "A guided onboarding experience.",
             "Photo-based flows for different everyday contexts.",
@@ -264,9 +278,9 @@ export const projects = [
           ]
         },
         {
-          "label": "04 / TRADEOFF",
+          "label": "06 / TRADEOFF",
           "title": "Choose the scope of the first version.",
-          "body": "For the MVP approach, I chose third-party vision APIs and data sources rather than developing a visual model. This traded control over the technology for a faster path to validation. I carried the same product positioning into the acquisition page."
+          "body": "For the MVP, I chose third-party vision APIs and data sources over building a visual model. That traded control for a faster path to validation, and let the team spend its effort on the experience around the photo."
         }
       ],
       "outcome": "A connected design direction across onboarding, core product flows, the design system, and acquisition. Clinical and behavioral hypotheses remain questions to validate.",
@@ -279,34 +293,48 @@ export const projects = [
       "summary": "Explorei onboarding, fluxos com fotos de refeições e um design system para um app de nutrição com IA.",
       "role": "Product design · UX e UI · Design system",
       "scope": "Discovery / Onboarding / Design system / Aquisição",
-      "status": "Exploração de design",
+      "status": "App em design · Funil web testado ao vivo",
       "decision": "Usar um tom acolhedor e situações reais de alimentação para orientar onboarding e feedbacks.",
+      "why": "Esse público já carrega culpa sobre comida e corpo. Um coach que dá bronca perde as pessoas no primeiro dia imperfeito, então o acolhimento precisava moldar o fluxo, não só as palavras.",
       "lead": "O Avela explora uma experiência de nutrição com IA para mulheres na perimenopausa. Meu trabalho se concentrou em como o produto conversa, responde e se encaixa na rotina. Essa direção orientou onboarding, fluxos principais, design system e aquisição.",
       "sections": [
         {
           "label": "01 / ENQUADRAMENTO",
-          "title": "Nomear certezas. Explicitar hipóteses.",
-          "body": "Usei uma matriz de certezas, suposições e dúvidas para separar evidências de hipóteses de design. Isso tornou as questões abertas visíveis antes de entrarem na interface, incluindo validação clínica e engajamento recorrente."
+          "title": "Nomear o que se sabe. Expor as suposições.",
+          "body": "Antes de desenhar telas, separei o que sabíamos do que esperávamos. Uma matriz de certezas, suposições e dúvidas impediu que hipóteses de design virassem promessas do produto e manteve perguntas abertas, como validação clínica e uso recorrente, fora da interface até terem resposta.",
+          "figure": "avela-matrix"
         },
         {
           "label": "02 / PRINCÍPIO DE DESIGN",
           "title": "O tom muda a estrutura.",
-          "body": "Escolhi uma abordagem acolhedora, com menos ênfase em mensagens centradas no peso. Essa decisão orientou a apresentação no onboarding, os feedbacks e a resposta a uma rotina interrompida. A experiência proposta abre espaço para dias imperfeitos."
+          "body": "Escolhi uma voz acolhedora, com menos ênfase em peso. Não era só texto: decidiu o que o onboarding pergunta primeiro, como os feedbacks são escritos e como o produto responde a uma rotina fora do eixo. A experiência abre espaço para dias imperfeitos."
         },
         {
-          "label": "03 / FLUXOS",
-          "title": "Encontrar a pessoa no seu contexto.",
-          "body": "Desenhei caminhos para fotografar refeições, explorar opções com o que há na geladeira e entender um cardápio. No onboarding, um companheiro ganha forma conforme a pessoa responde, apresentando a personalização pela própria interação.",
+          "label": "03 / O QUIZ",
+          "title": "Corrigir a promessa, não só a tela.",
+          "body": "O tráfego pago chegava a um quiz na web e a maioria saía na primeira pergunta. Refiz o quiz em torno de uma ideia que as pessoas conseguiam visualizar, a janela de alimentação, e li os dados por anúncio. O mesmo quiz rendeu dezoito vezes mais atrás de anúncios que o prometiam, então a correção foi alinhar a mensagem de ponta a ponta, do anúncio à primeira tela.",
+          "figure": "avela-quiz"
+        },
+        {
+          "label": "04 / ONBOARDING",
+          "title": "Merecer as perguntas difíceis.",
+          "body": "Para o app, revisei o onboarding comparando com 31 fluxos de 26 produtos e redesenhei a ordem. A Primeira Sessão começa reconstruindo o dia dela, mostra em cerca de noventa segundos um padrão que ela reconhece, checa segurança antes de pedir qualquer número e termina num plano que ela pode editar.",
+          "figure": "avela-onboarding"
+        },
+        {
+          "label": "05 / FLUXOS DO PRODUTO",
+          "title": "Encontrar as pessoas no momento em que estão.",
+          "body": "Desenhei caminhos para fotografar uma refeição, explorar opções a partir da geladeira e entender um cardápio de restaurante. A personalização chega pela própria interação, não por uma tela de configurações.",
           "points": [
-            "Um onboarding guiado.",
-            "Fluxos com fotos para diferentes contextos do dia a dia.",
+            "Uma experiência de onboarding guiada.",
+            "Fluxos com fotos para diferentes situações do dia a dia.",
             "Tokens e componentes compartilhados no produto."
           ]
         },
         {
-          "label": "04 / ESCOLHA DE ESCOPO",
-          "title": "Definir o que cabe na primeira versão.",
-          "body": "Na abordagem de MVP, escolhi APIs de visão e bases de terceiros em vez de desenvolver um modelo visual. A decisão trocou controle sobre a tecnologia por um caminho mais rápido para validação. Levei o mesmo posicionamento à página de aquisição."
+          "label": "06 / TRADE-OFF",
+          "title": "Definir o escopo da primeira versão.",
+          "body": "Para o MVP, escolhi APIs de visão e fontes de dados de terceiros em vez de construir um modelo visual. Isso trocou controle por um caminho mais rápido para validar e deixou o time investir na experiência em volta da foto."
         }
       ],
       "outcome": "Uma direção de design conectada entre onboarding, fluxos principais, design system e aquisição. As hipóteses clínicas e de comportamento continuam sendo pontos de validação.",
