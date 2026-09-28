@@ -297,7 +297,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-2);outline-off
 .hw-list{display:flex;gap:var(--g);margin:0;padding:0;list-style:none}
 .marquee[data-manual='true'] .hw-card{scroll-snap-align:start;scroll-margin-left:var(--m)}
 .hw-card{flex:0 0 auto;width:clamp(300px,31vw,460px);display:grid;gap:8px}
-.hw-media{aspect-ratio:480/400;background:#06102A;border:1px solid rgba(143,184,255,.18)}
+.hw-media{aspect-ratio:480/400}
 .hw-card h3{margin-top:10px;font:600 19px/1.2 var(--f-display);letter-spacing:-.03em}
 .hw-card p{font-size:15px;line-height:1.45;color:var(--fg-2)}
 .bp{display:block;width:100%;height:100%}
@@ -325,3 +325,18 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-2);outline-off
 .art-avela-glow{inset:30%;background:radial-gradient(circle,rgba(250,247,242,.22) 0%,rgba(250,247,242,0) 65%)}
 @media(prefers-reduced-motion:reduce){.art-owl-phone{opacity:.22;transform:translate(-50%,-50%)}}
 @media(prefers-reduced-motion:reduce){.marquee-set[aria-hidden='true']{display:none}}
+
+/* Abstract diagrams (How I work). */
+.dg{display:block;width:100%;height:100%;overflow:visible}
+.dg-index{font:600 9px/1 var(--f-display);fill:rgba(220,230,255,.7)}
+.dg-meridian{transform-box:fill-box;transform-origin:center;animation:meridian 9.6s linear infinite}
+@keyframes meridian{0%{transform:scaleX(1)}50%{transform:scaleX(-1)}100%{transform:scaleX(1)}}
+.dg-march{animation:march 1.6s linear infinite}
+.dg-pulse{transform-box:fill-box;transform-origin:center;animation:dg-pulse 4s ease-in-out infinite}
+@keyframes dg-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.06);opacity:.55}}
+.dg-rise{animation:dg-rise 3.5s ease-in-out infinite}
+@keyframes dg-rise{0%,100%{transform:translateY(0);opacity:1}50%{transform:translateY(-6px);opacity:.5}}
+.dg-twinkle{transform-box:fill-box;transform-origin:center;animation:dg-twinkle 3.2s ease-in-out infinite}
+@keyframes dg-twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(.72) rotate(45deg)}}
+.dg-spin-slow{animation:spin 60s linear infinite}
+.dg-spin-rev{animation:spin 24s linear infinite reverse}

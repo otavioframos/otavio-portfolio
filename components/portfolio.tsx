@@ -14,7 +14,7 @@ import { ScrollWords } from '@/components/scroll-words';
 import { MoreWorks } from '@/components/more-works';
 import { Gallery } from '@/components/gallery';
 import { Marquee } from '@/components/marquee';
-import { OwnershipBlueprint, CollaborationBlueprint, BuildingBlueprint, OffClockBlueprint } from '@/components/blueprints';
+import { OwnershipDiagram, CollaborationDiagram, BuildingDiagram, OffClockDiagram } from '@/components/diagrams';
 
 const tr = (lang: Lang, en: string, pt: string) => (lang === 'pt' ? pt : en);
 const path = (lang: Lang) => (lang === 'pt' ? '/pt' : '');
@@ -114,13 +114,13 @@ export function Portfolio({ lang }: { lang: Lang }) {
 
 function HowIWork({ lang }: { lang: Lang }) {
   const cards = [
-    { Art: OwnershipBlueprint, t: tr(lang, 'Ownership', 'Responsabilidade'), d: tr(lang, 'Brand, product, and the connections between them.', 'Marca, produto e as conexões entre eles.') },
-    { Art: CollaborationBlueprint, t: tr(lang, 'Collaboration', 'Colaboração'), d: tr(lang, 'Work through the details with development.', 'Resolver os detalhes junto a desenvolvimento.') },
-    { Art: BuildingBlueprint, t: tr(lang, 'Building', 'Construção'), d: tr(lang, 'Take an idea beyond the prototype.', 'Levar uma ideia além do protótipo.') },
-    { Art: OffClockBlueprint, t: tr(lang, 'Off the clock', 'Além do trabalho'), d: tr(lang, 'Coffee, creative coding, and the occasional late night in Figma.', 'Café, creative coding e uma ou outra noite até tarde no Figma.') },
+    { Art: OwnershipDiagram, t: tr(lang, 'Ownership', 'Responsabilidade'), d: tr(lang, 'Brand, product, and the connections between them.', 'Marca, produto e as conexões entre eles.') },
+    { Art: CollaborationDiagram, t: tr(lang, 'Collaboration', 'Colaboração'), d: tr(lang, 'Work through the details with development.', 'Resolver os detalhes junto a desenvolvimento.') },
+    { Art: BuildingDiagram, t: tr(lang, 'Building', 'Construção'), d: tr(lang, 'Take an idea beyond the prototype.', 'Levar uma ideia além do protótipo.') },
+    { Art: OffClockDiagram, t: tr(lang, 'Off the clock', 'Além do trabalho'), d: tr(lang, 'Coffee, creative coding, and the occasional late night in Figma.', 'Café, creative coding e uma ou outra noite até tarde no Figma.') },
   ];
   const list = <ul className="hw-list">{cards.map(({ Art, t, d }) => <li className="hw-card" key={t}>
-    <div className="hw-media"><Art title={t} /></div>
+    <div className="hw-media"><Art /></div>
     <h3>{t}</h3>
     <p>{d}</p>
   </li>)}</ul>;
