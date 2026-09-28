@@ -133,7 +133,7 @@ export const moreProjects: MoreProject[] = [
     },
   },
   {
-    slug: 'wrk', name: 'WRK', year: '2024', hidden: true,
+    slug: 'wrk', name: 'WRK', year: '2024',
     source: 'https://citrine-giraffe-448.notion.site/WRK-9efe62ee0f7f83a2898f813e894e39ce',
     images: ['/images/wrk-cover.webp', '/images/wrk-detail.webp'],
     en: {
