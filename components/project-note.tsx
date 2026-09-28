@@ -26,11 +26,11 @@ export function ProjectNote({ project, lang }: { project: MoreProject; lang: Lan
         </dl>
         <p className="case-caption">{copy.captions[0]}</p>
       </div>
-      <section className="grid block ruled" data-reveal="">
+      <section className="grid block ruled">
         <h2 className="label">{pt ? 'O projeto' : 'The project'}</h2>
         <div className="prose"><p className="lead">{copy.context}</p></div>
       </section>
-      <section className="grid block ruled" data-reveal="">
+      <section className="grid block ruled">
         <h2 className="label">{pt ? 'Minha contribuição' : 'My contribution'}</h2>
         <div className="prose"><p className="lead">{copy.approach}</p></div>
       </section>

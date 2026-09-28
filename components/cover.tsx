@@ -29,7 +29,7 @@ export function Cover({ spec, alt, name, kind, meta, href, priority = false, nam
     </div>
     <div className="cover-track">
       <div className="grid cover-label">
-        <Name className="cover-name">{name}</Name>
+        <Name className="cover-name" data-reveal="">{name}</Name>
         <span className="cover-kind">{kind}</span>
         <span className="cover-meta">{meta}</span>
       </div>

@@ -26,28 +26,18 @@ export function Header({ lang, slug }: { lang: Lang; slug?: string }) {
 export function Footer({ lang }: { lang: Lang }) {
   const base = path(lang);
   return <footer id="contact" className="foot">
-    <div className="grid foot-cta ruled" data-reveal="">
+    <div className="grid foot-cta ruled">
       <p className="label">{tr(lang, 'Contact', 'Contato')}</p>
-      <a className="foot-mail" href={`mailto:${EMAIL}`}>{tr(lang, 'Have something in mind?', 'Tem algo em mente?')}<span>{EMAIL}</span></a>
-    </div>
-    <div className="grid foot-cols">
-      <p className="foot-name">Otávio Ramos</p>
-      <nav className="foot-list" aria-label={tr(lang, 'Site map', 'Mapa do site')}>
-        <p className="label">{tr(lang, 'Site', 'Site')}</p>
-        <a href={base + '/#work'}>{tr(lang, 'Selected work', 'Projetos')}</a>
-        <a href={base + '/#more-work'}>{tr(lang, 'More work', 'Outros projetos')}</a>
-        <a href={base + '/#about'}>{tr(lang, 'About', 'Sobre')}</a>
-      </nav>
-      <div className="foot-list foot-social">
-        <p className="label">{tr(lang, 'Elsewhere', 'Em outros lugares')}</p>
-        <a href="https://www.linkedin.com/in/otaviofr/">LinkedIn</a>
-        <a href="https://github.com/otavioframos">GitHub</a>
-        {cvUrl && <a href={cvUrl}>{tr(lang, 'Résumé (PDF)', 'Currículo (PDF)')}</a>}
-      </div>
+      <a className="foot-mail" href={`mailto:${EMAIL}`} data-reveal="">{tr(lang, 'Have something in mind?', 'Tem algo em mente?')}<span>{EMAIL}</span></a>
     </div>
     <div className="grid foot-base">
-      <p>© 2026 Otávio Ramos</p>
-      <p className="foot-place">{tr(lang, 'Campinas, Brazil · GMT−3', 'Campinas, Brasil · GMT−3')}</p>
+      <p className="foot-copy">© 2026 Otávio Ramos</p>
+      <nav className="foot-links" aria-label={tr(lang, 'Elsewhere', 'Em outros lugares')}>
+        <a href="https://www.linkedin.com/in/otaviofr/">LinkedIn</a>
+        <a href="https://github.com/otavioframos">GitHub</a>
+        {cvUrl && <a href={cvUrl}>{tr(lang, 'Résumé', 'Currículo')}</a>}
+        <a href={`mailto:${EMAIL}`}>Email</a>
+      </nav>
       <a className="foot-top" href={base + '/#main'}>{tr(lang, 'Back to top ↑', 'Voltar ao topo ↑')}</a>
     </div>
   </footer>;
@@ -77,50 +67,48 @@ export function Portfolio({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      <section id="work" className="work" aria-labelledby="work-title">
-        <div className="grid shead ruled" data-reveal="">
-          <h2 id="work-title" className="label">{tr(lang, 'Selected work', 'Projetos selecionados')}</h2>
-          <p className="shead-note">{tr(lang, 'Consumer apps and internal tools where I owned the design direction.', 'Apps B2C e ferramentas internas em que conduzi a direção de design.')}</p>
-          <p className="shead-meta label">({String(projects.length).padStart(2, '0')})</p>
-        </div>
+      <section id="work" className="work" aria-label={tr(lang, 'Selected work', 'Projetos selecionados')}>
         {projects.map((p, i) => {
           const c = p[lang];
           const spec = covers[p.slug];
-          const href = base + '/work/' + p.slug;
-          return <article className="work-item" key={p.slug}>
-            <Cover spec={spec} alt={c.caption} name={p.name} kind={spec.kind?.[lang] ?? c.category} meta={c.status} href={href} priority={i === 0} />
-            <div className="grid work-overview">
-              <p className="work-index label">{String(i + 1).padStart(2, '0')}</p>
-              <p className="work-summary">{caseEvidence[p.slug]?.[lang]?.headline ?? c.summary}</p>
-              <a className="work-open" href={href} aria-label={tr(lang, `View case: ${p.name}`, `Ver case: ${p.name}`)}>{tr(lang, 'View case', 'Ver case')} →</a>
-            </div>
-          </article>;
+          return <Cover key={p.slug} spec={spec} alt={c.caption} name={p.name} kind={spec.kind?.[lang] ?? c.category} meta={c.status} href={base + '/work/' + p.slug} priority={i === 0} />;
         })}
       </section>
 
       <MoreWork lang={lang} />
 
       <section id="about" className="about" aria-labelledby="about-title">
-        <div className="grid block ruled about-top" data-reveal="">
-          <h2 id="about-title" className="label">{tr(lang, 'About', 'Sobre')}</h2>
-          <p className="about-statement">{tr(lang, 'Making things that are easy to understand and useful in everyday life.', 'Fazer coisas fáceis de entender e úteis no dia a dia.')}</p>
+        <div className="grid block ruled about-top">
+          <h2 id="about-title" className="label">{tr(lang, 'My ethos', 'Meu ethos')}</h2>
+          <p className="about-statement" data-reveal="">{tr(lang, 'Making things that are easy to understand and useful in everyday life.', 'Fazer coisas fáceis de entender e úteis no dia a dia.')}</p>
           <figure className="about-portrait"><img src="/images/otavio-portrait.webp" alt="Otávio Ramos" width="800" height="1000" loading="lazy" decoding="async" /></figure>
           <div className="about-text">
             <p>{tr(lang, 'I’m the founding product designer at A3Lab, A3Media’s consumer-app studio. I joined at its launch and remain the only designer on the team. My work includes the brand, our first two apps, and internal tools.', 'Sou Founding Product Designer na A3Lab, estúdio de apps B2C da A3Media. Entrei na criação do estúdio e continuo sendo o único designer do time. Trabalho na marca, nos dois primeiros apps e em ferramentas internas.')}</p>
-            <p>{tr(lang, 'My background in UX/UI and acquisition connects how people discover a product with what happens when they use it. I also helped establish the team’s work-management process using Linear, Notion, Codex, and Fireflies.ai.', 'Minha experiência em UX/UI e aquisição conecta como as pessoas descobrem um produto ao que acontece quando o utilizam. Também ajudei a estruturar a gestão de tarefas do time com Linear, Notion, Codex e Fireflies.ai.')}</p>
-            <p>{tr(lang, 'I’m studying Systems Analysis and Development at FIAP, bringing a deeper technical understanding into my design practice. Comfortable working in English; open to discussing international opportunities.', 'Curso Análise e Desenvolvimento de Sistemas na FIAP para aprofundar minha compreensão técnica. Tenho facilidade para trabalhar em inglês e interesse em oportunidades internacionais.')}</p>
-            <p>{tr(lang, 'Outside product work, I like experimenting with motion, creative coding, and GSAP. This site is one place to try those ideas.', 'Além do trabalho com produto, gosto de experimentar com movimento, creative coding e GSAP. Este site é um lugar para testar essas ideias.')}</p>
-            <a className="inline-link" href="https://www.linkedin.com/in/otaviofr/">{tr(lang, 'Experience & background', 'Experiência e formação')} ↗</a>
+            <details className="about-more">
+              <summary><span className="more-closed">{tr(lang, 'Read more', 'Ler mais')}</span><span className="more-open">{tr(lang, 'Read less', 'Ler menos')}</span></summary>
+              <div className="about-more-body">
+                <p>{tr(lang, 'My background in UX/UI and acquisition connects how people discover a product with what happens when they use it. I also helped establish the team’s work-management process using Linear, Notion, Codex, and Fireflies.ai.', 'Minha experiência em UX/UI e aquisição conecta como as pessoas descobrem um produto ao que acontece quando o utilizam. Também ajudei a estruturar a gestão de tarefas do time com Linear, Notion, Codex e Fireflies.ai.')}</p>
+                <p>{tr(lang, 'I’m studying Systems Analysis and Development at FIAP, bringing a deeper technical understanding into my design practice. Comfortable working in English; open to discussing international opportunities.', 'Curso Análise e Desenvolvimento de Sistemas na FIAP para aprofundar minha compreensão técnica. Tenho facilidade para trabalhar em inglês e interesse em oportunidades internacionais.')}</p>
+                <p>{tr(lang, 'Outside product work, I like experimenting with motion, creative coding, and GSAP. This site is one place to try those ideas.', 'Além do trabalho com produto, gosto de experimentar com movimento, creative coding e GSAP. Este site é um lugar para testar essas ideias.')}</p>
+                <a className="inline-link" href="https://www.linkedin.com/in/otaviofr/">{tr(lang, 'Experience & background', 'Experiência e formação')} ↗</a>
+              </div>
+            </details>
           </div>
         </div>
-        <div className="grid block ruled" data-reveal="">
-          <h3 className="label">{tr(lang, 'How I work', 'Como trabalho')}</h3>
-          <dl className="rows">
-            <div className="row"><dt>{tr(lang, 'Ownership', 'Responsabilidade')}</dt><dd>{tr(lang, 'Brand, product, and the connections between them.', 'Marca, produto e as conexões entre eles.')}</dd></div>
-            <div className="row"><dt>{tr(lang, 'Collaboration', 'Colaboração')}</dt><dd>{tr(lang, 'Work through the details with development.', 'Resolver os detalhes junto a desenvolvimento.')}</dd></div>
-            <div className="row"><dt>{tr(lang, 'Building', 'Construção')}</dt><dd>{tr(lang, 'Take an idea beyond the prototype.', 'Levar uma ideia além do protótipo.')}</dd></div>
-            <div className="row"><dt>{tr(lang, 'Off the clock', 'Além do trabalho')}</dt><dd>{tr(lang, 'Coffee, creative coding, and the occasional late night in Figma.', 'Café, creative coding e uma ou outra noite até tarde no Figma.')}</dd></div>
-          </dl>
+        <div className="hw">
+          <div className="grid hw-head"><h2 data-reveal="">{tr(lang, 'How I work', 'Como trabalho')}</h2></div>
+          <ul className="grid hw-list">
+            {[
+              { img: '/images/mindyoung-owl.webp', w: 512, h: 512, field: '#BFD0EC', t: tr(lang, 'Ownership', 'Responsabilidade'), d: tr(lang, 'Brand, product, and the connections between them.', 'Marca, produto e as conexões entre eles.') },
+              { img: '/images/radar-detail.webp', w: 1440, h: 1024, field: '#EFEFEF', t: tr(lang, 'Collaboration', 'Colaboração'), d: tr(lang, 'Work through the details with development.', 'Resolver os detalhes junto a desenvolvimento.') },
+              { img: '/images/avela-flow.webp', w: 1920, h: 1080, field: '#E8EDE0', t: tr(lang, 'Building', 'Construção'), d: tr(lang, 'Take an idea beyond the prototype.', 'Levar uma ideia além do protótipo.') },
+              { img: '/images/meadow.jpg', w: 1672, h: 941, field: '#111', t: tr(lang, 'Off the clock', 'Além do trabalho'), d: tr(lang, 'Coffee, creative coding, and the occasional late night in Figma.', 'Café, creative coding e uma ou outra noite até tarde no Figma.') },
+            ].map(card => <li className="hw-card" key={card.t}>
+              <div className="hw-media" style={{ background: card.field }}><img src={card.img} alt="" width={card.w} height={card.h} loading="lazy" decoding="async" /></div>
+              <h3 data-reveal="">{card.t}</h3>
+              <p>{card.d}</p>
+            </li>)}
+          </ul>
         </div>
         <Education lang={lang} />
       </section>
@@ -161,7 +149,7 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
         <p className="case-caption">{c.caption}</p>
       </div>
 
-      <section className="grid block ruled" data-reveal="">
+      <section className="grid block ruled">
         <h2 className="label">{tr(lang, 'Context', 'Contexto')}</h2>
         <div className="prose">
           <p className="lead">{c.lead}</p>
@@ -170,10 +158,10 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
       </section>
 
       {c.sections.map((s, i) => <Fragment key={s.label}>
-        <section className="grid block ruled" data-reveal="">
+        <section className="grid block ruled">
           <p className="label">{s.label}</p>
           <div className="prose">
-            <h2>{s.title}</h2>
+            <h2 data-reveal="">{s.title}</h2>
             <p>{s.body}</p>
             {'points' in s && <ul>{s.points.map(point => <li key={point}>{point}</li>)}</ul>}
           </div>
@@ -186,7 +174,7 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
         </figure>}
       </Fragment>)}
 
-      <section className="grid block ruled" data-reveal="">
+      <section className="grid block ruled">
         <h2 className="label">{tr(lang, 'Where it stands', 'Onde chegou')}</h2>
         <div className="prose">
           {ev?.results && ev.results.length > 0 && <dl className="case-results">{ev.results.map(r => <div key={r.label}><dt>{r.value}</dt><dd>{r.label}{r.note && <small>{r.note}</small>}</dd></div>)}</dl>}
@@ -199,7 +187,7 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
 
       <a className="grid next ruled" href={base + '/work/' + next.slug}>
         <span className="label">{tr(lang, 'Next project', 'Próximo projeto')}</span>
-        <span className="next-name">{next.name}</span>
+        <span className="next-name" data-reveal="">{next.name}</span>
         <span className="next-arrow" aria-hidden="true">→</span>
       </a>
     </main>

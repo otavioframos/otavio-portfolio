@@ -215,7 +215,7 @@ export type RibbonGlowProps = {
 
 export function RibbonGlow({
   className,
-  background = '#050A1C',
+  background = '#02040C',
   color1 = '#1F5BFF',
   color2 = '#8FB8FF',
   speed = 40,

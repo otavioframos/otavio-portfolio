@@ -24,7 +24,7 @@ const studies = [
 ];
 
 export function Education({ lang }: { lang: Lang }) {
-  return <div className="grid block ruled" data-reveal="">
+  return <div className="grid block ruled">
     <h3 className="label">{lang === 'en' ? 'Education' : 'Formação'}</h3>
     <dl className="rows">
       {studies.map(study => <div className="row" key={study.institution}>

@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* Shared tokens for the few UI primitives in use. The site's own system lives in site.css. */
-:root,.dark{--background:#050A1C;--foreground:#EEF2FF;--muted:#0A1330;--muted-foreground:rgba(238,242,255,.64);--accent:#2F6BFF;--accent-foreground:#FFFFFF;--border:rgba(238,242,255,.14);--card:#0A1330;--card-foreground:#EEF2FF;--popover:#0A1330;--popover-foreground:#EEF2FF;--primary:#2F6BFF;--primary-foreground:#FFFFFF;--secondary:#0A1330;--secondary-foreground:#EEF2FF;--destructive:#FF5A5A;--input:rgba(238,242,255,.2);--ring:#8FB8FF;--radius:0}
+:root,.dark{--background:#02040C;--foreground:#EEF2FF;--muted:#070B1A;--muted-foreground:rgba(238,242,255,.64);--accent:#2F6BFF;--accent-foreground:#FFFFFF;--border:rgba(238,242,255,.14);--card:#0A1330;--card-foreground:#EEF2FF;--popover:#0A1330;--popover-foreground:#EEF2FF;--primary:#2F6BFF;--primary-foreground:#FFFFFF;--secondary:#0A1330;--secondary-foreground:#EEF2FF;--destructive:#FF5A5A;--input:rgba(238,242,255,.2);--ring:#8FB8FF;--radius:0}
 @theme inline{--color-background:var(--background);--color-foreground:var(--foreground);--font-sans:var(--font-manrope);--font-mono:var(--font-pixel);--color-border:var(--border);--color-ring:var(--ring);--color-muted:var(--muted);--color-muted-foreground:var(--muted-foreground);--color-primary:var(--primary);--color-primary-foreground:var(--primary-foreground);--color-popover:var(--popover);--color-popover-foreground:var(--popover-foreground)}
 
 *,*::before,*::after{box-sizing:border-box}
