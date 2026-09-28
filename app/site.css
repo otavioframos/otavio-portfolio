@@ -729,3 +729,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-2);outline-off
 .av-plate-ph span{position:absolute;right:8px;top:8px;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.8);font:500 11.5px 'Fraunces',Georgia,serif}
 .av-ui-plate .av-day-tx{padding:0 6px 4px}
 @media(max-width:760px){.av-ui-plate{display:none}}
+
+/* How I work: one of each card, plain horizontal scroll with snap */
+.hw-scroll{scroll-snap-type:x mandatory;scroll-padding-inline:var(--m);-webkit-mask-image:none;mask-image:none}.hw-scroll .marquee-set{padding-inline:var(--m)}.hw-scroll .hw-card{scroll-snap-align:start}

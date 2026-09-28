@@ -16,19 +16,17 @@ type HeaderProps = {
  * Text-only header on the page grid, with no background. The menu opens inline:
  * "Menu" becomes "Close" and the links appear one by one on the same line.
  */
-export function SiteHeader({ lang, slug, home = false, progress = false }: HeaderProps) {
+export function SiteHeader({ lang, slug, progress = false }: HeaderProps) {
   const pt = lang === 'pt';
   const base = pt ? '/pt' : '';
   const alternate = (pt ? '' : '/pt') + (slug ? '/work/' + slug : '/');
   const [open, setOpen] = useState(false);
-  const [pastHero, setPastHero] = useState(!home);
   const progressRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     let frame = 0;
     const update = () => {
       frame = 0;
-      if (home) setPastHero(window.scrollY > window.innerHeight * 0.6);
       if (progressRef.current) {
         const max = document.documentElement.scrollHeight - window.innerHeight;
         progressRef.current.textContent = `${Math.round(max > 0 ? (window.scrollY / max) * 100 : 0)}%`;
@@ -39,7 +37,7 @@ export function SiteHeader({ lang, slug, home = false, progress = false }: Heade
     window.addEventListener('scroll', schedule, { passive: true });
     window.addEventListener('resize', schedule);
     return () => { cancelAnimationFrame(frame); window.removeEventListener('scroll', schedule); window.removeEventListener('resize', schedule); };
-  }, [home]);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -57,10 +55,7 @@ export function SiteHeader({ lang, slug, home = false, progress = false }: Heade
 
   return <header className="grid top" data-open={open ? 'true' : 'false'}>
     <a className="top-name" href={base || '/'} aria-label={pt ? 'Otávio Ramos, início' : 'Otávio Ramos, home'}>
-      <span className="top-swap" data-past={pastHero ? 'true' : 'false'}>
-        <span>{pt ? 'Founding Product Designer' : 'Founding Product Designer'}</span>
-        <span>Otávio Ramos</span>
-      </span>
+      <span>Otávio Ramos</span>
     </a>
     <nav className="top-nav" aria-label={pt ? 'Navegação principal' : 'Main navigation'}>
       <button type="button" className="top-menu" aria-expanded={open} aria-controls="top-links" onClick={() => setOpen(value => !value)}>
