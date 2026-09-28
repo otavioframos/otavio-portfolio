@@ -44,6 +44,10 @@ export const covers: Record<string, CoverSpec> = {
     kind: { en: 'AI research tool', pt: 'Ferramenta de pesquisa com IA' }, extraField: '#0B1640',
     gallery: [{ src: '/images/radar-detail.webp', width: 1440, height: 1024, span: 12, field: '#0B1640' }],
   },
+  vela: {
+    image: '/images/vela-cover.webp', width: 1600, height: 1000, fit: 'screen', field: '#0F1F19', ink: '#EEF2FF', extraField: '#0F1F19',
+    kind: { en: 'Personal finance app', pt: 'App de finanças pessoais' },
+  },
   avela: {
     image: '/images/avela-mark.webp', width: 360, height: 360, art: true, fit: 'screen', field: '#0E1A16', ink: '#EEF2FF',
     kind: { en: 'AI nutrition app', pt: 'App de nutrição com IA' }, extraField: '#E8EDE0',

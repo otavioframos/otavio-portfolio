@@ -657,3 +657,23 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-2);outline-off
 .pm-v s{color:rgba(255,255,255,.45);margin-right:6px}
 .pm figcaption{font-size:12px;color:rgba(255,255,255,.55)}
 @media(max-width:600px){.pm-title{text-align:left}.pm-rows>div{grid-template-columns:1fr}}
+
+/* Vela · principles, job stories and metric */
+.vl-pr-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(20px,3vw,48px);align-items:start}
+.vl-pr-list{list-style:none;margin:0;padding:0;display:grid}
+.vl-pr-list button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;gap:12px;align-items:baseline;width:100%;padding:12px 0;border-top:1px solid var(--line);font:600 16px/1.25 var(--f-display);letter-spacing:-.02em;color:var(--fg-3);transition:color .25s}
+.vl-pr-list button span{font-size:12px;color:var(--fg-3)}
+.vl-pr-list button[aria-pressed=true]{color:var(--fg)}.vl-pr-list button[aria-pressed=true] span{color:var(--blue-2)}
+.vl-pr-list button:focus-visible{outline:2px solid var(--blue-2);outline-offset:2px}
+.vl-pr-read{display:grid;gap:14px;padding:22px;border-radius:14px;background:rgba(238,242,255,.03);box-shadow:inset 0 0 0 1px var(--line);animation:rd-in .4s var(--ease) both}
+.vl-pr-k{font:600 12px/1 var(--f-display);color:var(--blue-2)}
+.vl-pr-rule{font:500 clamp(20px,2vw,26px)/1.25 var(--f-display);letter-spacing:-.03em;color:var(--fg)}
+.vl-pr-anti{display:grid;gap:4px;padding-top:14px;border-top:1px solid var(--line);font-size:15px;color:var(--fg-2)}
+.vl-pr-anti span{font:600 11px/1 var(--f-display);text-transform:uppercase;letter-spacing:.06em;color:#FF8A7A}
+.vl-job{grid-template-columns:minmax(160px,2.4fr) 4fr 150px}
+.vl-job .my-fname{display:grid;gap:3px}.vl-job .my-fname small{font:500 11px/1 var(--f-display);color:var(--fg-3)}
+.vl-job .my-fr{font-size:13px;color:var(--fg-2)}
+.vl-metric{display:grid;gap:10px;padding:clamp(18px,3vw,32px) 0;animation:rd-in .45s var(--ease) both}
+.vl-metric-name{font:600 clamp(30px,3.4vw,48px)/1 var(--f-display);letter-spacing:-.045em}
+.vl-metric-f{font:500 clamp(15px,1.4vw,19px)/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--blue-2)}
+@media(max-width:760px){.vl-pr-body{grid-template-columns:1fr}.vl-job{grid-template-columns:1fr auto}.vl-job .my-fbar{grid-column:1/-1;grid-row:2}}

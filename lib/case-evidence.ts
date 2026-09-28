@@ -77,6 +77,40 @@ export const caseEvidence: Record<string, Partial<Record<Lang, CaseEvidence>>> =
       next: 'Entregar as melhores referências novas no Telegram, para os times agirem sem abrir a ferramenta.',
     },
   },
+  vela: {
+    en: {
+      period: '2026',
+      facts: { platform: 'Installable web app + Android' },
+      results: [
+        { value: '5', label: 'design principles, each with an anti-rule' },
+        { value: '7', label: 'job stories ranked by frequency' },
+        { value: '3', label: 'versions of the core metric' },
+        { value: '2', label: 'surfaces from one data model: Flux and Aeon' },
+      ],
+      learnings: [
+        'A metric can be mathematically correct and semantically wrong. Test what a number makes people feel, not only what it computes.',
+        'Designing for one needs guardrails. Writing principles and anti-rules down kept my own preferences honest.',
+        'The hardest part of a finance app is trustworthy calculation, not the interface.',
+      ],
+      next: 'Test Flux with a few people who already track money, to see where designing for one does not travel.',
+    },
+    pt: {
+      period: '2026',
+      facts: { platform: 'Web app instalável + Android' },
+      results: [
+        { value: '5', label: 'princípios de design, cada um com anti-regra' },
+        { value: '7', label: 'job stories ordenadas por frequência' },
+        { value: '3', label: 'versões da métrica central' },
+        { value: '2', label: 'superfícies a partir de um modelo de dados: Flux e Aeon' },
+      ],
+      learnings: [
+        'Uma métrica pode estar matematicamente certa e semanticamente errada. Teste o que o número faz a pessoa sentir, não só o que ele calcula.',
+        'Desenhar para um precisa de limites. Escrever princípios e anti-regras manteve minhas preferências honestas.',
+        'A parte mais difícil de um app de finanças é um cálculo confiável, não a interface.',
+      ],
+      next: 'Testar o Flux com algumas pessoas que já controlam o dinheiro, para ver onde o desenho para um não se sustenta.',
+    },
+  },
   avela: {
     en: {
       period: '2026',
