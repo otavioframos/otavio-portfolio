@@ -14,7 +14,7 @@ import { ScrollWords } from '@/components/scroll-words';
 import { MoreWorks } from '@/components/more-works';
 import { Gallery } from '@/components/gallery';
 import { MindYoungSystem, MindYoungFunnel, MindYoungTests } from '@/components/mindyoung';
-import { RadarEvolution, RadarLoop } from '@/components/radar';
+import { RadarEvolution, RadarLoop, RadarCluster } from '@/components/radar';
 import { Marquee } from '@/components/marquee';
 import { OwnershipDiagram, CollaborationDiagram, BuildingDiagram, OffClockDiagram } from '@/components/diagrams';
 
@@ -129,7 +129,7 @@ function HowIWork({ lang }: { lang: Lang }) {
   return <Marquee label={tr(lang, 'How I work', 'Como trabalho')} copy={list}>{list}</Marquee>;
 }
 
-const FIGURES = { system: MindYoungSystem, funnel: MindYoungFunnel, tests: MindYoungTests, 'radar-evolution': RadarEvolution, 'radar-loop': RadarLoop };
+const FIGURES = { system: MindYoungSystem, funnel: MindYoungFunnel, tests: MindYoungTests, 'radar-evolution': RadarEvolution, 'radar-loop': RadarLoop, 'radar-cluster': RadarCluster };
 
 export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
   const p = projects.find(item => item.slug === slug);
@@ -186,7 +186,7 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
             <p>{s.body}</p>
             {'points' in s && <ul>{s.points.map(point => <li key={point}>{point}</li>)}</ul>}
           </div>
-          {'figure' in s && FIGURES[s.figure as keyof typeof FIGURES] && <div className="case-fig">{(() => { const F = FIGURES[s.figure as keyof typeof FIGURES]; return <F lang={lang} />; })()}</div>}
+          {'figure' in s && String(s.figure).split(' ').map(key => { const F = FIGURES[key as keyof typeof FIGURES]; return F ? <div className="case-fig" key={key}><F lang={lang} /></div> : null; })}
         </section>
         {i === (slug === 'mindyoung' ? 0 : 1) && <Gallery items={spec.gallery ?? [{ src: p.extra, width: extraSize[0], height: extraSize[1], span: 12, field: spec.extraField }]} caption={c.extraCaption} />}
       </Fragment>)}

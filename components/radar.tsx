@@ -106,3 +106,86 @@ export function RadarLoop({ lang }: { lang: Lang }) {
     </div>
   </figure>;
 }
+
+/* ───────────────────────── Hashtag clusters ───────────────────────── */
+
+/* Illustrative data: one seed hashtag, the videos that carry it, and how often
+   other hashtags co-occur on those videos. Real runs use the same rule. */
+const SEED = '#braintraining';
+const TAGS = [
+  { t: '#memory', f: 7 }, { t: '#focus', f: 6 }, { t: '#brainhealth', f: 5 }, { t: '#adhd', f: 5 },
+  { t: '#studytips', f: 4 }, { t: '#neuroscience', f: 4 }, { t: '#puzzle', f: 3 }, { t: '#iqtest', f: 3 },
+  { t: '#mindset', f: 2 }, { t: '#productivity', f: 2 }, { t: '#sudoku', f: 1 }, { t: '#chess', f: 1 },
+];
+const BEAM = 6;
+const VIDEOS = 10;
+const W = 900, H = 580, CX = 450, CY = 290;
+
+// Deterministic video → tag edges that add up to each tag's frequency.
+const EDGES: [number, number][] = TAGS.flatMap((tag, ti) => Array.from({ length: tag.f }, (_, k) => [(ti * 3 + k * 7) % VIDEOS, ti] as [number, number]));
+const vPos = Array.from({ length: VIDEOS }, (_, i) => { const a = -Math.PI / 2 + (i / VIDEOS) * Math.PI * 2 + 0.2; return { x: CX + Math.cos(a) * 120, y: CY + Math.sin(a) * 96 }; });
+// Followed tags take every other slot so the clusters spread around the seed.
+const tPos = TAGS.map((_, i) => { const slot = i < BEAM ? i * 2 : (i - BEAM) * 2 + 1; const a = -Math.PI / 2 + (slot / TAGS.length) * Math.PI * 2; return { x: CX + Math.cos(a) * 320, y: CY + Math.sin(a) * 200, a }; });
+// Second hop: each followed tag pulls its own small cluster of videos further out.
+const HOP2 = TAGS.slice(0, BEAM).flatMap((_, ti) => Array.from({ length: 5 }, (_, k) => {
+  const { a } = tPos[ti], spread = (k - 2) * 0.12, r = 58 + (k % 2) * 20;
+  return { ti, x: tPos[ti].x + Math.cos(a + spread) * r, y: tPos[ti].y + Math.sin(a + spread) * r * 0.8 };
+}));
+
+const STEPS = [
+  { en: 'Start with one hashtag.', pt: 'Comece com uma hashtag.', dEn: 'The team gives the radar a single seed from the niche.', dPt: 'O time dá ao radar uma única semente do nicho.' },
+  { en: 'Pull the videos that use it.', pt: 'Puxe os vídeos que a usam.', dEn: 'Every video found carries the seed, plus the other hashtags its creator chose.', dPt: 'Cada vídeo encontrado carrega a semente e as outras hashtags que o criador escolheu.' },
+  { en: 'Count what travels with it.', pt: 'Conte o que anda junto.', dEn: 'Each co-occurring hashtag is counted. The bigger the node, the more often it appears next to the seed.', dPt: 'Cada hashtag que aparece junto é contada. Quanto maior o nó, mais vezes ela aparece ao lado da semente.' },
+  { en: 'Follow only the strongest six.', pt: 'Siga só as seis mais fortes.', dEn: 'The six most frequent become new paths. The rest stay as evidence but are not followed, so the search stays focused.', dPt: 'As seis mais frequentes viram novos caminhos. O resto fica como evidência mas não é seguido, e a busca continua focada.' },
+  { en: 'Repeat, one hop further.', pt: 'Repita, um salto adiante.', dEn: 'Each path runs the same rule again. Clusters form around the seed: related content no one had to search for by hand.', dPt: 'Cada caminho roda a mesma regra de novo. Clusters se formam em volta da semente: conteúdo relacionado que ninguém precisou buscar à mão.' },
+];
+
+export function RadarCluster({ lang }: { lang: Lang }) {
+  const [step, setStep] = useState(0);
+  const s = STEPS[step];
+  const nf = (n: number) => n.toLocaleString(lang === 'pt' ? 'pt-BR' : 'en-US');
+  return <figure className="my-chart rd-cluster" data-step={step}>
+    <div className="my-chart-head">
+      <p className="label">{tr(lang, 'How a cluster is found · illustrative', 'Como um cluster é encontrado · ilustrativo')}</p>
+      <fieldset className="my-seg" aria-label={tr(lang, 'Step', 'Etapa')}>
+        {STEPS.map((_, i) => <button key={i} type="button" aria-pressed={i === step} onClick={() => setStep(i)}>{i + 1}</button>)}
+      </fieldset>
+    </div>
+    <svg className="rd-graph" viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
+      <g className="rd-l rd-l-hop2">
+        {HOP2.map((p, i) => <line key={`h${i}`} x1={tPos[p.ti].x} y1={tPos[p.ti].y} x2={p.x} y2={p.y} className="rd-edge rd-edge-2" />)}
+        {HOP2.map((p, i) => <rect key={`d${i}`} x={p.x - 4} y={p.y - 4} width="8" height="8" rx="2" className={`rd-vid2 c${p.ti % 3}`} />)}
+      </g>
+      <g className="rd-l rd-l-edges">
+        {EDGES.map(([v, t], i) => <line key={i} x1={vPos[v].x} y1={vPos[v].y} x2={tPos[t].x} y2={tPos[t].y} className={'rd-edge' + (t < BEAM ? ' is-beam' : '')} />)}
+      </g>
+      <g className="rd-l rd-l-videos">
+        {vPos.map((p, i) => <g key={i}><line x1={CX} y1={CY} x2={p.x} y2={p.y} className="rd-edge rd-edge-seed" /><rect x={p.x - 7} y={p.y - 7} width="14" height="14" rx="3" className="rd-vid" /></g>)}
+      </g>
+      <g className="rd-l rd-l-tags">
+        {TAGS.map((tag, i) => { const r = 5 + tag.f * 2.4, p = tPos[i], below = p.y <= CY + 20; return <g key={tag.t} className={'rd-tag' + (i < BEAM ? ' is-beam' : '')}>
+          <circle cx={p.x} cy={p.y} r={r} />
+          {/* Label sits on the side facing the seed; the next hop grows outward. */}
+          <text x={p.x} y={below ? p.y + r + 18 : p.y - r - 9} textAnchor="middle">{tag.t}<tspan className="rd-f"> ×{tag.f}</tspan></text>
+        </g>; })}
+      </g>
+      <g className="rd-seed">
+        <circle cx={CX} cy={CY} r="34" className="rd-seed-halo" />
+        <circle cx={CX} cy={CY} r="9" />
+        <text x={CX} y={CY + 56} textAnchor="middle">{SEED}</text>
+      </g>
+    </svg>
+    <div className="rd-cluster-foot">
+      <p className="rd-loop-read" aria-live="polite"><b>{tr(lang, s.en, s.pt)}</b>{tr(lang, s.dEn, s.dPt)}</p>
+      <div className="rd-cluster-nav">
+        <button type="button" className="my-toggle rd-btn" disabled={step === 0} onClick={() => setStep(v => v - 1)}>←</button>
+        <button type="button" className="my-toggle rd-btn" onClick={() => setStep(v => (v + 1) % STEPS.length)}>{step === STEPS.length - 1 ? tr(lang, 'Restart', 'Recomeçar') : tr(lang, 'Next', 'Próximo')} →</button>
+      </div>
+    </div>
+    <dl className="rd-capacity">
+      <div><dt>{nf(43)}</dt><dd>{tr(lang, 'discovery paths from one seed, by default (1 → 6 → 36)', 'caminhos de descoberta a partir de uma semente, no padrão (1 → 6 → 36)')}</dd></div>
+      <div><dt>{nf(1885)}</dt><dd>{tr(lang, 'paths at the ceiling: three hops, twelve wide', 'caminhos no limite máximo: três saltos, doze de largura')}</dd></div>
+      <div><dt>4</dt><dd>{tr(lang, 'platforms searched with the same rule', 'plataformas buscadas com a mesma regra')}</dd></div>
+    </dl>
+  </figure>;
+}

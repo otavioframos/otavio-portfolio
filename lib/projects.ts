@@ -154,7 +154,7 @@ export const projects = [
           "label": "04 / THE LOOP",
           "title": "Explore without endless scrolling.",
           "body": "Today a team seeds a folder with a few examples. The radar walks outward to nearby creators, sounds and hashtags, but only a bounded distance, ranks what it finds for relevance and variety, and delivers a finite inbox. Every judgement from the team becomes a seed for the next run, so the radar gets sharper the more it is used.",
-          "figure": "radar-loop"
+          "figure": "radar-cluster radar-loop"
         },
         {
           "label": "05 / INTERACTION DESIGN",
@@ -207,7 +207,7 @@ export const projects = [
           "label": "04 / O CICLO",
           "title": "Explorar sem rolagem infinita.",
           "body": "Hoje um time semeia uma pasta com alguns exemplos. O radar caminha para criadores, sons e hashtags próximos, mas só até uma distância limitada, ranqueia o que encontra por relevância e variedade e entrega uma caixa finita. Cada avaliação do time vira semente da próxima rodada, então o radar fica mais preciso quanto mais é usado.",
-          "figure": "radar-loop"
+          "figure": "radar-cluster radar-loop"
         },
         {
           "label": "05 / DESIGN DE INTERAÇÃO",
