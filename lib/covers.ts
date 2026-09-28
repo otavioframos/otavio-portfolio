@@ -51,5 +51,7 @@ export const covers: Record<string, CoverSpec> = {
   },
   'chilli-beans': { image: '/videos/chilli-beans-poster.webp', width: 1600, height: 900, video: '/videos/chilli-beans.mp4', fit: 'screen', field: '#E51D1C', ink: '#FFFFFF', extraField: '#E51D1C' },
   naluu: { image: '/videos/naluu-poster.webp', width: 1600, height: 900, video: '/videos/naluu.mp4', fit: 'screen', field: '#81533E', ink: '#FFFFFF', extraField: '#F4E9D8' },
+  homerunpet: { image: '/images/homerun-cover.webp', width: 1600, height: 1361, fit: 'screen', field: '#D9361E', ink: '#FFFFFF', extraField: '#D9361E' },
+  precato: { image: '/images/precato-cover.webp', width: 1600, height: 900, fit: 'screen', field: '#0B1224', ink: '#FFFFFF', extraField: '#0B1224' },
   wrk: { image: '/videos/wrk-poster.webp', width: 1600, height: 900, video: '/videos/wrk.mp4', fit: 'screen', field: '#171742', ink: '#FFFFFF', extraField: '#171742' },
 };

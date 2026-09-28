@@ -6,6 +6,8 @@ type ProjectCopy = {
   context: string;
   approach: string;
   captions: [string, string];
+  /** Render the coded design-system specimen instead of the second image. */
+  specimen?: boolean;
   /** Post-launch outcomes, as reported in the original case study. */
   results?: { value: string; label: string }[];
   resultsNote?: string;
@@ -59,6 +61,54 @@ export const moreProjects: MoreProject[] = [
       context: 'A Naluu, marca brasileira de moda fitness, não tinha canal digital. Precisava de uma primeira loja tão jovem e sofisticada quanto suas roupas, com espaço para crescer catálogo e campanhas sem depender de um designer em cada página.',
       approach: 'Fui responsável por toda a experiência da loja. Conversas com as fundadoras e desk research em e-commerces de moda fitness definiram uma estrutura mobile-first, com vitrines modulares e filtros por coleção. Mapeei jornadas de compra, criei wireframes e protótipos responsivos, defini tokens de cor, tipografia, espaçamento e botões e liderei o handoff no Figma com documentação para desenvolvimento.',
       captions: ['Seleção de produtos e fluxo de carrinho do case original da Naluu.', 'Design tokens, estudos de componentes e referências usados no projeto.'],
+    },
+  },
+  {
+    slug: 'homerunpet', name: 'HomeRunPet Brasil', year: '2024',
+    source: 'https://citrine-giraffe-448.notion.site/HomeRunPet-c7de62ee0f7f83739ff301e3cc0e5071',
+    images: ['/images/homerun-cover.webp', '/images/homerun-detail.webp'],
+    en: {
+      category: 'Brand launch · Design system',
+      contribution: 'Researched, localised and systemised the Brazilian launch of a global pet-tech brand.',
+      context: 'Tocca Pet, the only official HomeRunPet licensee in Brazil, sold only to businesses. It was launching the brand to consumers, starting with smart pet dryers, a product most Brazilian owners had never heard of.',
+      approach: 'Interviews with pet owners and groomers showed little technical knowledge but deep frustration with ordinary dryers, so the page leads with the real pains, noise and drying time, not the spec sheet. I adapted the global brand to Brazilian habits and built its design system as a scalable library, in Figma and in code: a 15-style Inter type scale, an orange palette, buttons in four tones and four variants, icons and product cards the team recombines for new pages and A/B tests. I delivered the launch landing page, the localised UI kit, brand guidelines, campaign assets and the developer handoff.',
+      captions: ['Launch landing page: the headline leads with noise and fear at bath time, the pains the research surfaced.', 'The design system: buttons, icons, product imagery and cards built as modular components for new pages and A/B tests.'],
+      specimen: true,
+      results: [{ value: '+41%', label: 'average time on page after launch' }],
+      resultsNote: 'Post-launch analytics reported in the original case study, alongside more consumer leads.',
+    },
+    pt: {
+      category: 'Lançamento de marca · Design system',
+      contribution: 'Pesquisa, adaptação e design system para o lançamento no Brasil de uma marca global de tecnologia pet.',
+      context: 'A Tocca Pet, única licenciada oficial da HomeRunPet no Brasil, vendia só para empresas. Estava lançando a marca para o consumidor final, começando pelos sopradores inteligentes, um produto que a maioria dos tutores brasileiros nem conhecia.',
+      approach: 'Entrevistas com tutores e groomers mostraram pouco conhecimento técnico, mas grande frustração com sopradores comuns. Por isso a página abre com as dores reais, barulho e tempo de secagem, e não com a ficha técnica. Adaptei a marca global aos hábitos brasileiros e construí seu design system como uma biblioteca escalável, no Figma e em código: escala tipográfica Inter com 15 estilos, paleta laranja, botões em quatro tons e quatro variações, ícones e cards de produto que o time recombina em novas páginas e testes A/B. Entreguei a landing page de lançamento, o UI kit localizado, o guia de identidade, assets de campanha e o handoff para desenvolvimento.',
+      captions: ['Landing page de lançamento: o título abre com barulho e medo na hora do banho, as dores que a pesquisa revelou.', 'O design system: botões, ícones, imagens de produto e cards como componentes modulares para novas páginas e testes A/B.'],
+      specimen: true,
+      results: [{ value: '+41%', label: 'tempo médio na página após o lançamento' }],
+      resultsNote: 'Analytics pós-lançamento registrado no case original, junto com aumento de leads de consumidor final.',
+    },
+  },
+  {
+    slug: 'precato', name: 'Precato', year: '2024',
+    source: 'https://citrine-giraffe-448.notion.site/Precato-3b4e62ee0f7f82129e8881c62acfac61',
+    images: ['/images/precato-cover.webp', '/images/precato-detail.webp'],
+    en: {
+      category: 'Performance · Accessibility',
+      contribution: 'Rebuilt the landing pages of Brazil’s leading court-debt buyer for speed and accessibility.',
+      context: 'Precato’s landing pages scored 49 on PageSpeed and took almost five seconds to load. Analytics showed 62% of mobile visitors never saw the main content, leaving before the page finished loading on slow connections.',
+      approach: 'Working from Google Analytics, PageSpeed Insights and GTmetrix, I reworked the front end: minified CSS and JavaScript, lazy-loaded and compressed images, reordered script loading and the rendering of key elements. I also redrew the visual hierarchy and contrast for accessibility, then delivered a before-and-after report, a metrics panel and best-practice documentation for the team.',
+      captions: ['Results after the rebuild, drawn from the figures in the original case study.', 'Gains across the site and in organic traffic over the following three months.'],
+      results: [{ value: '+109%', label: 'main landing page performance' }, { value: '95', label: 'accessibility score, out of 100' }, { value: '+39%', label: 'organic traffic in three months' }],
+      resultsNote: 'Figures reported in the original case study.',
+    },
+    pt: {
+      category: 'Performance · Acessibilidade',
+      contribution: 'Reconstrução das landing pages da líder nacional em compra de precatórios, com foco em velocidade e acessibilidade.',
+      context: 'As landing pages da Precato tinham nota 49 no PageSpeed e levavam quase cinco segundos para carregar. O analytics mostrou que 62% dos visitantes no celular nem viam o conteúdo principal, saindo antes de a página terminar de carregar em conexões lentas.',
+      approach: 'A partir do Google Analytics, PageSpeed Insights e GTmetrix, refiz o front-end: minifiquei CSS e JavaScript, apliquei lazy load e compressão nas imagens e reorganizei o carregamento de scripts e a renderização dos elementos principais. Também redesenhei a hierarquia visual e o contraste para acessibilidade, e entreguei relatório de antes e depois, painel de métricas e documentação de boas práticas para o time.',
+      captions: ['Resultados depois da reconstrução, a partir dos números do case original.', 'Ganhos no site como um todo e no tráfego orgânico nos três meses seguintes.'],
+      results: [{ value: '+109%', label: 'performance da landing page principal' }, { value: '95', label: 'nota de acessibilidade, de 100' }, { value: '+39%', label: 'tráfego orgânico em três meses' }],
+      resultsNote: 'Números registrados no case original.',
     },
   },
   {
