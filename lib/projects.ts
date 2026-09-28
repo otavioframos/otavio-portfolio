@@ -25,17 +25,17 @@ export const projects = [
       "category": "CONSUMER PRODUCT",
       "title": "Identity, interface and daily cognitive training.",
       "summary": "Designed the identity, design system and app screens alongside development.",
-      "role": "Sole designer · Partnered with development",
+      "role": "Sole designer · Owned design, measurement and experiments",
       "scope": "Brand identity / UX & UI / Design system / Acquisition",
       "status": "Live product",
       "decision": "Use one visual system across acquisition and in-app training.",
       "why": "The first contact is a quiz opened from an ad; the relationship is daily training. If they looked like two products, the trust built in the assessment would reset at the paywall.",
-      "lead": "A3Lab was created to explore new consumer products within A3Media. MindYoung brings cognitive assessment and ongoing training into one product. As the team’s sole designer, I worked across its identity, interface, and acquisition experience alongside the developer.",
+      "lead": "A3Lab was created to explore new consumer products within A3Media. MindYoung brings cognitive assessment and ongoing training into one product. As the only designer, I owned its identity, interface and acquisition journey, and went past design: I measured the journey and designed the experiments that decided what changed.",
       "sections": [
         {
           "label": "01 / RESPONSIBILITY",
           "title": "One product. Many connected decisions.",
-          "body": "MindYoung is a cognitive assessment that turns into daily training. As the only designer, I owned the logo, the design system and every screen, from the ad-driven quiz to the app, and shaped features with the developer as the product evolved."
+          "body": "MindYoung is a cognitive assessment that turns into daily training. I designed the logo, the design system and every screen, from the quiz people open from an ad to the app. On the quiz, the team was me, a copywriter and a media buyer: I defined the structure and pacing of the journey, the copy worked inside it, and traffic fed it."
         },
         {
           "label": "02 / THE SYSTEM",
@@ -51,14 +51,14 @@ export const projects = [
         },
         {
           "label": "04 / TESTING",
-          "title": "Two tests that changed nothing, and a finding that did.",
-          "body": "I ran live A/B tests on details I expected to matter: showing the score band before payment and the position of a hard question. At about 1,500 people per arm, neither moved. The real lever was where checkout opens: in a regular browser, with wallets and autofill, people bought twice as often as inside Instagram and Facebook's in-app browsers.",
+          "title": "Two tests that settled a debate, and a finding that moved the number.",
+          "body": "I designed two live A/B tests on details the team expected to matter: showing the score band before payment and the position of a hard question. At about 1,500 people per arm, neither moved, which ended the debate and freed the roadmap. Then I segmented checkout data by where it opened and found the real lever: in a regular browser, with wallets and autofill, people bought twice as often as inside Instagram and Facebook's in-app browsers. I proposed a way out, a prompt that reopens checkout in the phone's own browser, and it went live as its own A/B test.",
           "figure": "tests"
         },
         {
-          "label": "05 / COLLABORATION",
-          "title": "Design and development, in conversation.",
-          "body": "I worked with the developer on features and implementation while staying responsible for design across the product. The work continued past the first release through experiments, pricing tests and refinement of the acquisition experience."
+          "label": "05 / OWNERSHIP",
+          "title": "From spec to result, one loop.",
+          "body": "I wrote the specs, reviewed every implemented screen and adjusted the system when real content broke it. After launch, the loop was mine: read the data, propose the change, design the test, read the result."
         }
       ],
       "outcome": "MindYoung is live. My contribution spans its identity, design system, screens, and acquisition experience.",
@@ -69,17 +69,17 @@ export const projects = [
       "category": "PRODUTO B2C",
       "title": "Identidade, interface e treino cognitivo no dia a dia.",
       "summary": "Desenhei a identidade, o design system e as telas do app junto a desenvolvimento.",
-      "role": "Único designer · Em parceria com desenvolvimento",
+      "role": "Único designer · Responsável por design, medição e experimentos",
       "scope": "Identidade / UX e UI / Design system / Aquisição",
       "status": "Produto no ar",
       "decision": "Usar um mesmo sistema visual na aquisição e no treino dentro do app.",
       "why": "O primeiro contato é um quiz aberto a partir de um anúncio; a relação é o treino diário. Se parecessem dois produtos, a confiança criada na avaliação se perderia no paywall.",
-      "lead": "A A3Lab nasceu para explorar novos produtos B2C dentro da A3Media. O MindYoung reúne avaliação cognitiva e treino contínuo em um produto. Como único designer do time, trabalhei na identidade, na interface e na aquisição, junto ao desenvolvedor.",
+      "lead": "A A3Lab nasceu para explorar novos produtos B2C dentro da A3Media. O MindYoung reúne avaliação cognitiva e treino contínuo em um produto. Como único designer, fui responsável pela identidade, pela interface e pela jornada de aquisição, e fui além do design: medi a jornada e desenhei os experimentos que decidiram o que mudava.",
       "sections": [
         {
           "label": "01 / RESPONSABILIDADE",
           "title": "Um produto. Muitas decisões conectadas.",
-          "body": "O MindYoung é uma avaliação cognitiva que vira treino diário. Como único designer, fui responsável pelo logo, pelo design system e por todas as telas, do quiz vindo de anúncios até o app, e defini funcionalidades com o desenvolvedor conforme o produto evoluía."
+          "body": "O MindYoung é uma avaliação cognitiva que vira treino diário. Desenhei o logo, o design system e todas as telas, do quiz aberto a partir de um anúncio até o app. No quiz, o time era eu, um copywriter e um gestor de tráfego: defini a estrutura e o ritmo da jornada, a copy trabalhou dentro dela e o tráfego a alimentou."
         },
         {
           "label": "02 / O SISTEMA",
@@ -95,14 +95,14 @@ export const projects = [
         },
         {
           "label": "04 / TESTES",
-          "title": "Dois testes que não mudaram nada, e uma descoberta que mudou.",
-          "body": "Rodei testes A/B em detalhes que eu achava decisivos: mostrar a faixa do resultado antes do pagamento e a posição de uma questão difícil. Com cerca de 1.500 pessoas por braço, nenhum moveu o número. A alavanca real estava em onde o checkout abre: num navegador comum, com carteiras digitais e preenchimento automático, as pessoas compraram duas vezes mais do que dentro dos navegadores do Instagram e do Facebook.",
+          "title": "Dois testes que encerraram uma discussão, e uma descoberta que moveu o número.",
+          "body": "Desenhei dois testes A/B em detalhes que o time achava decisivos: mostrar a faixa do resultado antes do pagamento e a posição de uma questão difícil. Com cerca de 1.500 pessoas por braço, nenhum moveu o número, o que encerrou a discussão e liberou o roadmap. Depois segmentei os dados de checkout por onde ele abria e encontrei a alavanca real: num navegador comum, com carteiras digitais e preenchimento automático, as pessoas compraram duas vezes mais do que dentro dos navegadores do Instagram e do Facebook. Propus uma saída, um aviso que reabre o checkout no navegador do próprio celular, e ela entrou no ar como um novo teste A/B.",
           "figure": "tests"
         },
         {
-          "label": "05 / COLABORAÇÃO",
-          "title": "Design e desenvolvimento em diálogo.",
-          "body": "Trabalhei com o desenvolvedor nas funcionalidades e na implementação, mantendo a responsabilidade pelo design do produto. O trabalho seguiu depois do lançamento, com experimentos, testes de preço e refinamento da aquisição."
+          "label": "05 / AUTORIA",
+          "title": "Da especificação ao resultado, um ciclo só.",
+          "body": "Escrevi as especificações, revisei cada tela implementada e ajustei o sistema quando o conteúdo real o quebrava. Depois do lançamento, o ciclo era meu: ler os dados, propor a mudança, desenhar o teste, ler o resultado."
         }
       ],
       "outcome": "O MindYoung está no ar. Minha contribuição inclui identidade, design system, telas e experiência de aquisição.",

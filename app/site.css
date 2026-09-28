@@ -202,8 +202,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-2);outline-off
 .decision{margin-top:12px;padding:6px;border-radius:24px;background:linear-gradient(180deg,rgba(143,184,255,.14),rgba(143,184,255,.04));box-shadow:inset 0 0 0 1px rgba(143,184,255,.16),0 30px 60px -30px rgba(47,107,255,.35)}
 .decision-card{position:relative;padding:clamp(22px,2.4vw,30px);border-radius:19px;background:linear-gradient(180deg,#0E1428,#080C1C);box-shadow:inset 0 1px 0 rgba(238,242,255,.08),inset 0 0 0 1px rgba(238,242,255,.06);overflow:hidden}
 .decision-card::before{content:'';position:absolute;inset:auto -20% -60% 40%;height:120%;background:radial-gradient(closest-side,rgba(47,107,255,.18),transparent);pointer-events:none}
-.decision-head{display:flex;align-items:center;gap:10px;font:600 16px/1.2 var(--f-display);letter-spacing:-.02em;color:var(--fg)}
+.decision-head{margin:0;display:flex;align-items:center;gap:10px;font:600 16px/1.2 var(--f-display);letter-spacing:-.02em;color:var(--fg)}
 .decision-icon{width:22px;height:22px;padding:4px;border-radius:7px;background:rgba(47,107,255,.18);fill:none;stroke:var(--blue-2);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.learn-list{position:relative;list-style:none;margin:clamp(18px,2vw,26px) 0 0;padding:0;display:grid}
+.learn-list li{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;padding:16px 0;border-top:1px solid rgba(238,242,255,.08)}
+.prose .learn-list li:first-child{border-top:0;padding-top:0}.prose .learn-list li:last-child{border-bottom:0}.learn-list li:last-child{padding-bottom:0}
+.prose .learn-list p{font:500 clamp(17px,1.4vw,20px)/1.4 var(--f-display);letter-spacing:-.02em;color:var(--fg)}
+.learn-list .decision-chip{margin:3px 0 0}
 .decision-icon circle{fill:var(--blue-2);stroke:none}
 .prose .decision-v{position:relative;margin-top:clamp(20px,2.4vw,32px);font:500 clamp(26px,2.8vw,40px)/1.08 var(--f-display);letter-spacing:-.04em;color:var(--fg);text-wrap:balance}
 .prose .decision-why{position:relative;margin-top:clamp(18px,2vw,26px);font-size:15px;line-height:1.55;color:var(--fg-2);max-width:52ch}

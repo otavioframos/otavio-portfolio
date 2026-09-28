@@ -195,7 +195,15 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
         <div className="prose">
           {ev?.results && ev.results.length > 0 && <dl className="case-results">{ev.results.map(r => <div key={r.label}><dt>{r.value}</dt><dd>{r.label}{r.note && <small>{r.note}</small>}</dd></div>)}</dl>}
           <p className="lead">{c.outcome}</p>
-          {ev?.learnings && ev.learnings.length > 0 && <div className="case-list"><h3 className="label">{tr(lang, 'What I learned', 'O que aprendi')}</h3><ul>{ev.learnings.map(l => <li key={l}>{l}</li>)}</ul></div>}
+          {ev?.learnings && ev.learnings.length > 0 && <aside className="decision">
+            <div className="decision-card">
+              <h3 className="decision-head">
+                <svg className="decision-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 14.5h5M8 17h4" /><path d="M10 3a5 5 0 0 0-3 9c.6.5 1 1.2 1 2h4c0-.8.4-1.5 1-2a5 5 0 0 0-3-9Z" /></svg>
+                <span>{tr(lang, 'What I learned', 'O que aprendi')}</span>
+              </h3>
+              <ol className="learn-list">{ev.learnings.map((l, i) => <li key={l}><span className="decision-chip">{String(i + 1).padStart(2, '0')}</span><p>{l}</p></li>)}</ol>
+            </div>
+          </aside>}
           {ev?.next && <div className="case-list"><h3 className="label">{tr(lang, 'Next steps', 'Próximos passos')}</h3><p>{ev.next}</p></div>}
           {p.url && <a className="inline-link" href={p.url}>{tr(lang, 'Visit the product', 'Visitar o produto')} ↗</a>}
         </div>

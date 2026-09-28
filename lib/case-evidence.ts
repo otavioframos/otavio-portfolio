@@ -10,11 +10,11 @@ export const caseEvidence: Record<string, Partial<Record<Lang, CaseEvidence>>> =
   mindyoung: {
     en: {
       period: '2026',
-      facts: { platform: 'Mobile web funnel + app' },
+      facts: { team: 'Me, a copywriter and a media buyer (quiz)', platform: 'Mobile web funnel + app' },
       results: [
         { value: '6,900+', label: 'assessments started in the first four weeks', note: 'First-party analytics, from launch on Aug 19 2026' },
         { value: '44%', label: 'of them finished all questions', note: 'Cross-checked in PostHog' },
-        { value: '2×', label: 'purchase rate in a regular browser vs in-app', note: 'Found by segmenting live checkout data' },
+        { value: '2×', label: 'purchase rate in a regular browser vs in-app', note: 'My finding, from segmenting live checkout data' },
         { value: '62', label: 'countries reached', note: 'About half of visits from the US' },
       ],
       learnings: [
@@ -26,11 +26,11 @@ export const caseEvidence: Record<string, Partial<Record<Lang, CaseEvidence>>> =
     },
     pt: {
       period: '2026',
-      facts: { platform: 'Funil web mobile + app' },
+      facts: { team: 'Eu, um copywriter e um gestor de tráfego (quiz)', platform: 'Funil web mobile + app' },
       results: [
         { value: '6.900+', label: 'avaliações iniciadas nas quatro primeiras semanas', note: 'Analytics próprio, desde o lançamento em 19 ago 2026' },
         { value: '44%', label: 'delas responderam todas as questões', note: 'Conferido no PostHog' },
-        { value: '2×', label: 'taxa de compra no navegador comum vs no do app', note: 'Encontrado segmentando dados reais de checkout' },
+        { value: '2×', label: 'taxa de compra no navegador comum vs no do app', note: 'Descoberta minha, segmentando dados reais de checkout' },
         { value: '62', label: 'países alcançados', note: 'Cerca de metade das visitas dos EUA' },
       ],
       learnings: [
