@@ -5,12 +5,11 @@ import type { Lang } from '@/lib/projects';
 
 /**
  * MindYoung case figures: the product's design system as a live specimen, the
- * acquisition funnel and the A/B reads. Numbers are first-party analytics,
- * Aug 19 → Sep 16 2026 (QA excluded). No revenue figures, by rule.
+ * assessment journey and the A/B reads. Only shares and relative effects are
+ * shown: no traffic volumes, purchase rates or revenue.
  */
 
 const tr = (lang: Lang, en: string, pt: string) => (lang === 'pt' ? pt : en);
-const fmt = (n: number, lang: Lang) => n.toLocaleString(lang === 'pt' ? 'pt-BR' : 'en-US');
 const pct = (v: number, lang: Lang, d = 1) => (v * 100).toLocaleString(lang === 'pt' ? 'pt-BR' : 'en-US', { maximumFractionDigits: d, minimumFractionDigits: d }) + '%';
 
 /* ───────────────────────── Design system ───────────────────────── */
@@ -111,82 +110,64 @@ export function MindYoungSystem({ lang }: { lang: Lang }) {
   </figure>;
 }
 
-/* ───────────────────────── Funnel ───────────────────────── */
+/* ───────────────────────── Assessment journey ───────────────────────── */
 
-const FUNNEL = [
-  { n: 34666, en: 'Landed', pt: 'Chegaram' },
-  { n: 6913, en: 'Started the test', pt: 'Começaram o teste' },
-  { n: 3070, en: 'Finished it', pt: 'Terminaram' },
-  { n: 3036, en: 'Saw the offer', pt: 'Viram a oferta' },
-  { n: 177, en: 'Became members', pt: 'Viraram membros' },
+/* Shares only: what happens once someone starts the assessment. No acquisition
+   volumes, purchase rates or revenue, by rule. */
+const JOURNEY = [
+  { v: 1, en: 'Started the assessment', pt: 'Começaram a avaliação', noteEn: 'Every person who answered the first question.', notePt: 'Todas as pessoas que responderam a primeira questão.' },
+  { v: 0.444, en: 'Answered every question', pt: 'Responderam todas as questões', noteEn: 'A 30-question battery, taken on a phone, mostly from a social feed.', notePt: 'Uma bateria de 30 questões, feita no celular, quase sempre vinda de um feed social.' },
+  { v: 0.439, en: 'Reached their result', pt: 'Chegaram ao resultado', noteEn: 'Almost no one who finishes drops before seeing the result page.', notePt: 'Quase ninguém que termina desiste antes de ver a página de resultado.' },
 ];
 
 export function MindYoungFunnel({ lang }: { lang: Lang }) {
-  const [mode, setMode] = useState<'top' | 'step'>('step');
   const [active, setActive] = useState(1);
-  const top = FUNNEL[0].n;
-  const rate = (i: number) => (mode === 'top' || i === 0 ? FUNNEL[i].n / top : FUNNEL[i].n / FUNNEL[i - 1].n);
-  // Biggest relative loss: the step with the lowest step-to-step rate.
-  const worst = FUNNEL.slice(1).reduce((w, s, i) => (s.n / FUNNEL[i].n < FUNNEL[w].n / FUNNEL[w - 1].n ? i + 1 : w), 1);
-  const a = FUNNEL[active];
-
+  const a = JOURNEY[active];
   return <figure className="my-chart">
     <div className="my-chart-head">
-      <p className="label">{tr(lang, 'Acquisition funnel · Aug 19 → Sep 16 2026', 'Funil de aquisição · 19 ago → 16 set 2026')}</p>
-      <fieldset className="my-seg" aria-label={tr(lang, 'Show rates as', 'Mostrar taxas como')}>
-        <button type="button" aria-pressed={mode === 'step'} onClick={() => setMode('step')}>{tr(lang, 'Step to step', 'Etapa a etapa')}</button>
-        <button type="button" aria-pressed={mode === 'top'} onClick={() => setMode('top')}>{tr(lang, 'Of landings', 'Das chegadas')}</button>
-      </fieldset>
+      <p className="label">{tr(lang, 'Inside the assessment · first four weeks live', 'Dentro da avaliação · primeiras quatro semanas no ar')}</p>
     </div>
-    <ol className="my-funnel">{FUNNEL.map((s, i) => {
-      const w = Math.max(0.012, s.n / top);
-      return <li key={s.en}>
-        <button type="button" className={'my-frow' + (i === active ? ' is-active' : '') + (i === worst ? ' is-worst' : '')} onMouseEnter={() => setActive(i)} onFocus={() => setActive(i)} onClick={() => setActive(i)}>
-          <span className="my-fname">{tr(lang, s.en, s.pt)}</span>
-          <span className="my-fbar"><span style={{ '--w': w } as CSSProperties} /></span>
-          <span className="my-fn">{fmt(s.n, lang)}</span>
-          <span className="my-fr">{i === 0 ? '100%' : pct(rate(i), lang)}</span>
-        </button>
-      </li>;
-    })}</ol>
-    <figcaption className="my-chart-read" aria-live="polite">
-      {active === 0
-        ? tr(lang, `${fmt(top, lang)} visits from paid social in 62 countries, about half from the US.`, `${fmt(top, lang)} visitas de mídia paga em 62 países, cerca de metade dos EUA.`)
-        : tr(lang,
-          active === 1 ? `${a.en}: ${fmt(a.n, lang)}, ${pct(a.n / top, lang)} of everyone who landed. Four in five leave before the first question.` : `${a.en}: ${fmt(a.n, lang)}. ${pct(a.n / FUNNEL[active - 1].n, lang)} of the step before, ${pct(a.n / top, lang, 2)} of everyone who landed.`,
-          active === 1 ? `${a.pt}: ${fmt(a.n, lang)}, ${pct(a.n / top, lang)} de todos que chegaram. Quatro em cada cinco saem antes da primeira questão.` : `${a.pt}: ${fmt(a.n, lang)}. ${pct(a.n / FUNNEL[active - 1].n, lang)} da etapa anterior, ${pct(a.n / top, lang, 2)} de todos que chegaram.`)}
-      {active === worst && <strong> {tr(lang, 'The largest relative drop sits here.', 'A maior queda relativa está aqui.')}</strong>}
-    </figcaption>
+    <ol className="my-funnel">{JOURNEY.map((s, i) => <li key={s.en}>
+      <button type="button" className={'my-frow' + (i === active ? ' is-active' : '')} onMouseEnter={() => setActive(i)} onFocus={() => setActive(i)} onClick={() => setActive(i)}>
+        <span className="my-fname">{tr(lang, s.en, s.pt)}</span>
+        <span className="my-fbar"><span style={{ '--w': s.v } as CSSProperties} /></span>
+        <span className="my-fn" />
+        <span className="my-fr">{i === 0 ? '100%' : pct(s.v, lang, 0)}</span>
+      </button>
+    </li>)}</ol>
+    <figcaption className="my-chart-read" aria-live="polite">{tr(lang, a.noteEn, a.notePt)}</figcaption>
   </figure>;
 }
 
 /* ───────────────────────── Experiments ───────────────────────── */
 
-type Arm = { en: string; pt: string; rate: number; n?: number };
+/* Relative to the control arm (= 100), so the chart shows effect size without
+   publishing absolute conversion rates. */
+type Arm = { en: string; pt: string; idx: number; ci?: number };
 type Test = { key: string; en: string; pt: string; metricEn: string; metricPt: string; arms: [Arm, Arm]; verdictEn: string; verdictPt: string; moved: boolean };
 
 const TESTS: Test[] = [
   {
-    key: 'band', en: 'Score band label', pt: 'Rótulo da faixa', metricEn: 'Checkout → purchase', metricPt: 'Checkout → compra', moved: false,
-    arms: [{ en: 'Shown', pt: 'Visível', rate: 0.056, n: 1487 }, { en: 'Hidden', pt: 'Oculto', rate: 0.061, n: 1532 }],
-    verdictEn: 'Inside each other’s margin. No measurable effect.', verdictPt: 'Uma dentro da margem da outra. Sem efeito mensurável.',
+    key: 'band', en: 'Score band label', pt: 'Rótulo da faixa', metricEn: 'Purchase at checkout · control = 100', metricPt: 'Compra no checkout · controle = 100', moved: false,
+    arms: [{ en: 'Shown', pt: 'Visível', idx: 100, ci: 21 }, { en: 'Hidden', pt: 'Oculto', idx: 109, ci: 21 }],
+    verdictEn: 'About 1,500 people per arm; the intervals overlap. No measurable effect.', verdictPt: 'Cerca de 1.500 pessoas por braço; os intervalos se sobrepõem. Sem efeito mensurável.',
   },
   {
-    key: 'order', en: 'Item order', pt: 'Ordem das questões', metricEn: 'Completion per attempt', metricPt: 'Conclusão por tentativa', moved: false,
-    arms: [{ en: 'Keep', pt: 'Manter', rate: 0.087 }, { en: 'Later', pt: 'Depois', rate: 0.09 }],
-    verdictEn: 'A 0.3 point gap. No measurable effect.', verdictPt: 'Diferença de 0,3 ponto. Sem efeito mensurável.',
+    key: 'order', en: 'Item order', pt: 'Ordem das questões', metricEn: 'Completion · control = 100', metricPt: 'Conclusão · controle = 100', moved: false,
+    arms: [{ en: 'Keep', pt: 'Manter', idx: 100 }, { en: 'Later', pt: 'Depois', idx: 103 }],
+    verdictEn: 'Moving a hard question later changed completion by a rounding error.', verdictPt: 'Mover uma questão difícil para depois mudou a conclusão por um erro de arredondamento.',
   },
   {
-    key: 'webview', en: 'Where checkout opens', pt: 'Onde o checkout abre', metricEn: 'Checkout → purchase', metricPt: 'Checkout → compra', moved: true,
-    arms: [{ en: 'In-app browser', pt: 'Navegador do app', rate: 0.03 }, { en: 'Real browser', pt: 'Navegador real', rate: 0.06 }],
-    verdictEn: 'Twice the conversion outside Instagram and Facebook, and 94% of checkouts happen inside them.', verdictPt: 'O dobro de conversão fora do Instagram e do Facebook, e 94% dos checkouts acontecem dentro deles.',
+    key: 'webview', en: 'Where checkout opens', pt: 'Onde o checkout abre', metricEn: 'Purchase at checkout · in-app = 100', metricPt: 'Compra no checkout · navegador do app = 100', moved: true,
+    arms: [{ en: 'In-app browser', pt: 'Navegador do app', idx: 100 }, { en: 'Regular browser', pt: 'Navegador comum', idx: 200 }],
+    verdictEn: 'Twice the conversion outside Instagram and Facebook’s in-app browsers, where wallets and autofill are missing.', verdictPt: 'O dobro de conversão fora dos navegadores do Instagram e do Facebook, onde faltam carteiras digitais e preenchimento automático.',
   },
 ];
 
 export function MindYoungTests({ lang }: { lang: Lang }) {
   const [k, setK] = useState(TESTS[0].key);
   const t = TESTS.find(x => x.key === k)!;
-  const max = Math.max(...t.arms.map(x => x.rate)) * 1.35;
+  const max = Math.max(...t.arms.map(x => x.idx + (x.ci ?? 0))) * 1.12;
   return <figure className="my-chart">
     <div className="my-chart-head">
       <p className="label">{tr(lang, t.metricEn, t.metricPt)}</p>
@@ -194,22 +175,17 @@ export function MindYoungTests({ lang }: { lang: Lang }) {
         {TESTS.map(x => <button key={x.key} type="button" aria-pressed={x.key === k} onClick={() => setK(x.key)}>{tr(lang, x.en, x.pt)}</button>)}
       </fieldset>
     </div>
-    <div className="my-arms">{t.arms.map((arm, i) => {
-      // 95% interval for a proportion, when the sample size is known.
-      const ci = arm.n ? 1.96 * Math.sqrt((arm.rate * (1 - arm.rate)) / arm.n) : 0;
-      return <div key={arm.en} className={'my-arm' + (t.moved && i === 1 ? ' is-win' : '')}>
-        <div className="my-arm-track">
-          <span className="my-arm-bar" style={{ '--h': arm.rate / max } as CSSProperties} />
-          {ci > 0 && <span className="my-arm-ci" style={{ '--lo': (arm.rate - ci) / max, '--hi': (arm.rate + ci) / max } as CSSProperties} />}
-        </div>
-        <p className="my-arm-v">{pct(arm.rate, lang)}</p>
-        <p className="my-arm-k">{tr(lang, arm.en, arm.pt)}{arm.n && <small>n = {fmt(arm.n, lang)}</small>}</p>
-      </div>;
-    })}</div>
+    <div className="my-arms">{t.arms.map((arm, i) => <div key={arm.en} className={'my-arm' + (t.moved && i === 1 ? ' is-win' : '')}>
+      <div className="my-arm-track">
+        <span className="my-arm-bar" style={{ '--h': arm.idx / max } as CSSProperties} />
+        {arm.ci && <span className="my-arm-ci" style={{ '--lo': (arm.idx - arm.ci) / max, '--hi': (arm.idx + arm.ci) / max } as CSSProperties} />}
+      </div>
+      <p className="my-arm-v">{arm.idx}</p>
+      <p className="my-arm-k">{tr(lang, arm.en, arm.pt)}</p>
+    </div>)}</div>
     <figcaption className="my-chart-read">
       <span className={'my-chip' + (t.moved ? ' is-moved' : '')}>{t.moved ? tr(lang, 'Moves the number', 'Move o número') : tr(lang, 'No effect', 'Sem efeito')}</span>
       {tr(lang, t.verdictEn, t.verdictPt)}
     </figcaption>
   </figure>;
 }
-

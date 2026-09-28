@@ -44,15 +44,15 @@ export const projects = [
           "figure": "system"
         },
         {
-          "label": "03 / THE FUNNEL",
-          "title": "Where people actually stop.",
-          "body": "Once it went live on August 19, 2026, the journey could be measured end to end. Most people finish the test once they start it, and almost everyone who finishes sees the offer. The steep drops are before the test and at payment, which moved my attention away from the screens I had been polishing.",
+          "label": "03 / THE ASSESSMENT",
+          "title": "Built to be finished.",
+          "body": "A 30-question test on a phone, opened from a social feed, competes with every notification. I paced it in short sections with progress, small rewards between them and matrices that load before they are needed. Once it went live, the journey could be measured end to end, and that measurement set the priorities for what came next.",
           "figure": "funnel"
         },
         {
           "label": "04 / TESTING",
           "title": "Two tests that changed nothing, and a finding that did.",
-          "body": "I ran live A/B tests on details I expected to matter: showing the score band before payment and the position of a hard question. At about 1,500 people per arm, neither moved. The real gap was where checkout opens: inside Instagram and Facebook's in-app browsers, without Apple Pay or autofill, conversion is half of a regular browser.",
+          "body": "I ran live A/B tests on details I expected to matter: showing the score band before payment and the position of a hard question. At about 1,500 people per arm, neither moved. The real lever was where checkout opens: in a regular browser, with wallets and autofill, people bought twice as often as inside Instagram and Facebook's in-app browsers.",
           "figure": "tests"
         },
         {
@@ -88,15 +88,15 @@ export const projects = [
           "figure": "system"
         },
         {
-          "label": "03 / O FUNIL",
-          "title": "Onde as pessoas realmente param.",
-          "body": "Com o produto no ar desde 19 de agosto de 2026, a jornada passou a ser medida de ponta a ponta. A maioria termina o teste depois de começar, e quase todos que terminam veem a oferta. As quedas fortes estão antes do teste e no pagamento, o que tirou meu foco das telas que eu vinha polindo.",
+          "label": "03 / A AVALIAÇÃO",
+          "title": "Feita para ser terminada.",
+          "body": "Um teste de 30 questões no celular, aberto a partir de um feed social, compete com todas as notificações. Organizei o ritmo em seções curtas com progresso, pequenas recompensas entre elas e matrizes que carregam antes de serem necessárias. Com o produto no ar, a jornada passou a ser medida de ponta a ponta, e essa medição definiu as prioridades seguintes.",
           "figure": "funnel"
         },
         {
           "label": "04 / TESTES",
           "title": "Dois testes que não mudaram nada, e uma descoberta que mudou.",
-          "body": "Rodei testes A/B em detalhes que eu achava decisivos: mostrar a faixa do resultado antes do pagamento e a posição de uma questão difícil. Com cerca de 1.500 pessoas por braço, nenhum moveu o número. A diferença real estava em onde o checkout abre: dentro dos navegadores do Instagram e do Facebook, sem Apple Pay nem preenchimento automático, a conversão é metade da de um navegador comum.",
+          "body": "Rodei testes A/B em detalhes que eu achava decisivos: mostrar a faixa do resultado antes do pagamento e a posição de uma questão difícil. Com cerca de 1.500 pessoas por braço, nenhum moveu o número. A alavanca real estava em onde o checkout abre: num navegador comum, com carteiras digitais e preenchimento automático, as pessoas compraram duas vezes mais do que dentro dos navegadores do Instagram e do Facebook.",
           "figure": "tests"
         },
         {

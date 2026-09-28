@@ -165,9 +165,14 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
         <div className="prose">
           <p className="lead">{c.lead}</p>
           <aside className="decision">
-            <p className="decision-k"><span className="label">{tr(lang, 'Key decision', 'Decisão-chave')}</span><span className="decision-mark" aria-hidden="true">↳</span></p>
-            <p className="decision-v">{c.decision}</p>
-            {'why' in c && <p className="decision-why"><span className="label">{tr(lang, 'Why', 'Por quê')}</span>{c.why}</p>}
+            <div className="decision-card">
+              <p className="decision-head">
+                <svg className="decision-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 16V9.5a3.5 3.5 0 0 1 3.5-3.5H15" /><path d="M12 3l3 3-3 3" /><circle cx="4" cy="16" r="1.4" /></svg>
+                <span>{tr(lang, 'Key decision', 'Decisão-chave')}</span>
+              </p>
+              <p className="decision-v">{c.decision}</p>
+              {'why' in c && <p className="decision-why"><span className="decision-chip">{tr(lang, 'Why', 'Por quê')}</span>{c.why}</p>}
+            </div>
           </aside>
         </div>
       </section>
