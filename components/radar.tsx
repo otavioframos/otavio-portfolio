@@ -152,18 +152,29 @@ const METRICS: { v: string; en: string; pt: string }[][] = [
 export function RadarCluster({ lang }: { lang: Lang }) {
   const [step, setStep] = useState(0);
   const track = useRef<HTMLDivElement>(null);
+  const fig = useRef<HTMLElement>(null);
 
-  // The track is tall; the card sticks while scroll progress picks the step.
+  // The track is tall; the card sticks while scroll progress drives it. Layers
+  // fade on continuous CSS variables, so the graph follows the finger instead
+  // of jumping; React only re-renders when the step label changes.
   useEffect(() => {
-    const el = track.current;
-    if (!el) return;
-    let frame = 0;
+    const el = track.current, f = fig.current;
+    if (!el || !f) return;
+    let frame = 0, last = -1;
+    const ramp = (x: number, a: number) => Math.min(1, Math.max(0, (x - a) / 0.55));
     const read = () => {
       frame = 0;
       const r = el.getBoundingClientRect();
       const span = r.height - window.innerHeight;
-      const p = span > 0 ? Math.min(0.999, Math.max(0, -r.top / span)) : 0;
-      setStep(Math.floor(p * STEPS.length));
+      const p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 0;
+      const x = p * STEPS.length; // 0 → 5
+      f.style.setProperty('--p', p.toFixed(4));
+      f.style.setProperty('--l1', ramp(x, 0.7).toFixed(3));
+      f.style.setProperty('--l2', ramp(x, 1.7).toFixed(3));
+      f.style.setProperty('--l3', ramp(x, 2.7).toFixed(3));
+      f.style.setProperty('--l4', ramp(x, 3.7).toFixed(3));
+      const next = Math.min(STEPS.length - 1, Math.floor(x));
+      if (next !== last) { last = next; setStep(next); }
     };
     const onScroll = () => { if (!frame) frame = requestAnimationFrame(read); };
     read();
@@ -183,7 +194,8 @@ export function RadarCluster({ lang }: { lang: Lang }) {
   const s = STEPS[step];
   const pt = lang === 'pt';
   return <div ref={track} className="rd-scrolly" style={{ '--steps': STEPS.length } as CSSProperties}>
-    <figure className="my-chart rd-cluster" data-step={step}>
+    <figure ref={fig} className="my-chart rd-cluster">
+      <div className="rd-progress" aria-hidden="true">{STEPS.map((_, i) => <span key={i} style={{ '--i': i } as CSSProperties} />)}</div>
       <div className="rd-cluster-stage">
     <svg className="rd-graph" viewBox="40 30 820 540" aria-hidden="true">
         <g className="rd-l rd-l-hop2">
