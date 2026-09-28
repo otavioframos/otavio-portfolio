@@ -86,11 +86,11 @@ function VelaArt() {
     {/* eslint-disable-next-line @next/next/no-page-custom-font */}
     <link rel="stylesheet" precedence="default" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap" />
     <AvelaGlow color="rgb(110,190,150)" className="art-vela-dither" />
-    <div className="vela-orbit" aria-hidden="true">
-      <div className="vela-chip vela-c1"><span>Today’s allowance</span><b>R$ 196</b><i>on pace</i></div>
-      <div className="vela-chip vela-c2"><span>Living pace</span><svg viewBox="0 0 80 28"><path d="M2 22 L14 18 L26 20 L38 12 L50 14 L62 7 L78 9" /></svg></div>
-      <div className="vela-chip vela-c3"><span>Protected reserve</span><b>R$ 1.200</b></div>
-      <div className="vela-chip vela-c4"><span>Monthly spend</span><em>{Array.from({ length: 12 }, (_, i) => <u key={i} style={{ opacity: [0.9, 0.3, 0.6, 0.2, 0.8, 0.4, 0.3, 0.7, 0.2, 0.5, 0.9, 0.35][i] }} />)}</em></div>
+    <div className="vela-orbits" aria-hidden="true">
+      <div className="vela-ring vela-r1"><div className="vela-chip"><span>Today’s allowance</span><b>R$ 196</b><i>on pace</i></div></div>
+      <div className="vela-ring vela-r2"><div className="vela-chip"><span>Living pace</span><svg viewBox="0 0 80 28"><path d="M2 22 L14 18 L26 20 L38 12 L50 14 L62 7 L78 9" /></svg></div></div>
+      <div className="vela-ring vela-r3"><div className="vela-chip"><span>Protected reserve</span><b>R$ 1.200</b></div></div>
+      <div className="vela-ring vela-r4"><div className="vela-chip"><span>Monthly spend</span><em>{Array.from({ length: 12 }, (_, i) => <u key={i} style={{ opacity: [0.9, 0.3, 0.6, 0.2, 0.8, 0.4, 0.3, 0.7, 0.2, 0.5, 0.9, 0.35][i] }} />)}</em></div></div>
     </div>
     <img className="art-vela-mark" src="/images/vela-mark.svg" alt="" width="63" height="63" />
   </div>;
