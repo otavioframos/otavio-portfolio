@@ -708,8 +708,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-2);outline-off
 .avela-field{position:absolute;inset:0}
 .avela-field canvas{display:block;width:100%;height:100%}
 .avela-ui{position:absolute;inset:0;display:grid;place-items:center;font-family:'Manrope',var(--f-text);color:#24312E;pointer-events:none}
-.av-ui{position:absolute;margin:0;border-radius:22px;background:rgba(255,255,255,.75);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 0 0 1px rgba(234,223,207,.8),0 24px 60px -24px rgba(36,49,46,.28);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:float 7s ease-in-out infinite}
-.av-ui-coach{right:calc(50% - min(34vw,440px));top:22%;max-width:min(22vw,250px);padding:12px 16px;border-top-left-radius:6px;background:rgba(232,240,238,.75);font-size:13px;line-height:1.45;animation-delay:-2s}
+.av-ui{position:absolute;margin:0;border-radius:22px;background:rgba(255,255,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 0 0 1px rgba(234,223,207,.8),0 24px 60px -24px rgba(36,49,46,.28);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:float 7s ease-in-out infinite}
+.av-ui-coach{right:calc(50% - min(34vw,440px));top:22%;max-width:min(22vw,250px);padding:12px 16px;border-top-left-radius:6px;background:rgba(232,240,238,.5);font-size:13px;line-height:1.45;animation-delay:-2s}
 .av-ui-mark{position:relative;width:clamp(96px,11vw,150px);height:auto;border-radius:28%;filter:drop-shadow(0 20px 40px rgba(36,49,46,.25));animation:float 6s ease-in-out infinite}
 .mw-media .av-ui{display:none}.mw-media .av-ui-mark{width:28%}
 @media(max-width:760px){.av-ui-coach{right:4%;top:auto;bottom:8%;max-width:62%;font-size:11.5px}}
@@ -727,3 +727,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-2);outline-off
 .av-day-dot.todo{background:transparent;box-shadow:inset 0 0 0 1.5px #5E8C83,0 0 0 3px rgba(255,255,255,.5)}
 .av-day-tx{display:flex;justify-content:space-between;align-items:baseline;padding:0 8px 6px}.av-day-tx small{font-size:11.5px;color:#5E8C83}
 @media(max-width:760px){.av-ui-meal{left:4%;top:9%;width:54%;padding:12px 14px;gap:8px}.av-n{font-size:22px}.av-ui-meal b{font-size:15px}.av-ui-day{display:none}}
+
+/* Smaller floating set; plate card joins the float */
+.avela-ui .av-ui{scale:.86}
+.av-ui-plate{left:calc(50% - min(30vw,390px));bottom:12%;width:min(17vw,210px);padding:9px;display:grid;gap:10px;animation-delay:-5.5s}
+.av-plate-ph{position:relative;height:84px;border-radius:13px;background:radial-gradient(60% 70% at 35% 40%,#E9C7A0,transparent 70%),radial-gradient(50% 60% at 70% 60%,#A9C4A6,transparent 70%),radial-gradient(40% 40% at 55% 30%,#F3E3C3,transparent 70%),#EFE6D8}
+.av-plate-ph span{position:absolute;right:8px;top:8px;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.8);font:500 11.5px 'Fraunces',Georgia,serif}
+.av-ui-plate .av-day-tx{padding:0 6px 4px}
+@media(max-width:760px){.av-ui-plate{display:none}}

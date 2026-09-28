@@ -81,6 +81,10 @@ function AvelaArt() {
         </div>
         <div className="av-day-tx"><b>Today</b><small>3 of 4 meals · steady energy</small></div>
       </div>
+      <div className="av-ui av-ui-plate">
+        <div className="av-plate-ph"><span>82</span></div>
+        <div className="av-day-tx"><b>Grain bowl</b><small>Balanced</small></div>
+      </div>
       <img className="av-ui-mark" src="/images/avela-mark.webp" alt="" width="360" height="360" />
     </div>
   </div>;
