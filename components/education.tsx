@@ -24,23 +24,13 @@ const studies = [
 ];
 
 export function Education({ lang }: { lang: Lang }) {
-  return (
-    <section className="education" aria-labelledby="education-title">
-      <div className="education-heading">
-        <p className="eyebrow">{lang === 'en' ? 'EDUCATION & CONTINUED LEARNING' : 'FORMAÇÃO E APRENDIZADO CONTÍNUO'}</p>
-        <h3 id="education-title">{lang === 'en' ? 'A foundation that keeps growing.' : 'Uma base que continua crescendo.'}</h3>
-      </div>
-      <ul className="education-list">
-        {studies.map((study) => (
-          <li key={study.institution}>
-            <div>
-              <h4>{study[lang][0]}</h4>
-              <p>{study.institution}</p>
-            </div>
-            <p className="education-detail">{study[lang][1]}</p>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
+  return <div className="grid block ruled">
+    <h3 className="label">{lang === 'en' ? 'Education' : 'Formação'}</h3>
+    <dl className="rows">
+      {studies.map(study => <div className="row" key={study.institution}>
+        <dt>{study[lang][0]}</dt>
+        <dd>{study.institution}<span>{study[lang][1]}</span></dd>
+      </div>)}
+    </dl>
+  </div>;
 }

@@ -1,18 +1,14 @@
 import type { Metadata } from 'next';
-import { Barlow_Condensed, Manrope, Instrument_Serif, Pixelify_Sans, Syne } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import { siteUrl, indexable, alternatesFor } from '@/lib/site';
 import './globals.css';
-import './refinements.css';
-import './nature.css';
-const display=Barlow_Condensed({variable:'--font-barlow',weight:['300','500','600'],subsets:['latin']});
-const body=Manrope({variable:'--font-manrope',subsets:['latin']});
-const identity=Syne({variable:'--font-identity',weight:['600','700','800'],subsets:['latin']});
-const editorial=Instrument_Serif({variable:'--font-editorial',weight:'400',subsets:['latin']});
-const pixel=Pixelify_Sans({variable:'--font-pixel',weight:'400',subsets:['latin']});
+import './site.css';
+const body=Inter({variable:'--font-manrope',subsets:['latin']});
 const title='Otávio Ramos — Founding Product Designer';
 const description='Founding Product Designer at A3Lab, A3Media’s consumer-app studio. Consumer products, AI experiences, design systems, and hands-on building. Based in Brazil.';
 export const metadata:Metadata={
   metadataBase:new URL(siteUrl),
+  icons:{icon:[{url:'/favicon.svg',type:'image/svg+xml'},{url:'/icon.png',type:'image/png',sizes:'32x32'}],apple:'/apple-touch-icon.png'},
   title,
   description,
   alternates:alternatesFor('/'),
@@ -20,4 +16,4 @@ export const metadata:Metadata={
   twitter:{card:'summary_large_image',title,description,images:['/og.jpg']},
   robots:indexable?{index:true,follow:true}:{index:false,follow:false},
 };
-export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body className={`${display.variable} ${body.variable} ${editorial.variable} ${pixel.variable} ${identity.variable}`}>{children}</body></html>}
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en" className={body.variable}><body>{children}</body></html>}
