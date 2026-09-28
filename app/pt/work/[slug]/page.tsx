@@ -9,7 +9,7 @@ export function generateStaticParams() { return allProjects.map(p => ({ slug: p.
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const p = allProjects.find(p => p.slug === slug);
-  const title = p ? p.name + ' — Otávio Ramos' : 'Project not found';
+  const title = p ? p.name + ' | Otávio Ramos' : 'Project not found';
   const description = p ? ('summary' in p.pt ? p.pt.summary : p.pt.contribution) : undefined;
   return { title, description, alternates: alternatesForPt('/work/' + slug), openGraph: { title, description, url: alternatesForPt('/work/' + slug).canonical, images: p ? [{ url: 'image' in p ? p.image : p.images[0] }] : undefined } };
 }
