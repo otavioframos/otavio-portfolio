@@ -18,11 +18,71 @@ export type MoreProject = {
   year: string;
   source: string;
   images: [string, string];
+  /** Kept routable but left out of lists, e.g. while its numbers are being checked. */
+  hidden?: boolean;
   /** Process images: `afterContext` shows under the problem, `afterApproach` under the work. */
   process?: { src: string; width: number; height: number; at: 'afterContext' | 'afterApproach'; en: string; pt: string }[];
 } & Record<Lang, ProjectCopy>;
 
 export const moreProjects: MoreProject[] = [
+  {
+    slug: 'precato', name: 'Precato', year: '2025',
+    source: 'https://citrine-giraffe-448.notion.site/Precato-3b4e62ee0f7f82129e8881c62acfac61',
+    images: ['/images/precato-cover.webp', '/images/precato-cover.webp'],
+    process: [
+      { src: '/images/precato-before.webp', width: 1600, height: 1088, at: 'afterContext', en: 'Starting point in PageSpeed Insights: performance 40 on the main page and 68 on the São Paulo page (reports in Portuguese).', pt: 'Ponto de partida no PageSpeed Insights: desempenho 40 na página principal e 68 na página de São Paulo.' },
+      { src: '/images/precato-diagnosis.webp', width: 1600, height: 957, at: 'afterApproach', en: 'Diagnosis board: Core Web Vitals history next to my note on the root cause, the hero form hand-coded in HTML/CSS, and the three reasons for the drop (in Portuguese).', pt: 'Quadro de diagnóstico: histórico de Core Web Vitals ao lado da minha nota sobre a causa, o formulário do hero codado em HTML/CSS, e as três razões da queda.' },
+    ],
+    en: {
+      category: 'Performance · Accessibility',
+      contribution: 'Rebuilt the landing pages of Brazil’s leading court-debt buyer for speed and accessibility.',
+      context: 'Precato’s landing pages were slow and conversions were falling. The main page scored 40 for performance on PageSpeed, with over five seconds of blocking time, and analytics showed 62% of mobile visitors left before the main content loaded.',
+      approach: 'Google Analytics, PageSpeed Insights and GTmetrix pointed to an unexpected culprit: the worst page had the fewest images. Its lead form, hand-coded in the hero, was blocking the render. I reworked the front end across the landing pages, minifying CSS and JavaScript, fixing the loading order, and compressing and lazy-loading images, and adjusted hierarchy and contrast for accessibility. I delivered the optimised pages, a before-and-after report, a metrics panel and best-practice documentation for the team.',
+      captions: ['The optimised landing pages: the main page and the São Paulo and Belo Horizonte versions.', 'PageSpeed before and after on the main page: performance from 40 to 99, blocking time from 5,240 ms to 20 ms.'],
+      figure: 'precato',
+      results: [{ value: '40 → 99', label: 'PageSpeed performance, main page' }, { value: '+45.5%', label: 'average performance across pages' }, { value: '+39%', label: 'organic traffic in three months' }],
+      resultsNote: 'PageSpeed Insights, February 2025; organic traffic as reported in the original case study.',
+    },
+    pt: {
+      category: 'Performance · Acessibilidade',
+      contribution: 'Reconstrução das landing pages da líder nacional em compra de precatórios, com foco em velocidade e acessibilidade.',
+      context: 'As landing pages da Precato eram lentas e as conversões estavam caindo. A página principal tinha nota 40 de desempenho no PageSpeed, com mais de cinco segundos de bloqueio, e o analytics mostrou que 62% dos visitantes no celular saíam antes de o conteúdo principal carregar.',
+      approach: 'Google Analytics, PageSpeed Insights e GTmetrix apontaram um culpado inesperado: a pior página era a que tinha menos imagens. O formulário, codado à mão no hero, travava a renderização. Refiz o front-end das landing pages, minificando CSS e JavaScript, corrigindo a ordem de carregamento e comprimindo e aplicando lazy load nas imagens, e ajustei hierarquia e contraste para acessibilidade. Entreguei as páginas otimizadas, relatório de antes e depois, painel de métricas e documentação de boas práticas para o time.',
+      captions: ['As landing pages otimizadas: a principal e as versões de São Paulo e Belo Horizonte.', 'PageSpeed antes e depois na página principal: desempenho de 40 para 99, tempo de bloqueio de 5.240 ms para 20 ms.'],
+      figure: 'precato',
+      results: [{ value: '40 → 99', label: 'desempenho no PageSpeed, página principal' }, { value: '+45,5%', label: 'desempenho médio entre as páginas' }, { value: '+39%', label: 'tráfego orgânico em três meses' }],
+      resultsNote: 'PageSpeed Insights, fevereiro de 2025; tráfego orgânico conforme o case original.',
+    },
+  },
+  {
+    slug: 'homerunpet', name: 'HomeRunPet Brasil', year: '2024',
+    source: 'https://citrine-giraffe-448.notion.site/HomeRunPet-c7de62ee0f7f83739ff301e3cc0e5071',
+    images: ['/images/homerun-cover.webp', '/images/homerun-detail.webp'],
+    process: [
+      { src: '/images/homerun-before.webp', width: 780, height: 654, at: 'afterContext', en: 'The previous page: a price-led offer with no hierarchy or story, and nothing about why the product is different.', pt: 'A página anterior: uma oferta de preço sem hierarquia nem narrativa, e nada sobre o que torna o produto diferente.' },
+      { src: '/images/homerun-sections.webp', width: 626, height: 794, at: 'afterApproach', en: 'The new page built from the system: the pains from the research first, then the technology as answers to them.', pt: 'A nova página montada com o sistema: primeiro as dores da pesquisa, depois a tecnologia como resposta a elas.' },
+    ],
+    en: {
+      category: 'Brand launch · Design system',
+      contribution: 'Researched, localised and systemised the Brazilian launch of a global pet-tech brand.',
+      context: 'Tocca Pet, the only official HomeRunPet licensee in Brazil, sold only to businesses. It was launching the brand to consumers, starting with smart pet dryers, a product most Brazilian owners had never heard of.',
+      approach: 'Interviews with pet owners and groomers showed little technical knowledge but deep frustration with ordinary dryers, so the page leads with the real pains, noise and drying time, not the spec sheet. I adapted the global brand to Brazilian habits and built its design system as a scalable library, in Figma and in code: a 15-style Inter type scale, an orange palette, buttons in four tones and four variants, icons and product cards the team recombines for new pages and A/B tests. I delivered the launch landing page, the localised UI kit, brand guidelines, campaign assets and the developer handoff.',
+      captions: ['Launch landing page: the headline leads with noise and fear at bath time, the pains the research surfaced.', 'The design system: buttons, icons, product imagery and cards built as modular components for new pages and A/B tests.'],
+      figure: 'homerun',
+      results: [{ value: '+41%', label: 'average time on page after launch' }],
+      resultsNote: 'Post-launch analytics reported in the original case study, alongside more consumer leads.',
+    },
+    pt: {
+      category: 'Lançamento de marca · Design system',
+      contribution: 'Pesquisa, adaptação e design system para o lançamento no Brasil de uma marca global de tecnologia pet.',
+      context: 'A Tocca Pet, única licenciada oficial da HomeRunPet no Brasil, vendia só para empresas. Estava lançando a marca para o consumidor final, começando pelos sopradores inteligentes, um produto que a maioria dos tutores brasileiros nem conhecia.',
+      approach: 'Entrevistas com tutores e groomers mostraram pouco conhecimento técnico, mas grande frustração com sopradores comuns. Por isso a página abre com as dores reais, barulho e tempo de secagem, e não com a ficha técnica. Adaptei a marca global aos hábitos brasileiros e construí seu design system como uma biblioteca escalável, no Figma e em código: escala tipográfica Inter com 15 estilos, paleta laranja, botões em quatro tons e quatro variações, ícones e cards de produto que o time recombina em novas páginas e testes A/B. Entreguei a landing page de lançamento, o UI kit localizado, o guia de identidade, assets de campanha e o handoff para desenvolvimento.',
+      captions: ['Landing page de lançamento: o título abre com barulho e medo na hora do banho, as dores que a pesquisa revelou.', 'O design system: botões, ícones, imagens de produto e cards como componentes modulares para novas páginas e testes A/B.'],
+      figure: 'homerun',
+      results: [{ value: '+41%', label: 'tempo médio na página após o lançamento' }],
+      resultsNote: 'Analytics pós-lançamento registrado no case original, junto com aumento de leads de consumidor final.',
+    },
+  },
   {
     slug: 'chilli-beans', name: 'Chilli Beans Australia', year: '2024',
     source: 'https://citrine-giraffe-448.notion.site/Chilli-Beans-AU-7bee62ee0f7f82bdac0581b7b05f6088',
@@ -73,65 +133,7 @@ export const moreProjects: MoreProject[] = [
     },
   },
   {
-    slug: 'homerunpet', name: 'HomeRunPet Brasil', year: '2024',
-    source: 'https://citrine-giraffe-448.notion.site/HomeRunPet-c7de62ee0f7f83739ff301e3cc0e5071',
-    images: ['/images/homerun-cover.webp', '/images/homerun-detail.webp'],
-    process: [
-      { src: '/images/homerun-before.webp', width: 780, height: 654, at: 'afterContext', en: 'The previous page: a price-led offer with no hierarchy or story, and nothing about why the product is different.', pt: 'A página anterior: uma oferta de preço sem hierarquia nem narrativa, e nada sobre o que torna o produto diferente.' },
-      { src: '/images/homerun-sections.webp', width: 626, height: 794, at: 'afterApproach', en: 'The new page built from the system: the pains from the research first, then the technology as answers to them.', pt: 'A nova página montada com o sistema: primeiro as dores da pesquisa, depois a tecnologia como resposta a elas.' },
-    ],
-    en: {
-      category: 'Brand launch · Design system',
-      contribution: 'Researched, localised and systemised the Brazilian launch of a global pet-tech brand.',
-      context: 'Tocca Pet, the only official HomeRunPet licensee in Brazil, sold only to businesses. It was launching the brand to consumers, starting with smart pet dryers, a product most Brazilian owners had never heard of.',
-      approach: 'Interviews with pet owners and groomers showed little technical knowledge but deep frustration with ordinary dryers, so the page leads with the real pains, noise and drying time, not the spec sheet. I adapted the global brand to Brazilian habits and built its design system as a scalable library, in Figma and in code: a 15-style Inter type scale, an orange palette, buttons in four tones and four variants, icons and product cards the team recombines for new pages and A/B tests. I delivered the launch landing page, the localised UI kit, brand guidelines, campaign assets and the developer handoff.',
-      captions: ['Launch landing page: the headline leads with noise and fear at bath time, the pains the research surfaced.', 'The design system: buttons, icons, product imagery and cards built as modular components for new pages and A/B tests.'],
-      figure: 'homerun',
-      results: [{ value: '+41%', label: 'average time on page after launch' }],
-      resultsNote: 'Post-launch analytics reported in the original case study, alongside more consumer leads.',
-    },
-    pt: {
-      category: 'Lançamento de marca · Design system',
-      contribution: 'Pesquisa, adaptação e design system para o lançamento no Brasil de uma marca global de tecnologia pet.',
-      context: 'A Tocca Pet, única licenciada oficial da HomeRunPet no Brasil, vendia só para empresas. Estava lançando a marca para o consumidor final, começando pelos sopradores inteligentes, um produto que a maioria dos tutores brasileiros nem conhecia.',
-      approach: 'Entrevistas com tutores e groomers mostraram pouco conhecimento técnico, mas grande frustração com sopradores comuns. Por isso a página abre com as dores reais, barulho e tempo de secagem, e não com a ficha técnica. Adaptei a marca global aos hábitos brasileiros e construí seu design system como uma biblioteca escalável, no Figma e em código: escala tipográfica Inter com 15 estilos, paleta laranja, botões em quatro tons e quatro variações, ícones e cards de produto que o time recombina em novas páginas e testes A/B. Entreguei a landing page de lançamento, o UI kit localizado, o guia de identidade, assets de campanha e o handoff para desenvolvimento.',
-      captions: ['Landing page de lançamento: o título abre com barulho e medo na hora do banho, as dores que a pesquisa revelou.', 'O design system: botões, ícones, imagens de produto e cards como componentes modulares para novas páginas e testes A/B.'],
-      figure: 'homerun',
-      results: [{ value: '+41%', label: 'tempo médio na página após o lançamento' }],
-      resultsNote: 'Analytics pós-lançamento registrado no case original, junto com aumento de leads de consumidor final.',
-    },
-  },
-  {
-    slug: 'precato', name: 'Precato', year: '2025',
-    source: 'https://citrine-giraffe-448.notion.site/Precato-3b4e62ee0f7f82129e8881c62acfac61',
-    images: ['/images/precato-cover.webp', '/images/precato-cover.webp'],
-    process: [
-      { src: '/images/precato-before.webp', width: 1600, height: 1088, at: 'afterContext', en: 'Starting point in PageSpeed Insights: performance 40 on the main page and 68 on the São Paulo page (reports in Portuguese).', pt: 'Ponto de partida no PageSpeed Insights: desempenho 40 na página principal e 68 na página de São Paulo.' },
-      { src: '/images/precato-diagnosis.webp', width: 1600, height: 957, at: 'afterApproach', en: 'Diagnosis board: Core Web Vitals history next to my note on the root cause, the hero form hand-coded in HTML/CSS, and the three reasons for the drop (in Portuguese).', pt: 'Quadro de diagnóstico: histórico de Core Web Vitals ao lado da minha nota sobre a causa, o formulário do hero codado em HTML/CSS, e as três razões da queda.' },
-    ],
-    en: {
-      category: 'Performance · Accessibility',
-      contribution: 'Rebuilt the landing pages of Brazil’s leading court-debt buyer for speed and accessibility.',
-      context: 'Precato’s landing pages were slow and conversions were falling. The main page scored 40 for performance on PageSpeed, with over five seconds of blocking time, and analytics showed 62% of mobile visitors left before the main content loaded.',
-      approach: 'Google Analytics, PageSpeed Insights and GTmetrix pointed to an unexpected culprit: the worst page had the fewest images. Its lead form, hand-coded in the hero, was blocking the render. I reworked the front end across the landing pages, minifying CSS and JavaScript, fixing the loading order, and compressing and lazy-loading images, and adjusted hierarchy and contrast for accessibility. I delivered the optimised pages, a before-and-after report, a metrics panel and best-practice documentation for the team.',
-      captions: ['The optimised landing pages: the main page and the São Paulo and Belo Horizonte versions.', 'PageSpeed before and after on the main page: performance from 40 to 99, blocking time from 5,240 ms to 20 ms.'],
-      figure: 'precato',
-      results: [{ value: '40 → 99', label: 'PageSpeed performance, main page' }, { value: '+45.5%', label: 'average performance across pages' }, { value: '+39%', label: 'organic traffic in three months' }],
-      resultsNote: 'PageSpeed Insights, February 2025; organic traffic as reported in the original case study.',
-    },
-    pt: {
-      category: 'Performance · Acessibilidade',
-      contribution: 'Reconstrução das landing pages da líder nacional em compra de precatórios, com foco em velocidade e acessibilidade.',
-      context: 'As landing pages da Precato eram lentas e as conversões estavam caindo. A página principal tinha nota 40 de desempenho no PageSpeed, com mais de cinco segundos de bloqueio, e o analytics mostrou que 62% dos visitantes no celular saíam antes de o conteúdo principal carregar.',
-      approach: 'Google Analytics, PageSpeed Insights e GTmetrix apontaram um culpado inesperado: a pior página era a que tinha menos imagens. O formulário, codado à mão no hero, travava a renderização. Refiz o front-end das landing pages, minificando CSS e JavaScript, corrigindo a ordem de carregamento e comprimindo e aplicando lazy load nas imagens, e ajustei hierarquia e contraste para acessibilidade. Entreguei as páginas otimizadas, relatório de antes e depois, painel de métricas e documentação de boas práticas para o time.',
-      captions: ['As landing pages otimizadas: a principal e as versões de São Paulo e Belo Horizonte.', 'PageSpeed antes e depois na página principal: desempenho de 40 para 99, tempo de bloqueio de 5.240 ms para 20 ms.'],
-      figure: 'precato',
-      results: [{ value: '40 → 99', label: 'desempenho no PageSpeed, página principal' }, { value: '+45,5%', label: 'desempenho médio entre as páginas' }, { value: '+39%', label: 'tráfego orgânico em três meses' }],
-      resultsNote: 'PageSpeed Insights, fevereiro de 2025; tráfego orgânico conforme o case original.',
-    },
-  },
-  {
-    slug: 'wrk', name: 'WRK', year: '2024',
+    slug: 'wrk', name: 'WRK', year: '2024', hidden: true,
     source: 'https://citrine-giraffe-448.notion.site/WRK-9efe62ee0f7f83a2898f813e894e39ce',
     images: ['/images/wrk-cover.webp', '/images/wrk-detail.webp'],
     en: {

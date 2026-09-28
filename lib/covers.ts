@@ -45,11 +45,11 @@ export const covers: Record<string, CoverSpec> = {
     gallery: [{ src: '/images/radar-detail.webp', width: 1440, height: 1024, span: 12, field: '#0B1640' }],
   },
   vela: {
-    image: '/images/vela-cover.webp', width: 1600, height: 1000, fit: 'screen', field: '#0F1F19', ink: '#EEF2FF', extraField: '#0F1F19',
+    image: '/images/vela-cover.webp', width: 1600, height: 1000, art: true, fit: 'screen', field: '#0B1712', ink: '#EEF2FF', extraField: '#0F1F19',
     kind: { en: 'Personal finance app', pt: 'App de finanças pessoais' },
   },
   avela: {
-    image: '/images/avela-mark.webp', width: 360, height: 360, art: true, fit: 'screen', field: '#0E1A16', ink: '#EEF2FF',
+    image: '/images/avela-mark.webp', width: 360, height: 360, art: true, fit: 'screen', field: '#F4EFE7', ink: '#24312E',
     kind: { en: 'AI nutrition app', pt: 'App de nutrição com IA' }, extraField: '#E8EDE0',
     gallery: [{ src: '/images/avela-flow.webp', width: 1920, height: 1080, span: 12, field: '#E8EDE0' }],
   },

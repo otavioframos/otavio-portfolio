@@ -1,3 +1,4 @@
+import { RibbonGlow } from '@/components/ribbon-glow';
 import { AvelaGlow } from '@/components/avela-glow';
 
 /**
@@ -63,20 +64,44 @@ function MindYoungArt() {
   </div>;
 }
 
-/** Avela: the app mark in the centre of a slow, breathing glow. */
+/** Avela: the hero's ribbon field in the product's sage and coral on a soft cream ground, with app pieces floating over it. */
 function AvelaArt() {
-  return <div className="art art-avela">
-    <AvelaGlow />
-    <span className="art-avela-glow" />
-    <img className="art-avela-mark" src="/images/avela-mark.webp" alt="" width="360" height="360" />
+  return <div className="art art-avela2">
+    <RibbonGlow className="avela-field" background="#F4EFE7" color1="#3E7A6C" color2="#E3A58E" speed={30} size={130} angle={-150} hover={60} />
+    <div className="avela-ui" aria-hidden="true">
+      <div className="av-ui av-ui-meal">
+        <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="18" className="t" /><circle cx="22" cy="22" r="18" className="v" strokeDasharray="113" strokeDashoffset="20" transform="rotate(-90 22 22)" /><text x="22" y="26.5" textAnchor="middle">82</text></svg>
+        <div><b>Lunch · grain bowl</b><span className="av-ui-bar"><i style={{ width: '64%' }} /></span><span className="av-ui-bar gold"><i style={{ width: '80%' }} /></span></div>
+      </div>
+      <p className="av-ui av-ui-coach">Nice balance. The fibre will carry you to the afternoon.</p>
+      <p className="av-ui av-ui-opt"><span />Satisfied</p>
+      <img className="av-ui-mark" src="/images/avela-mark.webp" alt="" width="360" height="360" />
+    </div>
+  </div>;
+}
+
+/** Vela: the app mark over a green dithered glow, with pieces of the app in slow orbit. */
+function VelaArt() {
+  return <div className="art art-vela">
+    {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+    <link rel="stylesheet" precedence="default" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap" />
+    <AvelaGlow color="rgb(110,190,150)" className="art-vela-dither" />
+    <div className="vela-orbit" aria-hidden="true">
+      <div className="vela-chip vela-c1"><span>Today’s allowance</span><b>R$ 196</b><i>on pace</i></div>
+      <div className="vela-chip vela-c2"><span>Living pace</span><svg viewBox="0 0 80 28"><path d="M2 22 L14 18 L26 20 L38 12 L50 14 L62 7 L78 9" /></svg></div>
+      <div className="vela-chip vela-c3"><span>Protected reserve</span><b>R$ 1.200</b></div>
+      <div className="vela-chip vela-c4"><span>Monthly spend</span><em>{Array.from({ length: 12 }, (_, i) => <u key={i} style={{ opacity: [0.9, 0.3, 0.6, 0.2, 0.8, 0.4, 0.3, 0.7, 0.2, 0.5, 0.9, 0.35][i] }} />)}</em></div>
+    </div>
+    <img className="art-vela-mark" src="/images/vela-mark.svg" alt="" width="63" height="63" />
   </div>;
 }
 
 export function CoverArt({ slug }: { slug: string }) {
+  if (slug === 'vela') return <VelaArt />;
   if (slug === 'content-radar') return <RadarArt />;
   if (slug === 'mindyoung') return <MindYoungArt />;
   if (slug === 'avela') return <AvelaArt />;
   return null;
 }
 
-export const coverArtSlugs = new Set(['content-radar', 'mindyoung', 'avela']);
+export const coverArtSlugs = new Set(['content-radar', 'mindyoung', 'avela', 'vela']);

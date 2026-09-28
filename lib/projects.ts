@@ -111,9 +111,126 @@ export const projects = [
     }
   },
   {
+    "slug": "vela",
+    "name": "Vela",
+    "number": "02",
+    "theme": "vela",
+    "image": "/images/vela-cover.webp",
+    "extra": "/images/vela-desktop.webp",
+    "url": "https://otavioframos.github.io/aeon/",
+    "en": {
+      "category": "PERSONAL FINANCE · DESIGN & CODE",
+      "title": "A finance app that answers “how will I be?”, not “what did I spend?”.",
+      "summary": "Researched, designed and built a personal finance app around forecasting instead of history.",
+      "role": "Sole designer and developer",
+      "scope": "Research / Product definition / UX & UI / Front end",
+      "status": "Live PWA + Android app",
+      "decision": "Turn money into time: lead with how long today’s balance lasts, not with where it went.",
+      "why": "The pain behind every abandoned finance tool was not knowing how today’s choices affect next month. A list of expenses answers the wrong question.",
+      "lead": "Vela started from a spreadsheet thousands of people pay for: a day-by-day calendar that projects your balance forward. People loved the forecast and hated the manual work around it. I researched why, defined what a better tool should and should not do, then designed and built it myself.",
+      "sections": [
+        {
+          "label": "01 / RESEARCH",
+          "title": "The forecast was the product. Everything else was friction.",
+          "body": "I studied the original spreadsheet and app, their positioning and screenshots, a Reddit investing thread and comments from users with two to five months of use. The value was clear: one user no longer made a decision without checking it. So were the limits: everything typed by hand, one cell per day, no categories, and a phone app that was a cut-down spreadsheet. Existing apps each answered one question: what did I spend, how much do I have, or what will my balance be. None did all three lightly."
+        },
+        {
+          "label": "02 / DEFINITION",
+          "title": "Designing for one, on purpose.",
+          "body": "I was the user, so I wrote that down as a method and a risk. Five principles came out of it, each paired with an anti-rule so they could settle arguments later.",
+          "figure": "vela-principles"
+        },
+        {
+          "label": "03 / PRIORITIES",
+          "title": "Frequency decides the hierarchy.",
+          "body": "Seven job stories, each with how often it happens. Logging a purchase happens about five times a day; setting up recurring entries happens once. That gap set the structure: the most frequent jobs live on the first screen, the rare ones two taps away.",
+          "figure": "vela-jobs"
+        },
+        {
+          "label": "04 / THE METRIC",
+          "title": "A number can be right and still mislead.",
+          "body": "The whole app hangs on one figure. The first version counted the reserve and made tight months look safe. The next subtracted card bills already committed. In the shipped app it became a daily allowance with an “on pace” signal, the question people actually ask before paying.",
+          "figure": "vela-metric"
+        },
+        {
+          "label": "05 / WHAT I LEFT OUT",
+          "title": "Saying no is part of the design.",
+          "body": "The definition listed anti-jobs as firmly as jobs: no advice, no gamification, no social feed, no celebration. I cut an AI assistant because it would break the tone of plain facts, and removed a “postpone an instalment” lever because nobody can actually do that in real life.",
+          "points": [
+            "No badges, streaks or confetti: red is red.",
+            "No investment advice or AI coach.",
+            "Categories are optional, never a gate."
+          ]
+        },
+        {
+          "label": "06 / BUILD",
+          "title": "From documents to a working app.",
+          "body": "I built Vela as an installable web app with two faces: Flux, the phone companion for logging and today’s allowance, and Aeon, the long view with projection, pace and yearly rhythm. An Android build adds a home-screen widget. The hardest part turned out not to be the interface but trustworthy calculation, so the app stores source facts and derives every figure from them."
+        }
+      ],
+      "outcome": "Vela is live as an installable web app and an Android build, used daily by its first user.",
+      "caption": "Flux and Aeon on the phone, shown with sample data.",
+      "extraCaption": "Flux on desktop, shown with sample data."
+    },
+    "pt": {
+      "category": "FINANÇAS PESSOAIS · DESIGN E CÓDIGO",
+      "title": "Um app de finanças que responde “como vou estar?”, não “quanto gastei?”.",
+      "summary": "Pesquisei, desenhei e construí um app de finanças pessoais centrado em previsão, não em histórico.",
+      "role": "Único designer e desenvolvedor",
+      "scope": "Pesquisa / Definição de produto / UX e UI / Front-end",
+      "status": "PWA no ar + app Android",
+      "decision": "Transformar dinheiro em tempo: começar por quanto o saldo de hoje dura, não por onde ele foi.",
+      "why": "A dor por trás de toda ferramenta abandonada era não saber como as escolhas de hoje afetam o mês que vem. Uma lista de gastos responde à pergunta errada.",
+      "lead": "O Vela nasceu de uma planilha pela qual milhares de pessoas pagam: um calendário dia a dia que projeta o saldo para frente. As pessoas amavam a previsão e odiavam o trabalho manual em volta dela. Pesquisei o porquê, defini o que uma ferramenta melhor deveria e não deveria fazer, e depois desenhei e construí eu mesmo.",
+      "sections": [
+        {
+          "label": "01 / PESQUISA",
+          "title": "A previsão era o produto. O resto era atrito.",
+          "body": "Estudei a planilha e o app originais, seu posicionamento e telas, uma discussão no Reddit sobre investimentos e comentários de usuários com dois a cinco meses de uso. O valor era claro: um usuário não tomava mais nenhuma decisão sem consultá-la. Os limites também: tudo digitado à mão, uma célula por dia, sem categorias e um app de celular que era uma planilha cortada. Os apps existentes respondiam cada um a uma pergunta: quanto gastei, quanto tenho ou quanto vou ter. Nenhum fazia as três de forma leve."
+        },
+        {
+          "label": "02 / DEFINIÇÃO",
+          "title": "Desenhar para um, de propósito.",
+          "body": "Eu era o usuário, então registrei isso como método e como risco. Daí saíram cinco princípios, cada um com uma anti-regra, para resolver discussões depois.",
+          "figure": "vela-principles"
+        },
+        {
+          "label": "03 / PRIORIDADES",
+          "title": "A frequência decide a hierarquia.",
+          "body": "Sete job stories, cada uma com a frequência em que acontece. Lançar uma compra acontece cerca de cinco vezes por dia; configurar recorrências, uma vez. Essa diferença definiu a estrutura: as tarefas mais frequentes ficam na primeira tela, as raras a dois toques.",
+          "figure": "vela-jobs"
+        },
+        {
+          "label": "04 / A MÉTRICA",
+          "title": "Um número pode estar certo e ainda enganar.",
+          "body": "O app inteiro depende de um número. A primeira versão contava a reserva e fazia meses apertados parecerem seguros. A seguinte descontava as faturas já comprometidas. No app lançado virou um limite diário com sinal de “no ritmo”, a pergunta que as pessoas fazem de verdade antes de pagar.",
+          "figure": "vela-metric"
+        },
+        {
+          "label": "05 / O QUE FICOU DE FORA",
+          "title": "Dizer não também é design.",
+          "body": "A definição listava anti-tarefas com a mesma firmeza das tarefas: sem conselhos, sem gamificação, sem feed social, sem comemoração. Cortei um assistente de IA porque quebraria o tom de fatos simples, e removi a opção de “adiar uma parcela” porque ninguém consegue fazer isso na vida real.",
+          "points": [
+            "Sem medalhas, sequências ou confete: vermelho é vermelho.",
+            "Sem conselho de investimento nem coach de IA.",
+            "Categorias opcionais, nunca obrigatórias."
+          ]
+        },
+        {
+          "label": "06 / CONSTRUÇÃO",
+          "title": "Dos documentos a um app funcionando.",
+          "body": "Construí o Vela como um web app instalável com duas faces: Flux, a companhia no celular para lançar e ver o limite do dia, e Aeon, a visão longa com projeção, ritmo e o ano todo. Uma versão Android adiciona um widget na tela inicial. A parte mais difícil não foi a interface, mas um cálculo confiável, então o app guarda os fatos de origem e deriva cada número deles."
+        }
+      ],
+      "outcome": "O Vela está no ar como web app instalável e versão Android, usado todos os dias pelo seu primeiro usuário.",
+      "caption": "Flux e Aeon no celular, com dados de exemplo.",
+      "extraCaption": "Flux no desktop, com dados de exemplo."
+    }
+  },
+  {
     "slug": "content-radar",
     "name": "Content Radar",
-    "number": "02",
+    "number": "03",
     "theme": "radar",
     "image": "/images/radar-overview.webp",
     "extra": "/images/radar-detail.webp",
@@ -230,7 +347,7 @@ export const projects = [
   {
     "slug": "avela",
     "name": "Avela",
-    "number": "03",
+    "number": "04",
     "theme": "avela",
     "image": "/images/avela-cover.webp",
     "extra": "/images/avela-flow.webp",
@@ -344,123 +461,6 @@ export const projects = [
       "outcome": "Uma direção de design conectada entre onboarding, fluxos principais, design system e aquisição. As hipóteses clínicas e de comportamento continuam sendo pontos de validação.",
       "caption": "Apresentação do Avela no case original.",
       "extraCaption": "Exploração de onboarding. Textos e depoimentos na imagem fazem parte do artefato de design e não são evidências verificadas de resultado."
-    }
-  },
-  {
-    "slug": "vela",
-    "name": "Vela",
-    "number": "04",
-    "theme": "vela",
-    "image": "/images/vela-cover.webp",
-    "extra": "/images/vela-desktop.webp",
-    "url": "https://otavioframos.github.io/aeon/",
-    "en": {
-      "category": "PERSONAL FINANCE · DESIGN & CODE",
-      "title": "A finance app that answers “how will I be?”, not “what did I spend?”.",
-      "summary": "Researched, designed and built a personal finance app around forecasting instead of history.",
-      "role": "Sole designer and developer",
-      "scope": "Research / Product definition / UX & UI / Front end",
-      "status": "Live PWA + Android app",
-      "decision": "Turn money into time: lead with how long today’s balance lasts, not with where it went.",
-      "why": "The pain behind every abandoned finance tool was not knowing how today’s choices affect next month. A list of expenses answers the wrong question.",
-      "lead": "Vela started from a spreadsheet thousands of people pay for: a day-by-day calendar that projects your balance forward. People loved the forecast and hated the manual work around it. I researched why, defined what a better tool should and should not do, then designed and built it myself.",
-      "sections": [
-        {
-          "label": "01 / RESEARCH",
-          "title": "The forecast was the product. Everything else was friction.",
-          "body": "I studied the original spreadsheet and app, their positioning and screenshots, a Reddit investing thread and comments from users with two to five months of use. The value was clear: one user no longer made a decision without checking it. So were the limits: everything typed by hand, one cell per day, no categories, and a phone app that was a cut-down spreadsheet. Existing apps each answered one question: what did I spend, how much do I have, or what will my balance be. None did all three lightly."
-        },
-        {
-          "label": "02 / DEFINITION",
-          "title": "Designing for one, on purpose.",
-          "body": "I was the user, so I wrote that down as a method and a risk. Five principles came out of it, each paired with an anti-rule so they could settle arguments later.",
-          "figure": "vela-principles"
-        },
-        {
-          "label": "03 / PRIORITIES",
-          "title": "Frequency decides the hierarchy.",
-          "body": "Seven job stories, each with how often it happens. Logging a purchase happens about five times a day; setting up recurring entries happens once. That gap set the structure: the most frequent jobs live on the first screen, the rare ones two taps away.",
-          "figure": "vela-jobs"
-        },
-        {
-          "label": "04 / THE METRIC",
-          "title": "A number can be right and still mislead.",
-          "body": "The whole app hangs on one figure. The first version counted the reserve and made tight months look safe. The next subtracted card bills already committed. In the shipped app it became a daily allowance with an “on pace” signal, the question people actually ask before paying.",
-          "figure": "vela-metric"
-        },
-        {
-          "label": "05 / WHAT I LEFT OUT",
-          "title": "Saying no is part of the design.",
-          "body": "The definition listed anti-jobs as firmly as jobs: no advice, no gamification, no social feed, no celebration. I cut an AI assistant because it would break the tone of plain facts, and removed a “postpone an instalment” lever because nobody can actually do that in real life.",
-          "points": [
-            "No badges, streaks or confetti: red is red.",
-            "No investment advice or AI coach.",
-            "Categories are optional, never a gate."
-          ]
-        },
-        {
-          "label": "06 / BUILD",
-          "title": "From documents to a working app.",
-          "body": "I built Vela as an installable web app with two faces: Flux, the phone companion for logging and today’s allowance, and Aeon, the long view with projection, pace and yearly rhythm. An Android build adds a home-screen widget. The hardest part turned out not to be the interface but trustworthy calculation, so the app stores source facts and derives every figure from them."
-        }
-      ],
-      "outcome": "Vela is live as an installable web app and an Android build, used daily by its first user.",
-      "caption": "Flux and Aeon on the phone, shown with sample data.",
-      "extraCaption": "Flux on desktop, shown with sample data."
-    },
-    "pt": {
-      "category": "FINANÇAS PESSOAIS · DESIGN E CÓDIGO",
-      "title": "Um app de finanças que responde “como vou estar?”, não “quanto gastei?”.",
-      "summary": "Pesquisei, desenhei e construí um app de finanças pessoais centrado em previsão, não em histórico.",
-      "role": "Único designer e desenvolvedor",
-      "scope": "Pesquisa / Definição de produto / UX e UI / Front-end",
-      "status": "PWA no ar + app Android",
-      "decision": "Transformar dinheiro em tempo: começar por quanto o saldo de hoje dura, não por onde ele foi.",
-      "why": "A dor por trás de toda ferramenta abandonada era não saber como as escolhas de hoje afetam o mês que vem. Uma lista de gastos responde à pergunta errada.",
-      "lead": "O Vela nasceu de uma planilha pela qual milhares de pessoas pagam: um calendário dia a dia que projeta o saldo para frente. As pessoas amavam a previsão e odiavam o trabalho manual em volta dela. Pesquisei o porquê, defini o que uma ferramenta melhor deveria e não deveria fazer, e depois desenhei e construí eu mesmo.",
-      "sections": [
-        {
-          "label": "01 / PESQUISA",
-          "title": "A previsão era o produto. O resto era atrito.",
-          "body": "Estudei a planilha e o app originais, seu posicionamento e telas, uma discussão no Reddit sobre investimentos e comentários de usuários com dois a cinco meses de uso. O valor era claro: um usuário não tomava mais nenhuma decisão sem consultá-la. Os limites também: tudo digitado à mão, uma célula por dia, sem categorias e um app de celular que era uma planilha cortada. Os apps existentes respondiam cada um a uma pergunta: quanto gastei, quanto tenho ou quanto vou ter. Nenhum fazia as três de forma leve."
-        },
-        {
-          "label": "02 / DEFINIÇÃO",
-          "title": "Desenhar para um, de propósito.",
-          "body": "Eu era o usuário, então registrei isso como método e como risco. Daí saíram cinco princípios, cada um com uma anti-regra, para resolver discussões depois.",
-          "figure": "vela-principles"
-        },
-        {
-          "label": "03 / PRIORIDADES",
-          "title": "A frequência decide a hierarquia.",
-          "body": "Sete job stories, cada uma com a frequência em que acontece. Lançar uma compra acontece cerca de cinco vezes por dia; configurar recorrências, uma vez. Essa diferença definiu a estrutura: as tarefas mais frequentes ficam na primeira tela, as raras a dois toques.",
-          "figure": "vela-jobs"
-        },
-        {
-          "label": "04 / A MÉTRICA",
-          "title": "Um número pode estar certo e ainda enganar.",
-          "body": "O app inteiro depende de um número. A primeira versão contava a reserva e fazia meses apertados parecerem seguros. A seguinte descontava as faturas já comprometidas. No app lançado virou um limite diário com sinal de “no ritmo”, a pergunta que as pessoas fazem de verdade antes de pagar.",
-          "figure": "vela-metric"
-        },
-        {
-          "label": "05 / O QUE FICOU DE FORA",
-          "title": "Dizer não também é design.",
-          "body": "A definição listava anti-tarefas com a mesma firmeza das tarefas: sem conselhos, sem gamificação, sem feed social, sem comemoração. Cortei um assistente de IA porque quebraria o tom de fatos simples, e removi a opção de “adiar uma parcela” porque ninguém consegue fazer isso na vida real.",
-          "points": [
-            "Sem medalhas, sequências ou confete: vermelho é vermelho.",
-            "Sem conselho de investimento nem coach de IA.",
-            "Categorias opcionais, nunca obrigatórias."
-          ]
-        },
-        {
-          "label": "06 / CONSTRUÇÃO",
-          "title": "Dos documentos a um app funcionando.",
-          "body": "Construí o Vela como um web app instalável com duas faces: Flux, a companhia no celular para lançar e ver o limite do dia, e Aeon, a visão longa com projeção, ritmo e o ano todo. Uma versão Android adiciona um widget na tela inicial. A parte mais difícil não foi a interface, mas um cálculo confiável, então o app guarda os fatos de origem e deriva cada número deles."
-        }
-      ],
-      "outcome": "O Vela está no ar como web app instalável e versão Android, usado todos os dias pelo seu primeiro usuário.",
-      "caption": "Flux e Aeon no celular, com dados de exemplo.",
-      "extraCaption": "Flux no desktop, com dados de exemplo."
     }
   }
 ] as const;

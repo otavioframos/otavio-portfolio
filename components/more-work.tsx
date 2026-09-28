@@ -4,7 +4,7 @@ import type { Lang } from '@/lib/projects';
 /** Secondary work as a typographic index on the same three-point grid as the covers. */
 export function MoreWork({ lang }: { lang: Lang }) {
   const pt = lang === 'pt';
-  const rows = moreProjects.map(project => ({ key: project.slug, name: project.name, kind: project[lang].category, meta: project.year, href: (pt ? '/pt' : '') + '/work/' + project.slug, external: false }));
+  const rows = moreProjects.filter(project => !project.hidden).map(project => ({ key: project.slug, name: project.name, kind: project[lang].category, meta: project.year, href: (pt ? '/pt' : '') + '/work/' + project.slug, external: false }));
   return <section id="more-work" className="more" aria-labelledby="more-work-title">
     <div className="grid shead ruled">
       <h2 id="more-work-title" className="label">{pt ? 'Outros projetos' : 'More work'}</h2>

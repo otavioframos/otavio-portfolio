@@ -11,7 +11,7 @@ export function MoreWorks({ current, lang }: { current: string; lang: Lang }) {
   const pt = lang === 'pt';
   const all: Item[] = [
     ...projects.map(p => ({ slug: p.slug, name: p.name, kind: covers[p.slug].kind?.[lang] ?? p[lang].category, meta: p[lang].status })),
-    ...moreProjects.map(p => ({ slug: p.slug, name: p.name, kind: p[lang].category, meta: p.year })),
+    ...moreProjects.filter(p => !p.hidden).map(p => ({ slug: p.slug, name: p.name, kind: p[lang].category, meta: p.year })),
   ];
   const at = all.findIndex(item => item.slug === current);
   const picks = [1, 2, 3].map(step => all[(at + step) % all.length]);

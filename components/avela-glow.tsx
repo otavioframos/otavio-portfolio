@@ -20,7 +20,7 @@ const PEAKS = Array.from({ length: 7 }, (_, i) => ({
  * swelling outward and sinking back inside. Drawn on a canvas at 3px dots,
  * only while on screen; reduced motion gets a single still frame.
  */
-export function AvelaGlow() {
+export function AvelaGlow({ color = 'rgb(120,176,160)', className = 'art-avela-dither' }: { color?: string; className?: string } = {}) {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export function AvelaGlow() {
 
     const draw = (t: number) => {
       ctx.clearRect(0, 0, SIZE, SIZE);
-      ctx.fillStyle = 'rgb(120,176,160)';
+      ctx.fillStyle = color;
       const breath = 0.5 + 0.5 * Math.sin(t * 0.6);
       for (let y = 0; y < SIZE; y += CELL) for (let x = 0; x < SIZE; x += CELL) {
         const dx = x - half, dy = y - half;
@@ -70,7 +70,7 @@ export function AvelaGlow() {
     draw(0);
     frame = requestAnimationFrame(loop);
     return () => { cancelAnimationFrame(frame); io.disconnect(); };
-  }, []);
+  }, [color]);
 
-  return <canvas ref={ref} className="art-avela-dither" aria-hidden="true" />;
+  return <canvas ref={ref} className={className} aria-hidden="true" />;
 }
