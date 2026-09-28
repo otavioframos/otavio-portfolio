@@ -1,3 +1,5 @@
+import { AvelaGlow } from '@/components/avela-glow';
+
 /**
  * Animated cover art drawn in code: crisp at any size, a few KB each, and
  * frozen by the global reduced-motion rule. Used on covers and More works cards.
@@ -18,8 +20,17 @@ function RadarArt() {
       <radialGradient id="radar-core"><stop offset="0" stopColor="#2F6BFF" stopOpacity=".35" /><stop offset="1" stopColor="#2F6BFF" stopOpacity="0" /></radialGradient>
     </defs>
     <circle r="250" fill="url(#radar-core)" />
-    {/* A3Lab mark, dithered, sitting under the radar. */}
-    <image className="radar-mark" href="/images/a3lab-mark-dither.webp" x="-170" y="-170" width="340" height="340" />
+    {/* The A3Lab mark is only lit where the beam has just passed, like a torch that fades behind it. */}
+    <mask id="radar-torch" maskUnits="userSpaceOnUse" x="-260" y="-260" width="520" height="520">
+      <g className="radar-sweep" style={{ animationDuration: `${period}s` }}>
+        {Array.from({ length: 30 }, (_, i) => {
+          const a0 = (-i * 5.4 * Math.PI) / 180, a1 = (-((i + 1) * 5.4 + 0.4) * Math.PI) / 180, R = 260;
+          return <path key={i} d={`M0 0L${(Math.cos(a0) * R).toFixed(1)} ${(Math.sin(a0) * R).toFixed(1)}A${R} ${R} 0 0 0 ${(Math.cos(a1) * R).toFixed(1)} ${(Math.sin(a1) * R).toFixed(1)}Z`} fill="#fff" fillOpacity={((1 - i / 30) ** 1.6).toFixed(3)} />;
+        })}
+      </g>
+    </mask>
+    <image className="radar-ghost" href="/images/a3lab-mark-dither.webp" x="-235" y="-250" width="470" height="470" />
+    <image className="radar-mark" href="/images/a3lab-mark-dither.webp" x="-235" y="-250" width="470" height="470" mask="url(#radar-torch)" />
     {[60, 120, 180, 240].map(r => <circle key={r} r={r} fill="none" stroke="#8FB8FF" strokeOpacity=".32" strokeWidth="1.2" />)}
     <path d="M-250 0H250M0-250V250" stroke="#8FB8FF" strokeOpacity=".2" strokeWidth="1" />
     {Array.from({ length: 36 }, (_, i) => {
@@ -55,7 +66,7 @@ function MindYoungArt() {
 /** Avela: the app mark in the centre of a slow, breathing glow. */
 function AvelaArt() {
   return <div className="art art-avela">
-    <img className="art-avela-dither" src="/images/avela-glow-dither.webp" alt="" width="900" height="900" />
+    <AvelaGlow />
     <span className="art-avela-glow" />
     <img className="art-avela-mark" src="/images/avela-mark.webp" alt="" width="360" height="360" />
   </div>;

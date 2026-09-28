@@ -312,14 +312,15 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-2);outline-off
 .hw-head h2{grid-column:1/-1;font:600 clamp(36px,4vw,56px)/1 var(--f-display);letter-spacing:-.045em}
 
 /* Radar: the dithered A3Lab mark sits under the rings. */
-.radar-mark{opacity:.42}
+.radar-mark{opacity:1}
+.radar-ghost{opacity:.05}
 /* MindYoung: the app screen rises behind the mascot, faint, and keeps drifting. */
-.art-owl-phone{position:absolute;top:50%;left:50%;width:auto;height:min(70vh,640px);border-radius:clamp(22px,2.6vw,36px);opacity:0;transform:translate(-50%,-38%);animation:phone-in 1.4s var(--ease-in) .2s forwards,phone-loop 7s ease-in-out 1.6s infinite}
+.art-owl-phone{position:absolute;top:50%;left:50%;width:auto;height:min(52vh,470px);border-radius:clamp(18px,2vw,28px);opacity:0;transform:translate(-50%,-38%);animation:phone-in 1.4s var(--ease-in) .2s forwards,phone-loop 7s ease-in-out 1.6s infinite}
 @keyframes phone-in{to{opacity:.22;transform:translate(-50%,-50%)}}
 @keyframes phone-loop{0%,100%{opacity:.22;transform:translate(-50%,-50%)}50%{opacity:.3;transform:translate(-50%,-53%)}}
-.mw-media .art-owl-phone{height:88%}
+.mw-media .art-owl-phone{height:70%}
 /* Avela: an irregular, dithered glow breathing behind the mark. */
-.art-avela-dither{position:absolute;inset:0;grid-area:1/1;width:100%;height:100%;image-rendering:pixelated;opacity:.8;animation:breathe-d 6s ease-in-out infinite}
+.art-avela-dither{position:absolute;inset:0;grid-area:1/1;width:100%;height:100%;image-rendering:pixelated;opacity:.8;animation:none}
 @keyframes breathe-d{0%,100%{transform:scale(.88) rotate(0);opacity:.6}50%{transform:scale(1.06) rotate(8deg);opacity:.95}}
 .art-avela-glow{inset:30%;background:radial-gradient(circle,rgba(250,247,242,.22) 0%,rgba(250,247,242,0) 65%)}
 @media(prefers-reduced-motion:reduce){.art-owl-phone{opacity:.22;transform:translate(-50%,-50%)}}

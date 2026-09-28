@@ -1,4 +1,5 @@
-// Generates the dithered textures used by the Content Radar and Avela covers.
+// Generates the dithered A3Lab mark used by the Content Radar cover.
+// (Avela's glow is drawn live on a canvas: components/avela-glow.tsx.)
 // Run: node scripts/dither-assets.mjs  (outputs to public/images)
 import sharp from 'sharp';
 
@@ -31,16 +32,4 @@ await dither(S, S, (x, y) => {
   return m * (0.95 - d * 0.55);
 }, [143, 184, 255], 'public/images/a3lab-mark-dither.webp');
 
-// Avela glow: concentric rings with an irregular, spiky rim that fades out.
-const G = 900;
-const spikes = Array.from({ length: 6 }, (_, i) => ({ a: (i / 6) * Math.PI * 2 + Math.sin(i * 7.3) * 0.4, h: 0.05 + ((i * 37) % 10) / 90, w: 0.14 + ((i * 13) % 5) / 40 }));
-await dither(G, G, (x, y) => {
-  const dx = x - G / 2, dy = y - G / 2;
-  const r = Math.hypot(dx, dy) / (G / 2), a = Math.atan2(dy, dx);
-  let rim = 0.7 + 0.04 * Math.sin(a * 3 + 1.3) + 0.025 * Math.sin(a * 7 + 0.4);
-  for (const s of spikes) { let d = Math.abs(a - s.a); d = Math.min(d, Math.PI * 2 - d); rim += s.h * Math.exp(-(d * d) / (s.w * s.w)); }
-  const core = Math.max(0, 1 - r / rim);
-  const rings = 0.55 + 0.45 * Math.cos((r / rim) * Math.PI * 7);
-  return core ** 1.1 * (0.5 + 0.5 * rings);
-}, [120, 176, 160], 'public/images/avela-glow-dither.webp');
 console.log('done');
