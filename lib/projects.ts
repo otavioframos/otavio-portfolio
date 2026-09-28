@@ -122,21 +122,28 @@ export const projects = [
       "category": "AI & INTERNAL TOOLING",
       "title": "From manual content research to a shared tool.",
       "summary": "Designed and built an internal tool for researching content across products.",
-      "role": "Product design · Architecture · AI-assisted implementation",
+      "role": "Product owner · Design · Architecture",
       "scope": "Discovery / Workflow design / Interface / Prototyping",
       "status": "Internal tool",
       "decision": "Replace the initial automation with Python collection and a browser interface as usage grew.",
+      "why": "Patching n8n would have kept a one-product workaround alive. Other teams needed volume, control and a place to judge findings together, which only a product could give them.",
       "lead": "Content Radar began with a practical problem: researching relevant content for Avela, one video at a time, was difficult to sustain. I built an initial workflow to collect and analyze material, then evolved it into a product when other teams needed the same intelligence.",
       "sections": [
         {
-          "label": "01 / FIRST ITERATION",
-          "title": "Make the research repeatable.",
-          "body": "The first version used n8n to collect videos and Airtable to organize them. A second process retrieved captions and used an LLM to assess how the content related to the product. Another layer turned the analysis into potential content directions."
+          "label": "01 / THE PROBLEM",
+          "title": "Research that depended on scrolling.",
+          "body": "Finding references for Avela meant opening TikTok and Instagram and watching one video at a time. It was slow, impossible to share, and whatever someone found lived in their own head. I wanted to replace open-ended scrolling with a queue a team could review and clear."
         },
         {
-          "label": "02 / PRODUCT DECISION",
+          "label": "02 / FIRST ITERATION",
+          "title": "Make the research repeatable.",
+          "body": "I started with automation I could build in days: n8n collected videos, Airtable organised them, and an LLM read the captions to judge relevance and suggest content directions. It proved the value. When a second product asked for the same research, it also showed the limits: volume, control and a spreadsheet no one wanted to open.",
+          "figure": "radar-evolution"
+        },
+        {
+          "label": "03 / PRODUCT DECISION",
           "title": "Rebuild when the requirements change.",
-          "body": "As more products began using the workflow, collection volume and control became constraints. I rebuilt the collection layer in Python and designed a browser interface around three user needs.",
+          "body": "Instead of patching the automation, I rebuilt it as a product. With a developer, collection moved to Python and later to a durable worker; I designed the browser interface around three needs.",
           "points": [
             "Tell the system what to look for.",
             "Understand what to do with the findings.",
@@ -144,14 +151,20 @@ export const projects = [
           ]
         },
         {
-          "label": "03 / INTERACTION DESIGN",
-          "title": "Make the work visible.",
-          "body": "The interface presents insights in plain language and organizes the material by product. I designed the loading experience to reveal findings as they arrive. The user can see the work taking shape while the rest of the analysis continues."
+          "label": "04 / THE LOOP",
+          "title": "Explore without endless scrolling.",
+          "body": "Today a team seeds a folder with a few examples. The radar walks outward to nearby creators, sounds and hashtags, but only a bounded distance, ranks what it finds for relevance and variety, and delivers a finite inbox. Every judgement from the team becomes a seed for the next run, so the radar gets sharper the more it is used.",
+          "figure": "radar-loop"
         },
         {
-          "label": "04 / IMPLEMENTATION",
-          "title": "Use AI to bring the idea further.",
-          "body": "I defined the system’s architecture and product experience, using AI to support coding. That let me build and iterate on a working tool while retaining responsibility for the decisions behind it."
+          "label": "05 / INTERACTION DESIGN",
+          "title": "Make the work visible.",
+          "body": "Insights are written in plain language and organised by product. Each card shows the path that found it, so people can trust or discard it quickly. Findings appear as they arrive, so the work takes shape on screen while the rest of the analysis runs."
+        },
+        {
+          "label": "06 / OWNERSHIP",
+          "title": "From a workaround to shared infrastructure.",
+          "body": "I owned the product: the problem framing, the architecture, the ranking logic people see and the interface. The developer and I built it with AI-assisted coding, which let a two-person team ship a durable system. It now runs with Jev, a frontier model built for high-volume judgement, alongside its own explainable ranking."
         }
       ],
       "outcome": "The tool now supports content production across multiple products. An initial research workflow became a shared product capability.",
@@ -162,36 +175,49 @@ export const projects = [
       "category": "IA E FERRAMENTAS INTERNAS",
       "title": "Da pesquisa manual de conteúdo a uma ferramenta compartilhada.",
       "summary": "Desenhei e construí uma ferramenta interna de pesquisa de conteúdo para múltiplos produtos.",
-      "role": "Product design · Arquitetura · Implementação com IA",
+      "role": "Dono do produto · Design · Arquitetura",
       "scope": "Discovery / Fluxos / Interface / Prototipação",
       "status": "Ferramenta interna",
       "decision": "Substituir a automação inicial por coleta em Python e uma interface no navegador conforme o uso cresceu.",
+      "why": "Remendar o n8n manteria vivo um improviso feito para um produto. Outros times precisavam de volume, controle e um lugar para avaliar descobertas juntos, e só um produto daria isso.",
       "lead": "O Content Radar nasceu de um problema prático: pesquisar conteúdo relevante para o Avela, vídeo a vídeo, era difícil de manter. Construí um fluxo de coleta e análise e o transformei em produto quando outros times passaram a precisar da mesma inteligência.",
       "sections": [
         {
-          "label": "01 / PRIMEIRA VERSÃO",
-          "title": "Tornar a pesquisa repetível.",
-          "body": "A primeira versão usava n8n para coletar vídeos e Airtable para organizá-los. Um segundo processo buscava legendas e usava uma LLM para avaliar a relação do conteúdo com o produto. Outra camada transformava a análise em possíveis direções de conteúdo."
+          "label": "01 / O PROBLEMA",
+          "title": "Uma pesquisa que dependia de rolar o feed.",
+          "body": "Encontrar referências para o Avela significava abrir TikTok e Instagram e assistir um vídeo de cada vez. Era lento, impossível de compartilhar, e o que alguém encontrava ficava na cabeça dessa pessoa. Eu queria trocar a rolagem sem fim por uma fila que um time pudesse revisar e esvaziar."
         },
         {
-          "label": "02 / DECISÃO DE PRODUTO",
+          "label": "02 / PRIMEIRA VERSÃO",
+          "title": "Tornar a pesquisa repetível.",
+          "body": "Comecei com uma automação que eu conseguia montar em dias: o n8n coletava vídeos, o Airtable organizava e uma LLM lia as legendas para julgar a relevância e sugerir caminhos de conteúdo. Isso provou o valor. Quando um segundo produto pediu a mesma pesquisa, também mostrou os limites: volume, controle e uma planilha que ninguém queria abrir.",
+          "figure": "radar-evolution"
+        },
+        {
+          "label": "03 / DECISÃO DE PRODUTO",
           "title": "Reconstruir quando os requisitos mudam.",
-          "body": "Com a adoção por mais produtos, o volume e o controle da coleta passaram a ser limitações. Reconstruí essa camada em Python e desenhei uma interface no navegador em torno de três necessidades.",
+          "body": "Em vez de remendar a automação, reconstruí como produto. Com um desenvolvedor, a coleta foi para Python e depois para um worker durável; desenhei a interface no navegador em torno de três necessidades.",
           "points": [
             "Dizer ao sistema o que procurar.",
-            "Entender o que fazer com os achados.",
-            "Conferir a evidência por trás de um insight."
+            "Entender o que fazer com as descobertas.",
+            "Ver as evidências por trás de cada insight."
           ]
         },
         {
-          "label": "03 / DESIGN DE INTERAÇÃO",
-          "title": "Dar visibilidade ao trabalho.",
-          "body": "A interface apresenta insights em linguagem simples e organiza o material por produto. Desenhei o carregamento para revelar achados conforme chegam. Assim, a pessoa vê o trabalho ganhar forma enquanto a análise continua."
+          "label": "04 / O CICLO",
+          "title": "Explorar sem rolagem infinita.",
+          "body": "Hoje um time semeia uma pasta com alguns exemplos. O radar caminha para criadores, sons e hashtags próximos, mas só até uma distância limitada, ranqueia o que encontra por relevância e variedade e entrega uma caixa finita. Cada avaliação do time vira semente da próxima rodada, então o radar fica mais preciso quanto mais é usado.",
+          "figure": "radar-loop"
         },
         {
-          "label": "04 / IMPLEMENTAÇÃO",
-          "title": "Usar IA para levar a ideia adiante.",
-          "body": "Defini a arquitetura e a experiência do produto, usando IA como apoio à programação. Isso permitiu construir e iterar sobre uma ferramenta funcional, mantendo a responsabilidade pelas decisões do sistema."
+          "label": "05 / DESIGN DE INTERAÇÃO",
+          "title": "Tornar o trabalho visível.",
+          "body": "Os insights são escritos em linguagem simples e organizados por produto. Cada card mostra o caminho que o encontrou, para que as pessoas confiem ou descartem rápido. As descobertas aparecem conforme chegam, então o trabalho ganha forma na tela enquanto o resto da análise continua."
+        },
+        {
+          "label": "06 / AUTORIA",
+          "title": "De um improviso a uma infraestrutura compartilhada.",
+          "body": "Fui responsável pelo produto: o enquadramento do problema, a arquitetura, a lógica de ranking que as pessoas veem e a interface. Eu e o desenvolvedor construímos com código assistido por IA, o que permitiu a um time de duas pessoas entregar um sistema durável. Hoje ele roda com o Jev, um modelo de IA de ponta feito para julgamento em alto volume, ao lado do seu próprio ranking explicável."
         }
       ],
       "outcome": "Hoje a ferramenta apoia a produção de conteúdo de múltiplos produtos. Um fluxo inicial de pesquisa se tornou uma capacidade compartilhada.",

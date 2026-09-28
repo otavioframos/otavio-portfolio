@@ -41,6 +41,37 @@ export const caseEvidence: Record<string, Partial<Record<Lang, CaseEvidence>>> =
       next: 'Tirar as pessoas do navegador do app antes do pagamento e testar preço com o mesmo tráfego.',
     },
   },
-  'content-radar': {},
+  'content-radar': {
+    en: {
+      period: '2025–2026',
+      facts: { team: 'Me and a developer', platform: 'Web app + background worker' },
+      results: [
+        { value: '3', label: 'products researching with it', note: 'Shared workspace, one folder per product' },
+        { value: '4', label: 'sources in one inbox', note: 'TikTok, Reels, Shorts, Meta Ad Library' },
+        { value: '5 min', label: 'to 30 days: refresh on a schedule', note: 'Recurring runs per folder' },
+      ],
+      learnings: [
+        'Prove the value with the cheapest version, then rebuild when the requirements change. Patching would have cost more.',
+        'Trust comes from showing the path. People act on a finding faster when they can see why it was surfaced.',
+        'Finite beats infinite. A queue you can clear gets used; another feed gets ignored.',
+      ],
+      next: 'Deliver the best new references to Telegram, so teams act on them without opening the tool.',
+    },
+    pt: {
+      period: '2025–2026',
+      facts: { team: 'Eu e um desenvolvedor', platform: 'Web app + worker em segundo plano' },
+      results: [
+        { value: '3', label: 'produtos pesquisando com ele', note: 'Workspace compartilhado, uma pasta por produto' },
+        { value: '4', label: 'fontes numa só caixa', note: 'TikTok, Reels, Shorts, Biblioteca de Anúncios da Meta' },
+        { value: '5 min', label: 'a 30 dias: atualização agendada', note: 'Rodadas recorrentes por pasta' },
+      ],
+      learnings: [
+        'Provar o valor com a versão mais barata e reconstruir quando os requisitos mudam. Remendar teria custado mais.',
+        'Confiança vem de mostrar o caminho. As pessoas agem mais rápido numa descoberta quando veem por que ela apareceu.',
+        'Finito vence infinito. Uma fila que se esvazia é usada; mais um feed é ignorado.',
+      ],
+      next: 'Entregar as melhores referências novas no Telegram, para os times agirem sem abrir a ferramenta.',
+    },
+  },
   avela: {},
 };
