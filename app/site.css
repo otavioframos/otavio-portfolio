@@ -2,16 +2,18 @@
    Site system. Grid: 12 columns, 20px margin and gutter (4 columns, 16px on
    phones). Three anchor points carry every row: column 1, column 8 and the
    right edge. Running text starts at column 4.
-   Type: Arimo for names and titles, Inter for reading, mono for labels.
+   Type: Switzer for names, titles, labels and buttons; Inter for reading.
    ========================================================================== */
+@font-face{font-family:'Switzer';src:url('/fonts/switzer-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Switzer';src:url('/fonts/switzer-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'Switzer';src:url('/fonts/switzer-700.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
 :root{
   --bg:#050A1C;--bg-2:#0A1330;--fg:#EEF2FF;--fg-2:rgba(238,242,255,.64);--fg-3:rgba(238,242,255,.42);--line:rgba(238,242,255,.14);
   --blue:#2F6BFF;--blue-2:#8FB8FF;
   --m:20px;--g:20px;--cols:12;--top:60px;
   --ease:cubic-bezier(.2,.7,.1,1);
-  --f-display:var(--font-identity),'Helvetica Neue',Arial,sans-serif;
+  --f-display:'Switzer','Helvetica Neue',Arial,sans-serif;
   --f-text:var(--font-manrope),'Helvetica Neue',Arial,sans-serif;
-  --f-mono:var(--font-pixel),ui-monospace,Menlo,monospace;
   --space:clamp(64px,8vw,128px);
 }
 @media(max-width:760px){:root{--m:16px;--g:12px;--cols:4;--top:56px}}
@@ -25,7 +27,7 @@ img{display:block;max-width:100%;height:auto}
 a:focus-visible,button:focus-visible{outline:2px solid var(--blue-2);outline-offset:4px}
 
 .grid{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));column-gap:var(--g);padding-inline:var(--m)}
-.label{font:500 12px/1.4 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2)}
+.label{font:600 12px/1.4 var(--f-display);letter-spacing:.02em;text-transform:uppercase;color:var(--fg-2)}
 .ruled{position:relative;padding-top:14px}
 .ruled::before{content:'';position:absolute;top:0;left:var(--m);right:var(--m);height:1px;background:var(--line)}
 .inline-link{display:inline-block;justify-self:start;padding-bottom:2px;border-bottom:1px solid var(--line);font:600 15px/1.3 var(--f-display);letter-spacing:-.02em;color:var(--fg);transition:border-color .2s,color .2s}
@@ -59,17 +61,17 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-2);outline-off
 .hero::after{content:'';position:absolute;inset:auto 0 0;height:55%;z-index:-1;background:linear-gradient(180deg,transparent,rgba(5,10,28,.78));pointer-events:none}
 .hero-grid{align-items:end;row-gap:28px;padding-bottom:clamp(20px,2.4vw,32px)}
 .hero-id{grid-column:1/span 7}
-.hero-tag{display:inline-block;margin-bottom:18px;padding:.4rem .6rem;background:#000;font:500 12px/1.2 var(--f-mono);letter-spacing:.06em;animation:rise .9s var(--ease) .15s both}
+.hero-tag{display:inline-block;margin-bottom:18px;padding:.4rem .6rem;background:#000;font:600 12px/1.2 var(--f-display);letter-spacing:.02em;animation:rise .9s var(--ease) .15s both}
 .hero h1{margin-left:-.04em;font:600 clamp(3.2rem,8vw,7.6rem)/.9 var(--f-display);letter-spacing:-.055em;animation:rise 1s var(--ease) .25s both}
 .hero-copy{grid-column:8/span 4;animation:rise 1s var(--ease) .45s both}
 .hero-lead{max-width:30rem;font:400 15px/1.5 var(--f-text);color:#DCE4FF}
 .hero-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
-.hero-meta{margin-top:16px;font:500 11px/1.4 var(--f-mono);letter-spacing:.08em;color:#AFC0F0}
+.hero-meta{margin-top:16px;font:600 12px/1.4 var(--f-display);letter-spacing:.02em;color:#AFC0F0}
 .hero-scroll{grid-column:12/13;justify-self:end;font:600 13px var(--f-display);color:#C9D5FF;animation:fade 1s var(--ease) .8s both}
 @media(max-width:760px){.hero-id,.hero-copy{grid-column:1/-1}.hero-scroll{display:none}.hero h1{font-size:clamp(2.9rem,14vw,4rem)}}
 
 /* Square mono buttons with an arrow cell. */
-.action-link{position:relative;display:inline-flex;align-items:stretch;min-height:44px;border:1px solid #fff;background:#fff;color:#0B1440;font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.action-link{position:relative;display:inline-flex;align-items:stretch;min-height:44px;border:1px solid #fff;background:#fff;color:#0B1440;font:600 14px/1 var(--f-display);letter-spacing:-.02em;white-space:nowrap}
 .action-label{display:grid;align-self:center;height:1.25em;overflow:hidden;padding:0 14px}
 .action-label>span{grid-area:1/1;line-height:1.25;transition:transform .25s var(--ease)}
 .action-label>span+span{transform:translateY(115%)}
@@ -162,7 +164,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-2);outline-off
 .foot-list a{justify-self:start;transition:color .2s}
 .foot-list a:hover{color:var(--blue-2)}
 .foot-social{grid-column:10/span 3}
-.foot-base{margin-top:var(--space);font:500 11px/1.4 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--fg-3)}
+.foot-base{margin-top:var(--space);font:600 12px/1.4 var(--f-display);letter-spacing:.02em;text-transform:uppercase;color:var(--fg-3)}
 .foot-base p:first-child{grid-column:1/span 7}
 .foot-place{grid-column:8/span 4}
 .foot-top{grid-column:12/13;justify-self:end;white-space:nowrap}
@@ -181,7 +183,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-2);outline-off
 .case-facts{grid-column:8/span 5;display:grid}
 .case-facts>div{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:12px;align-items:baseline;padding-block:11px;border-top:1px solid var(--line)}
 .case-facts>div:last-child{border-bottom:1px solid var(--line)}
-.case-facts dt{font:500 12px/1.4 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--fg-3)}
+.case-facts dt{font:600 12px/1.4 var(--f-display);letter-spacing:.02em;text-transform:uppercase;color:var(--fg-3)}
 .case-facts dd{font-size:14px;line-height:1.45}
 .case-caption{grid-column:8/span 5;font-size:12px;line-height:1.45;color:var(--fg-3)}
 .decision{margin-top:6px;padding:18px 20px;background:var(--bg-2);border-left:2px solid var(--blue)}
@@ -191,7 +193,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-2);outline-off
 .case-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px;padding-block:18px;border-block:1px solid var(--line)}
 .case-results dt{font:600 clamp(32px,3.4vw,48px)/1 var(--f-display);letter-spacing:-.05em}
 .case-results dd{margin-top:6px;font-size:14px;line-height:1.45;color:var(--fg-2)}
-.case-results small{display:block;margin-top:4px;font:500 11px/1.4 var(--f-mono);color:var(--fg-3)}
+.case-results small{display:block;margin-top:4px;font:600 12px/1.4 var(--f-display);color:var(--fg-3)}
 .case-figure{margin-top:clamp(48px,6vw,96px);row-gap:12px}
 .case-figure-media{grid-column:1/-1;display:grid;place-items:center;padding:clamp(24px,6vw,96px)}
 .case-figure-media img{max-height:78vh;width:auto;object-fit:contain}
