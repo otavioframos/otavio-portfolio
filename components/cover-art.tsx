@@ -75,12 +75,6 @@ function AvelaArt() {
         <div className="av-bars"><span>Protein</span><span className="av-seg">{Array.from({ length: 10 }, (_, i) => <i key={i} className={i < 6 ? 'on' : undefined} />)}</span><span>Fibre</span><span className="av-seg gold">{Array.from({ length: 10 }, (_, i) => <i key={i} className={i < 8 ? 'on' : undefined} />)}</span></div>
       </div>
       <p className="av-ui av-ui-coach">Nice balance. The fibre will carry you to the afternoon.</p>
-      <div className="av-ui av-ui-day">
-        <div className="av-day-sky">
-          {[{ x: 18, l: 'Breakfast' }, { x: 44, l: 'Lunch' }, { x: 66, l: 'Snack' }, { x: 88, l: 'Dinner', todo: true }].map(m => <span key={m.l} className={'av-day-dot' + (m.todo ? ' todo' : '')} style={{ left: `${m.x}%` }} title={m.l} />)}
-        </div>
-        <div className="av-day-tx"><b>Today</b><small>3 of 4 meals · steady energy</small></div>
-      </div>
       <div className="av-ui av-ui-plate">
         <div className="av-plate-ph"><span>82</span></div>
         <div className="av-day-tx"><b>Grain bowl</b><small>Balanced</small></div>

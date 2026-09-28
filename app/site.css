@@ -720,17 +720,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-2);outline-off
 .av-ui-meal b,.av-day-tx b{font:400 18px/1.1 'Fraunces',Georgia,serif;letter-spacing:-.01em}
 .av-bars{display:grid;grid-template-columns:52px 1fr;gap:8px 0;align-items:center;font-size:11px;color:#7A857F}
 .av-seg{display:grid;grid-template-columns:repeat(10,1fr);gap:3px}.av-seg i{height:4px;border-radius:2px;background:rgba(94,140,131,.18)}.av-seg i.on{background:#5E8C83}.av-seg.gold i.on{background:#D6A24A}
-.av-ui-day{right:calc(50% - min(32vw,420px));bottom:14%;width:min(20vw,250px);padding:10px;display:grid;gap:12px;animation-delay:-4s}
-.av-day-sky{position:relative;height:96px;border-radius:14px;background:radial-gradient(60% 80% at 20% 70%,#F3D9B8,transparent 70%),radial-gradient(55% 70% at 55% 30%,#F7E9CF,transparent 70%),radial-gradient(50% 70% at 90% 80%,#B9CFC4,transparent 70%),#EFE6D8;overflow:hidden}
-.av-day-sky::before{content:'';position:absolute;left:8%;right:6%;top:62%;height:1px;background:rgba(36,49,46,.18)}
-.av-day-dot{position:absolute;top:62%;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#5E8C83;box-shadow:0 0 0 3px rgba(255,255,255,.7)}
-.av-day-dot.todo{background:transparent;box-shadow:inset 0 0 0 1.5px #5E8C83,0 0 0 3px rgba(255,255,255,.5)}
 .av-day-tx{display:flex;justify-content:space-between;align-items:baseline;padding:0 8px 6px}.av-day-tx small{font-size:11.5px;color:#5E8C83}
-@media(max-width:760px){.av-ui-meal{left:4%;top:9%;width:54%;padding:12px 14px;gap:8px}.av-n{font-size:22px}.av-ui-meal b{font-size:15px}.av-ui-day{display:none}}
-
+@media(max-width:760px){.av-ui-meal{left:4%;top:9%;width:54%;padding:12px 14px;gap:8px}.av-n{font-size:22px}.av-ui-meal b{font-size:15px}}
 /* Smaller floating set; plate card joins the float */
 .avela-ui .av-ui{scale:.86}
-.av-ui-plate{left:calc(50% - min(30vw,390px));bottom:12%;width:min(17vw,210px);padding:9px;display:grid;gap:10px;animation-delay:-5.5s}
+.av-ui-plate{right:calc(50% - min(32vw,420px));bottom:14%;width:min(17vw,210px);padding:9px;display:grid;gap:10px;animation-delay:-5.5s}
 .av-plate-ph{position:relative;height:84px;border-radius:13px;background:radial-gradient(60% 70% at 35% 40%,#E9C7A0,transparent 70%),radial-gradient(50% 60% at 70% 60%,#A9C4A6,transparent 70%),radial-gradient(40% 40% at 55% 30%,#F3E3C3,transparent 70%),#EFE6D8}
 .av-plate-ph span{position:absolute;right:8px;top:8px;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.8);font:500 11.5px 'Fraunces',Georgia,serif}
 .av-ui-plate .av-day-tx{padding:0 6px 4px}
