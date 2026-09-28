@@ -158,6 +158,7 @@ export const projects = [
         },
         {
           "label": "05 / INTERACTION DESIGN",
+          "figure": "radar-card",
           "title": "Make the work visible.",
           "body": "Insights are written in plain language and organised by product. Each card shows the path that found it, so people can trust or discard it quickly. Findings appear as they arrive, so the work takes shape on screen while the rest of the analysis runs."
         },
@@ -211,6 +212,7 @@ export const projects = [
         },
         {
           "label": "05 / DESIGN DE INTERAÇÃO",
+          "figure": "radar-card",
           "title": "Tornar o trabalho visível.",
           "body": "Os insights são escritos em linguagem simples e organizados por produto. Cada card mostra o caminho que o encontrou, para que as pessoas confiem ou descartem rápido. As descobertas aparecem conforme chegam, então o trabalho ganha forma na tela enquanto o resto da análise continua."
         },

@@ -236,3 +236,79 @@ export function RadarCluster({ lang }: { lang: Lang }) {
     </figure>
   </div>;
 }
+
+/* ───────────────────────── Inbox card ───────────────────────── */
+
+type Status = 'new' | 'inspired' | 'used' | 'gone';
+type Item = { id: string; handle: string; capEn: string; capPt: string; score: number; viral: string; views: string; path: string[]; hue: number };
+
+/* Illustrative items in the production card layout (v3 tokens: paper, copper, dark card). */
+const ITEMS: Item[] = [
+  { id: 'a', handle: '@memorycoach', capEn: '3 memory tricks I wish I knew at 40', capPt: '3 truques de memória que eu queria saber aos 40', score: 86, viral: '3.4×', views: '412K', path: ['#braintraining', '#memory', '@memorycoach'], hue: 18 },
+  { id: 'b', handle: '@focuslab', capEn: 'The 90-second focus reset', capPt: 'O reset de foco de 90 segundos', score: 79, viral: '2.1×', views: '128K', path: ['#braintraining', '#focus', '♫ lofi study'], hue: 210 },
+  { id: 'c', handle: '@puzzleaday', capEn: 'Can you solve this before the timer?', capPt: 'Você resolve antes do cronômetro?', score: 71, viral: '1.6×', views: '64K', path: ['#braintraining', '#puzzle', '@puzzleaday'], hue: 140 },
+];
+
+const ACTIONS = [
+  { key: 'inspire', en: 'Inspire me', pt: 'Inspirar', to: 'inspired' as Status, effEn: 'Moved to Inspired. It becomes a seed: the next run searches around it.', effPt: 'Foi para Inspirados. Vira semente: a próxima rodada busca em volta dele.' },
+  { key: 'more', en: 'More like this', pt: 'Mais assim', to: 'inspired' as Status, effEn: 'Its path gains weight. Expect more from this corner of the graph.', effPt: 'O caminho dele ganha peso. Espere mais desse canto do grafo.' },
+  { key: 'used', en: 'Used', pt: 'Usado', to: 'used' as Status, effEn: 'Marked as used and kept as a seed, so the team never re-reviews it.', effPt: 'Marcado como usado e mantido como semente, para o time nunca revisar de novo.' },
+  { key: 'no', en: 'Not relevant', pt: 'Não relevante', to: 'gone' as Status, effEn: 'Removed from the inbox, and the path that found it stops counting.', effPt: 'Sai da caixa, e o caminho que o encontrou deixa de contar.' },
+];
+
+export function RadarCard({ lang }: { lang: Lang }) {
+  const [status, setStatus] = useState<Record<string, Status>>({ a: 'new', b: 'new', c: 'new' });
+  const [tab, setTab] = useState<Status>('new');
+  const [sel, setSel] = useState('a');
+  const [effect, setEffect] = useState<{ key: string; item: string } | null>(null);
+  const list = ITEMS.filter(i => status[i.id] === tab);
+  const it = ITEMS.find(i => i.id === sel) ?? ITEMS[0];
+  const count = (s: Status) => ITEMS.filter(i => status[i.id] === s).length;
+  const act = (a: typeof ACTIONS[number]) => {
+    setStatus(st => ({ ...st, [it.id]: a.to }));
+    setEffect({ key: a.key, item: it.id });
+    const next = ITEMS.find(i => i.id !== it.id && status[i.id] === 'new');
+    if (next) setSel(next.id);
+  };
+  const reset = () => { setStatus({ a: 'new', b: 'new', c: 'new' }); setTab('new'); setSel('a'); setEffect(null); };
+  const eff = effect && ACTIONS.find(a => a.key === effect.key);
+  const effItem = effect && ITEMS.find(i => i.id === effect.item);
+  const tabs: [Status, string, string][] = [['new', 'New', 'Novos'], ['inspired', 'Inspired', 'Inspirados'], ['used', 'Used', 'Usados']];
+
+  return <figure className="rc" aria-label={tr(lang, 'Content Radar inbox', 'Caixa do Content Radar')}>
+    {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+    <link rel="stylesheet" precedence="default" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+    <div className="rc-inbox">
+      <div className="rc-tabs" role="tablist">{tabs.map(([k, en, pt]) => <button key={k} type="button" role="tab" aria-selected={tab === k} onClick={() => setTab(k)}>{tr(lang, en, pt)}<span>{count(k)}</span></button>)}</div>
+      <ul className="rc-list">
+        {list.length === 0 && <li className="rc-empty">{tab === 'new' ? tr(lang, 'Inbox cleared.', 'Caixa zerada.') : tr(lang, 'Nothing here yet.', 'Nada aqui ainda.')}{tab === 'new' && <button type="button" onClick={reset}>{tr(lang, 'Reset demo', 'Reiniciar demo')}</button>}</li>}
+        {list.map(i => <li key={i.id}><button type="button" className={'rc-row' + (i.id === sel ? ' is-sel' : '')} onClick={() => setSel(i.id)}>
+          <span className="rc-thumb" style={{ '--h': i.hue } as CSSProperties} />
+          <span className="rc-row-t"><b>{i.handle}</b>{tr(lang, i.capEn, i.capPt)}</span>
+          <span className="rc-score">{i.score}</span>
+        </button></li>)}
+      </ul>
+    </div>
+
+    <div className="rc-detail" key={it.id}>
+      <div className="rc-media" style={{ '--h': it.hue } as CSSProperties}><span>{it.handle}</span></div>
+      <div className="rc-body">
+        <p className="rc-cap">{tr(lang, it.capEn, it.capPt)}</p>
+        <dl className="rc-scoreline">
+          <div><dt>{tr(lang, 'Inspiration', 'Inspiração')}</dt><dd>{it.score}</dd></div>
+          <div><dt>Viral</dt><dd>{it.viral}</dd></div>
+          <div><dt>{tr(lang, 'Views', 'Views')}</dt><dd>{it.views}</dd></div>
+        </dl>
+        <div className="rc-why">
+          <span>{tr(lang, 'Why it surfaced', 'Por que apareceu')}</span>
+          <ol className={'rc-path' + (effect?.key === 'no' && effect.item === it.id ? ' is-cut' : '')}>{it.path.map((p, i) => <li key={p}>{i > 0 && <i aria-hidden="true">→</i>}<span>{p}</span></li>)}</ol>
+        </div>
+        <div className="rc-actions">{ACTIONS.map((a, i) => <button key={a.key} type="button" className={i < 2 ? '' : 'is-2'} disabled={status[it.id] !== 'new'} onClick={() => act(a)}>{tr(lang, a.en, a.pt)}</button>)}</div>
+      </div>
+    </div>
+
+    <p className="rc-effect" aria-live="polite">{eff && effItem
+      ? <><b>{effItem.handle}</b> · {tr(lang, eff.effEn, eff.effPt)}</>
+      : tr(lang, 'Illustrative items in the production layout. Try an action: each one changes what the next run looks for.', 'Itens ilustrativos no layout de produção. Teste uma ação: cada uma muda o que a próxima rodada procura.')}</p>
+  </figure>;
+}
