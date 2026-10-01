@@ -5,8 +5,8 @@ import type { Lang } from '@/lib/projects';
 
 /**
  * MindYoung case figures: the product's design system as a live specimen, the
- * assessment journey and the A/B reads. Only shares and relative effects are
- * shown: no traffic volumes, purchase rates or revenue.
+ * assessment journey, the A/B reads and how far people read the checkout.
+ * Shares and relative effects only: no traffic volumes or revenue.
  */
 
 const tr = (lang: Lang, en: string, pt: string) => (lang === 'pt' ? pt : en);
@@ -116,7 +116,7 @@ export function MindYoungSystem({ lang }: { lang: Lang }) {
    volumes, purchase rates or revenue, by rule. */
 const JOURNEY = [
   { v: 1, en: 'Started the assessment', pt: 'Começaram a avaliação', noteEn: 'Every person who answered the first question.', notePt: 'Todas as pessoas que responderam a primeira questão.' },
-  { v: 0.444, en: 'Answered every question', pt: 'Responderam todas as questões', noteEn: 'A 30-question battery, taken on a phone, mostly from a social feed.', notePt: 'Uma bateria de 30 questões, feita no celular, quase sempre vinda de um feed social.' },
+  { v: 0.444, en: 'Answered every question', pt: 'Responderam todas as questões', noteEn: 'A 29-question battery, taken on a phone, mostly from a social feed.', notePt: 'Uma bateria de 29 questões, feita no celular, quase sempre vinda de um feed social.' },
   { v: 0.439, en: 'Reached their result', pt: 'Chegaram ao resultado', noteEn: 'Almost no one who finishes drops before seeing the result page.', notePt: 'Quase ninguém que termina desiste antes de ver a página de resultado.' },
 ];
 
@@ -144,7 +144,7 @@ export function MindYoungFunnel({ lang }: { lang: Lang }) {
 /* Relative to the control arm (= 100), so the chart shows effect size without
    publishing absolute conversion rates. */
 type Arm = { en: string; pt: string; idx: number; ci?: number };
-type Test = { key: string; en: string; pt: string; metricEn: string; metricPt: string; arms: [Arm, Arm]; verdictEn: string; verdictPt: string; moved: boolean };
+type Test = { key: string; en: string; pt: string; metricEn: string; metricPt: string; arms: [Arm, Arm]; verdictEn: string; verdictPt: string; moved: boolean; chipEn?: string; chipPt?: string };
 
 const TESTS: Test[] = [
   {
@@ -158,9 +158,10 @@ const TESTS: Test[] = [
     verdictEn: 'Moving a hard question later changed completion by a rounding error.', verdictPt: 'Mover uma questão difícil para depois mudou a conclusão por um erro de arredondamento.',
   },
   {
-    key: 'webview', en: 'Where checkout opens', pt: 'Onde o checkout abre', metricEn: 'Purchase at checkout · in-app = 100', metricPt: 'Compra no checkout · navegador do app = 100', moved: true,
-    arms: [{ en: 'In-app browser', pt: 'Navegador do app', idx: 100 }, { en: 'Regular browser', pt: 'Navegador comum', idx: 200 }],
-    verdictEn: 'Twice the conversion outside Instagram and Facebook’s in-app browsers, where wallets and autofill are missing.', verdictPt: 'O dobro de conversão fora dos navegadores do Instagram e do Facebook, onde faltam carteiras digitais e preenchimento automático.',
+    key: 'browser', en: 'Asking people to switch browser', pt: 'Pedir para trocar de navegador', metricEn: 'Purchases per person who finished the test · control = 100', metricPt: 'Compras por pessoa que terminou o teste · controle = 100', moved: false,
+    chipEn: 'My hypothesis lost', chipPt: 'Minha hipótese perdeu',
+    arms: [{ en: 'Straight to checkout', pt: 'Direto ao checkout', idx: 100 }, { en: 'Asked to switch first', pt: 'Pedido para trocar antes', idx: 49 }],
+    verdictEn: 'The screen that sent people to their own browser sold about half as much, and a third left on it. Small sample: direction, not proof.', verdictPt: 'A tela que mandava as pessoas para o próprio navegador vendeu cerca de metade, e um terço saiu nela. Amostra pequena: direção, não prova.',
   },
 ];
 
@@ -184,8 +185,39 @@ export function MindYoungTests({ lang }: { lang: Lang }) {
       <p className="my-arm-k">{tr(lang, arm.en, arm.pt)}</p>
     </div>)}</div>
     <figcaption className="my-chart-read">
-      <span className={'my-chip' + (t.moved ? ' is-moved' : '')}>{t.moved ? tr(lang, 'Moves the number', 'Move o número') : tr(lang, 'No effect', 'Sem efeito')}</span>
+      <span className={'my-chip' + (t.moved ? ' is-moved' : '')}>{t.chipEn ? tr(lang, t.chipEn, t.chipPt ?? t.chipEn) : t.moved ? tr(lang, 'Moves the number', 'Move o número') : tr(lang, 'No effect', 'Sem efeito')}</span>
       {tr(lang, t.verdictEn, t.verdictPt)}
     </figcaption>
+  </figure>;
+}
+
+/* ───────────────────────── How far people read the checkout ───────────────────────── */
+
+/* Share of people who saw each section of the checkout page, split by whether
+   they bought. Section-view events, once per visit; not a tap heatmap. */
+const REACH = [
+  { en: 'Headline and what you get', pt: 'Título e o que você recebe', no: 1, yes: 1 },
+  { en: 'Payment block', pt: 'Bloco de pagamento', no: 0.89, yes: 1 },
+  { en: 'Comparison', pt: 'Comparação', no: 0.66, yes: 0.49 },
+  { en: 'Report preview', pt: 'Prévia do relatório', no: 0.53, yes: 0.29 },
+  { en: 'What the test measures', pt: 'O que o teste mede', no: 0.42, yes: 0.17 },
+  { en: 'Questions and answers', pt: 'Perguntas e respostas', no: 0.27, yes: 0.1 },
+  { en: 'Footer', pt: 'Rodapé', no: 0.21, yes: 0.07 },
+];
+
+export function MindYoungReach({ lang }: { lang: Lang }) {
+  return <figure className="my-chart">
+    <div className="my-chart-head">
+      <p className="label">{tr(lang, 'Share who saw each part of the payment page', 'Quantos viram cada parte da página de pagamento')}</p>
+      <p className="my-reach-key"><span className="is-no" />{tr(lang, 'Did not buy', 'Não compraram')}<span className="is-yes" />{tr(lang, 'Bought', 'Compraram')}</p>
+    </div>
+    <ol className="my-reach">{REACH.map(r => <li key={r.en}>
+      <span className="my-fname">{tr(lang, r.en, r.pt)}</span>
+      <span className="my-reach-bars">
+        <span className="my-reach-bar is-no" style={{ '--w': r.no } as CSSProperties}><i>{pct(r.no, lang, 0)}</i></span>
+        <span className="my-reach-bar is-yes" style={{ '--w': r.yes } as CSSProperties}><i>{pct(r.yes, lang, 0)}</i></span>
+      </span>
+    </li>)}</ol>
+    <figcaption className="my-chart-read">{tr(lang, 'Buyers decide near the top. People who leave keep reading, as if looking for a reason to pay.', 'Quem compra decide perto do topo. Quem vai embora continua lendo, como quem procura um motivo para pagar.')}</figcaption>
   </figure>;
 }
