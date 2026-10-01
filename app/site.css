@@ -732,3 +732,21 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-2);outline-off
 
 /* How I work: one of each card, plain horizontal scroll with snap */
 .hw-scroll{scroll-snap-type:x mandatory;scroll-padding-inline:var(--m);-webkit-mask-image:none;mask-image:none}.hw-scroll .marquee-set{padding-inline:var(--m)}.hw-scroll .hw-card{scroll-snap-align:start}
+
+/* Reading mode (plain / technical): both registers are in the HTML. */
+.case[data-depth=plain] .reg-tech,.case[data-depth=tech] .reg-plain{display:none}
+.depth{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0 0 22px;padding:0;border:0;min-width:0}
+.depth legend{float:left;padding:0;margin-right:14px;line-height:32px}
+.depth-hint{font-size:13px;line-height:1.4;color:var(--fg-3)}
+.my-reach{list-style:none;margin:0;padding:0;display:grid}
+.my-reach li{display:grid;grid-template-columns:minmax(120px,2fr) 7fr;align-items:center;gap:16px;padding:12px 0;border-top:1px solid var(--line)}
+.my-reach-bars{display:grid;gap:4px;min-width:0}
+.my-reach-bar{display:block;height:16px;width:calc(var(--w)*100%);min-width:34px;border-radius:4px;position:relative}
+.my-reach-bar.is-no{background:rgba(143,184,255,.35)}
+.my-reach-bar.is-yes{background:var(--blue)}
+.my-reach-bar i{position:absolute;right:6px;top:0;font:600 11px/16px var(--f-display);font-style:normal;font-variant-numeric:tabular-nums;color:var(--fg)}
+.my-reach-key{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:0;font:600 12.5px/1 var(--f-display);color:var(--fg-2)}
+.my-reach-key span{display:inline-block;width:12px;height:12px;border-radius:3px;margin-left:8px}
+.my-reach-key .is-no{background:rgba(143,184,255,.35);margin-left:0}
+.my-reach-key .is-yes{background:var(--blue)}
+@media(max-width:760px){.my-reach li{grid-template-columns:1fr;gap:8px}}
