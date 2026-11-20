@@ -89,7 +89,7 @@ export function Portfolio({ lang }: { lang: Lang }) {
         <div className="grid block ruled about-top">
           <h2 id="about-title" className="label">{tr(lang, 'My ethos', 'Meu ethos')}</h2>
           <ScrollWords className="about-statement" text={tr(lang, 'Making things that are easy to understand and useful in everyday life.', 'Fazer coisas fáceis de entender e úteis no dia a dia.')} />
-          <figure className="about-portrait"><img src="/images/otavio-portrait.webp" alt="Otávio Ramos" width="800" height="1000" loading="lazy" decoding="async" /></figure>
+          <figure className="about-portrait"><img src="/images/otavio-portrait.webp" alt="Otávio Ramos" width="800" height="1000" decoding="async" /></figure>
           <div className="about-text">
             <p>{tr(lang, 'I’m the founding product designer at A3Lab, A3Media’s consumer-app studio. I joined at its launch and remain the only designer on the team. My work includes the brand, our first two apps, and internal tools.', 'Sou Founding Product Designer na A3Lab, estúdio de apps B2C da A3Media. Entrei na criação do estúdio e continuo sendo o único designer do time. Trabalho na marca, nos dois primeiros apps e em ferramentas internas.')}</p>
             <details className="about-more">
