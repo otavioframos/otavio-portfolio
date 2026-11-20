@@ -12,8 +12,9 @@ import { RevealObserver } from '@/components/reveal';
 import { SiteHeader } from '@/components/site-header';
 import { ScrollWords } from '@/components/scroll-words';
 import { MoreWorks } from '@/components/more-works';
+import { DepthToggle } from '@/components/depth-toggle';
 import { Gallery } from '@/components/gallery';
-import { MindYoungSystem, MindYoungFunnel, MindYoungTests } from '@/components/mindyoung';
+import { MindYoungSystem, MindYoungFunnel, MindYoungTests, MindYoungReach } from '@/components/mindyoung';
 import { RadarEvolution, RadarCluster, RadarCard } from '@/components/radar';
 import { AvelaMatrix, AvelaQuiz, AvelaOnboarding, AvelaSystem } from '@/components/avela';
 import { VelaPrinciples, VelaJobs, VelaMetric } from '@/components/vela';
@@ -130,7 +131,7 @@ function HowIWork({ lang }: { lang: Lang }) {
   return <section className="marquee hw-scroll" aria-label={tr(lang, 'How I work', 'Como trabalho')}><div className="marquee-set">{list}</div></section>;
 }
 
-const FIGURES = { system: MindYoungSystem, funnel: MindYoungFunnel, tests: MindYoungTests, 'radar-evolution': RadarEvolution, 'radar-cluster': RadarCluster, 'radar-card': RadarCard, 'avela-matrix': AvelaMatrix, 'avela-quiz': AvelaQuiz, 'avela-onboarding': AvelaOnboarding, 'avela-system': AvelaSystem, 'vela-principles': VelaPrinciples, 'vela-jobs': VelaJobs, 'vela-metric': VelaMetric };
+const FIGURES = { system: MindYoungSystem, funnel: MindYoungFunnel, tests: MindYoungTests, reach: MindYoungReach, 'radar-evolution': RadarEvolution, 'radar-cluster': RadarCluster, 'radar-card': RadarCard, 'avela-matrix': AvelaMatrix, 'avela-quiz': AvelaQuiz, 'avela-onboarding': AvelaOnboarding, 'avela-system': AvelaSystem, 'vela-principles': VelaPrinciples, 'vela-jobs': VelaJobs, 'vela-metric': VelaMetric };
 
 export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
   const p = projects.find(item => item.slug === slug);
@@ -139,6 +140,9 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
   const spec = covers[slug];
   const ev = caseEvidence[slug]?.[lang];
   const base = path(lang);
+  // Two registers of the same text (plain / technical): both render, CSS shows one.
+  const hasDepth = 'leadTech' in c;
+  const reg = (plain: string, tech?: string) => tech ? <><span className="reg-plain">{plain}</span><span className="reg-tech">{tech}</span></> : plain;
   const extraSize = p.slug === 'mindyoung' ? [512, 512] : p.slug === 'avela' ? [1920, 1080] : [1440, 1024];
   const facts: [string, string][] = [
     [tr(lang, 'Role', 'Papel'), c.role],
@@ -150,7 +154,7 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
   ];
   return <div className="page" lang={lang === 'pt' ? 'pt-BR' : 'en'}>
     <Header lang={lang} slug={slug} progress />
-    <main id="main" className="case">
+    <main id="main" className="case" data-depth="plain">
       <Cover slug={slug} spec={spec} alt={c.caption} name={p.name} kind={spec.kind?.[lang] ?? c.category} meta={ev?.period ?? '2026'} priority nameAs="p" />
       <div className="grid case-head">
         <div className="case-title">
@@ -167,7 +171,8 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
       <section className="grid block ruled">
         <h2 className="label">{tr(lang, 'Context', 'Contexto')}</h2>
         <div className="prose">
-          <p className="lead">{c.lead}</p>
+          {hasDepth && <DepthToggle lang={lang} />}
+          <p className="lead">{reg(c.lead, 'leadTech' in c ? c.leadTech : undefined)}</p>
           <aside className="decision">
             <div className="decision-card">
               <p className="decision-head">
@@ -186,7 +191,7 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
           <p className="label">{s.label}</p>
           <div className="prose">
             <h2 data-reveal="">{s.title}</h2>
-            <p>{s.body}</p>
+            <p>{reg(s.body, 'tech' in s ? s.tech : undefined)}</p>
             {'points' in s && <ul>{s.points.map(point => <li key={point}>{point}</li>)}</ul>}
           </div>
           {'figure' in s && String(s.figure).split(' ').map(key => { const F = FIGURES[key as keyof typeof FIGURES]; return F ? <div className="case-fig" key={key}><F lang={lang} /></div> : null; })}
@@ -198,7 +203,7 @@ export function CaseStudy({ slug, lang }: { slug: string; lang: Lang }) {
         <h2 className="label">{tr(lang, 'Where it stands', 'Onde chegou')}</h2>
         <div className="prose">
           {ev?.results && ev.results.length > 0 && <dl className="case-results">{ev.results.map(r => <div key={r.label}><dt>{r.value}</dt><dd>{r.label}{r.note && <small>{r.note}</small>}</dd></div>)}</dl>}
-          <p className="lead">{c.outcome}</p>
+          <p className="lead">{reg(c.outcome, 'outcomeTech' in c ? c.outcomeTech : undefined)}</p>
           {ev?.learnings && ev.learnings.length > 0 && <aside className="decision">
             <div className="decision-card">
               <h3 className="decision-head">

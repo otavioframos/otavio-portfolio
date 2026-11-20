@@ -23,89 +23,141 @@ export const projects = [
     "url": "https://mindyoung.app/",
     "en": {
       "category": "CONSUMER PRODUCT",
-      "title": "Identity, interface and daily cognitive training.",
-      "summary": "Designed the identity, design system and app screens alongside development.",
-      "role": "Sole designer · Owned design, measurement and experiments",
-      "scope": "Brand identity / UX & UI / Design system / Acquisition",
+      "title": "People came for a number. The product sold a subscription.",
+      "summary": "Designed the product end to end, then found the real problem was the promise, not the screens.",
+      "role": "Sole designer · Design, measurement, experiments and product decisions",
+      "scope": "Brand identity / UX & UI / Design system / Checkout and pricing / Emails and billing",
       "status": "Live product",
-      "decision": "Use one visual system across acquisition and in-app training.",
-      "why": "The first contact is a quiz opened from an ad; the relationship is daily training. If they looked like two products, the trust built in the assessment would reset at the paywall.",
-      "lead": "A3Lab was created to explore new consumer products within A3Media. MindYoung brings cognitive assessment and ongoing training into one product. As the only designer, I owned its identity, interface and acquisition journey, and went past design: I measured the journey and designed the experiments that decided what changed.",
+      "decision": "Stop polishing screens and redo the deal with the customer: deliver what was promised, make the offer easy to read, and be honest about charging.",
+      "why": "People finished the test and left at the payment screen. The ones who paid kept writing the same thing: they only wanted their result. The screens were fine. The promise was not.",
+      "lead": "MindYoung is an IQ-style test that turns into daily brain training. As the only designer, I created its identity, its design system and every screen. The product looked finished and people used it, but it cost more to bring in a buyer than a buyer paid back, and the team was losing heart. This is how I found where the problem really was, and what I changed.",
+      "leadTech": "MindYoung is a cognitive self-assessment sold as a paid trial that renews weekly, acquired through social ads on mobile web. As the only designer, I owned identity, design system and every screen, then measurement and experiments. The unit economics did not close: about 5% of people who reached checkout paid, 37% of trials kept their first weekly charge, and acquiring a buyer cost roughly three times what a buyer returned. This case is the diagnosis and the redesign.",
       "sections": [
         {
-          "label": "01 / RESPONSIBILITY",
-          "title": "One product. Many connected decisions.",
-          "body": "MindYoung is a cognitive assessment that turns into daily training. I designed the logo, the design system and every screen, from the quiz people open from an ad to the app. On the quiz, the team was me, a copywriter and a media buyer: I defined the structure and pacing of the journey, the copy worked inside it, and traffic fed it."
-        },
-        {
-          "label": "02 / THE SYSTEM",
+          "label": "01 / THE SETUP",
           "title": "One language, from the ad to the app.",
-          "body": "People meet MindYoung in a quiz opened from a social ad and stay for training inside the app. I built one system for both: a warm paper ground, deep ink, a single blue for action, and generous shapes that read as physical keys on a phone. The specimen below uses the production tokens.",
+          "body": "People meet MindYoung in a test opened from a social ad and stay for training inside the app. I designed the logo, the visual system and every screen so both moments feel like one product: a warm paper background, dark ink, a single blue for action, and large shapes that read as physical keys on a phone. On the test, the team was me, a copywriter and a media buyer.",
+          "tech": "One token set serves the acquisition funnel (mobile web, mostly inside Instagram and Facebook's in-app browsers) and the app: a single 30rem column, 16px gutters, touch targets above 56px, one accent colour reserved for the primary action. The same system later carried emails, the PDF report and printable workbooks. The specimen below uses the production tokens.",
           "figure": "system"
         },
         {
-          "label": "03 / THE ASSESSMENT",
+          "label": "02 / THE ASSESSMENT",
           "title": "Built to be finished.",
-          "body": "A 30-question test on a phone, opened from a social feed, competes with every notification. I paced it in short sections with progress, small rewards between them and matrices that load before they are needed. Once it went live, the journey could be measured end to end, and that measurement set the priorities for what came next.",
+          "body": "A 29-question test on a phone, opened from a social feed, competes with every notification. I paced it in short sections with visible progress, small rewards between them and puzzles that load before they are needed. People finish it.",
+          "tech": "In the first four weeks, 44% of people who answered the first item answered all of them, and almost none dropped between the last item and the result. On paid traffic in the latest read, about 60% of starters reach the end (a different window and traffic mix, so not a like-for-like gain). Completion was never the constraint, which is what sent me looking further down the journey.",
           "figure": "funnel"
         },
         {
-          "label": "04 / TESTING",
-          "title": "Two tests that settled a debate, and a finding that moved the number.",
-          "body": "I designed two live A/B tests on details the team expected to matter: showing the score band before payment and the position of a hard question. At about 1,500 people per arm, neither moved, which ended the debate and freed the roadmap. Then I segmented checkout data by where it opened and found the real lever: in a regular browser, with wallets and autofill, people bought twice as often as inside Instagram and Facebook's in-app browsers. I proposed a way out, a prompt that reopens checkout in the phone's own browser, and it went live as its own A/B test.",
+          "label": "03 / THE PROBLEM",
+          "title": "It worked, and it did not pay for itself.",
+          "body": "After the test, people saw a payment screen: a small price today, then a weekly charge. Out of every hundred, ninety-five left. Of the few who paid, most cancelled within days or had their card refused at the first weekly charge. Bringing in a buyer cost about three times what that buyer paid back. A product can be well made and still not work.",
+          "tech": "Checkout view to purchase sat near 5% (6% submitted a card; 78% of cards were approved). Of trials, 37% kept the first weekly charge, 30% cancelled inside the trial and 32% were declined at renewal. Lifetime net per buyer was about a third of blended acquisition cost. Conversion varied four-fold by market: around 11% in the US against 3% on translated pages in euro markets."
+        },
+        {
+          "label": "04 / THE WRONG TURNS",
+          "title": "I looked for the problem in the screens. Then my own test proved me wrong.",
+          "body": "First I tested details the team believed in: showing part of the result before payment, and moving a hard question. Neither changed anything. Then I found a strong signal: people who paid in a regular browser bought twice as often as people inside Instagram and Facebook. I designed a screen asking people to switch browsers and ran it as a test. It sold about half as much. The people in a regular browser had not bought because of the browser. They had arrived wanting it more.",
+          "tech": "Two A/B tests at about 1,500 people per arm showed overlapping intervals: no measurable effect. The browser finding was observational, and the difference was selection: people already in a real browser reached us through different paths, with higher intent. The controlled test (50/50, iOS in-app visitors) put the gated arm at an index of 49 against control, with a third of people abandoning on the gate itself; small sample, so direction rather than proof. A second version with a visual guide closed the gap. The lesson was about method: a correlation is a reason to run a test, not a reason to ship.",
           "figure": "tests"
         },
         {
-          "label": "05 / OWNERSHIP",
-          "title": "From spec to result, one loop.",
-          "body": "I wrote the specs, reviewed every implemented screen and adjusted the system when real content broke it. After launch, the loop was mine: read the data, propose the change, design the test, read the result."
+          "label": "05 / THE TURN",
+          "title": "People who did not buy read more of the page than people who did.",
+          "body": "I stopped asking which screen was wrong and looked at what people did. Buyers decided in about a minute, on the first screen. People who left scrolled further down the page, as if looking for a reason to pay. And the buyers who cancelled wrote the same sentence in several languages: I only wanted my result. They came for a number and found a subscription. The problem was the promise, not the page.",
+          "tech": "A section-view funnel on the checkout: 90% see the payment block within five seconds and only 18% interact with it. Median time is 33 seconds for non-buyers and 64 seconds to purchase for buyers. Non-buyers reach the report preview at 53% against 29% for buyers, and the footer at 21% against 7%. Cancellation reasons (31 texts) and refund requests (13 cases) cluster on not wanting or not noticing the subscription. Those voices are buyers only; nobody who left unpaid was heard, which is the main gap in the evidence. In HCI terms: the person's mental model was a one-time purchase and the system's model was a subscription.",
+          "figure": "reach"
+        },
+        {
+          "label": "06 / THE NEW DEAL",
+          "title": "Four moves to redo the deal.",
+          "body": "If the problem was the promise, the fix was to keep it, and to be clear about everything around it.",
+          "tech": "Each move has a before-and-after baseline saved at the time it went live. Delivery: 20 of the 33 buyers who never reached the app had stopped at one extra screen, which I removed; 78% of new buyers now reach the app, against 69% before (23 buyers so far). Offer: extras offered after payment were accepted zero times in more than 60 exposures, so I moved them into the checkout as a second plan, shown first and pre-selected (default, anchoring and order effects); a higher entry price returned about 2.5 times more per visitor in the first read, with few purchases per arm. Charging: off-cycle retries of failed renewals had recovered 7 of 104 members and triggered fraud disputes; I replaced them with an offer the person accepts or ignores, and added a notice about a day before the first charge. Offers by email had reached 11 of 723 buyers because of a consent gate; they now reach every buyer, with one-click unsubscribe.",
+          "points": [
+            "Deliver what was promised. A path from payment to the app with no dead ends, and the full report sent by email.",
+            "Make the offer easy to read. The most complete plan comes first, what used to be offered after payment moved into the checkout, and the entry price is being tested.",
+            "Be honest about charging. A notice the day before the first charge. When a card fails, an offer the person chooses instead of a surprise charge.",
+            "Give a reason to stay. A home with tests, printables and a daily challenge, all included."
+          ]
+        },
+        {
+          "label": "07 / AUTHORSHIP",
+          "title": "My decisions, shipped with AI.",
+          "body": "The questions, the hypotheses and the decisions were mine, including the ones that went against my own ideas. I directed the implementation and the data analysis with AI coding tools, reviewed what came back and approved every change that reached production.",
+          "tech": "Changes shipped as reviewed pull requests with tests and database migrations. Every change is logged with its go-live time and the numbers before it, so later reads can attribute movement instead of guessing. I set the questions, the stopping rules and what counts as evidence; the tooling did the querying and the code."
         }
       ],
-      "outcome": "MindYoung is live. My contribution spans its identity, design system, screens, and acquisition experience.",
+      "outcome": "MindYoung is live in nine languages. The path from payment to the app works, charging is transparent and the offer is under test. Whether the product pays for itself is being read now, as the first buyers under the new deal reach their first weekly charge.",
+      "outcomeTech": "Targets for the current read: first-charge retention from 37% to at least 42%, cancellation inside the trial from 30% to 25% or less, and card submission at checkout from 6% towards 10%. At those rates the product breaks even on its cheaper campaigns. The read is honest about sample size: nothing here is claimed as a result until the cohort matures.",
       "caption": "Sample training screen from the public MindYoung site.",
       "extraCaption": "MindYoung’s product mascot."
     },
     "pt": {
       "category": "PRODUTO B2C",
-      "title": "Identidade, interface e treino cognitivo no dia a dia.",
-      "summary": "Desenhei a identidade, o design system e as telas do app junto a desenvolvimento.",
-      "role": "Único designer · Responsável por design, medição e experimentos",
-      "scope": "Identidade / UX e UI / Design system / Aquisição",
+      "title": "As pessoas vinham buscar um número. O produto vendia uma assinatura.",
+      "summary": "Desenhei o produto de ponta a ponta e descobri que o problema real era a promessa, não as telas.",
+      "role": "Único designer · Design, medição, experimentos e decisões de produto",
+      "scope": "Identidade / UX e UI / Design system / Checkout e preço / E-mails e cobrança",
       "status": "Produto no ar",
-      "decision": "Usar um mesmo sistema visual na aquisição e no treino dentro do app.",
-      "why": "O primeiro contato é um quiz aberto a partir de um anúncio; a relação é o treino diário. Se parecessem dois produtos, a confiança criada na avaliação se perderia no paywall.",
-      "lead": "A A3Lab nasceu para explorar novos produtos B2C dentro da A3Media. O MindYoung reúne avaliação cognitiva e treino contínuo em um produto. Como único designer, fui responsável pela identidade, pela interface e pela jornada de aquisição, e fui além do design: medi a jornada e desenhei os experimentos que decidiram o que mudava.",
+      "decision": "Parar de polir telas e refazer o acordo com o cliente: entregar o que foi prometido, deixar a oferta fácil de ler e ser honesto sobre a cobrança.",
+      "why": "As pessoas terminavam o teste e saíam na tela de pagamento. Quem pagava repetia a mesma frase: só queria o resultado. As telas estavam boas. A promessa, não.",
+      "lead": "O MindYoung é um teste no estilo de QI que vira treino diário para o cérebro. Como único designer, criei a identidade, o design system e todas as telas. O produto parecia pronto e as pessoas usavam, mas trazer um comprador custava mais do que ele pagava de volta, e o time foi desanimando. Esta é a história de como descobri onde o problema realmente estava, e do que mudei.",
+      "leadTech": "O MindYoung é uma autoavaliação cognitiva vendida como trial pago com renovação semanal, adquirida por anúncios em redes sociais no celular. Como único designer, fui responsável por identidade, design system e todas as telas, e depois por medição e experimentos. A conta não fechava: cerca de 5% de quem chegava ao checkout pagava, 37% dos trials mantinham a primeira cobrança semanal, e adquirir um comprador custava perto de três vezes o que ele retornava. Este case é o diagnóstico e o redesenho.",
       "sections": [
         {
-          "label": "01 / RESPONSABILIDADE",
-          "title": "Um produto. Muitas decisões conectadas.",
-          "body": "O MindYoung é uma avaliação cognitiva que vira treino diário. Desenhei o logo, o design system e todas as telas, do quiz aberto a partir de um anúncio até o app. No quiz, o time era eu, um copywriter e um gestor de tráfego: defini a estrutura e o ritmo da jornada, a copy trabalhou dentro dela e o tráfego a alimentou."
-        },
-        {
-          "label": "02 / O SISTEMA",
+          "label": "01 / O COMEÇO",
           "title": "Uma linguagem, do anúncio ao app.",
-          "body": "As pessoas conhecem o MindYoung num quiz aberto a partir de um anúncio e ficam pelo treino dentro do app. Criei um sistema para os dois: fundo papel quente, tinta profunda, um único azul para ação e formas generosas que parecem teclas físicas no celular. O espécime abaixo usa os tokens de produção.",
+          "body": "As pessoas conhecem o MindYoung num teste aberto a partir de um anúncio e ficam pelo treino dentro do app. Desenhei o logo, o sistema visual e todas as telas para que os dois momentos pareçam um produto só: fundo de papel quente, tinta escura, um único azul para ação e formas grandes que parecem teclas físicas no celular. No teste, o time era eu, um copywriter e um gestor de tráfego.",
+          "tech": "Um único conjunto de tokens atende o funil de aquisição (web no celular, quase sempre dentro dos navegadores do Instagram e do Facebook) e o app: uma coluna de 30rem, margens de 16px, alvos de toque acima de 56px e uma cor de destaque reservada para a ação principal. O mesmo sistema depois passou a cobrir e-mails, o relatório em PDF e os materiais para imprimir. O espécime abaixo usa os tokens de produção.",
           "figure": "system"
         },
         {
-          "label": "03 / A AVALIAÇÃO",
+          "label": "02 / A AVALIAÇÃO",
           "title": "Feita para ser terminada.",
-          "body": "Um teste de 30 questões no celular, aberto a partir de um feed social, compete com todas as notificações. Organizei o ritmo em seções curtas com progresso, pequenas recompensas entre elas e matrizes que carregam antes de serem necessárias. Com o produto no ar, a jornada passou a ser medida de ponta a ponta, e essa medição definiu as prioridades seguintes.",
+          "body": "Um teste de 29 questões no celular, aberto a partir de um feed social, compete com todas as notificações. Organizei o ritmo em seções curtas, com progresso visível, pequenas recompensas entre elas e desafios que carregam antes de serem necessários. As pessoas terminam.",
+          "tech": "Nas quatro primeiras semanas, 44% de quem respondeu a primeira questão respondeu todas, e quase ninguém desistiu entre a última questão e o resultado. No tráfego pago da leitura mais recente, cerca de 60% de quem começa chega ao fim (outra janela e outro perfil de tráfego, então não é um ganho comparável). A conclusão nunca foi o gargalo, e foi isso que me fez procurar mais adiante na jornada.",
           "figure": "funnel"
         },
         {
-          "label": "04 / TESTES",
-          "title": "Dois testes que encerraram uma discussão, e uma descoberta que moveu o número.",
-          "body": "Desenhei dois testes A/B em detalhes que o time achava decisivos: mostrar a faixa do resultado antes do pagamento e a posição de uma questão difícil. Com cerca de 1.500 pessoas por braço, nenhum moveu o número, o que encerrou a discussão e liberou o roadmap. Depois segmentei os dados de checkout por onde ele abria e encontrei a alavanca real: num navegador comum, com carteiras digitais e preenchimento automático, as pessoas compraram duas vezes mais do que dentro dos navegadores do Instagram e do Facebook. Propus uma saída, um aviso que reabre o checkout no navegador do próprio celular, e ela entrou no ar como um novo teste A/B.",
+          "label": "03 / O PROBLEMA",
+          "title": "Funcionava, e não se pagava.",
+          "body": "Depois do teste, a pessoa via uma tela de pagamento: um valor pequeno hoje e depois uma cobrança semanal. De cada cem, noventa e cinco iam embora. Dos poucos que pagavam, a maioria cancelava em poucos dias ou tinha o cartão recusado na primeira cobrança semanal. Trazer um comprador custava cerca de três vezes o que ele pagava de volta. Um produto pode ser bem feito e ainda assim não funcionar.",
+          "tech": "A conversão de checkout para compra ficava perto de 5% (6% enviavam o cartão; 78% dos cartões eram aprovados). Dos trials, 37% mantinham a primeira cobrança semanal, 30% cancelavam dentro do trial e 32% eram recusados na renovação. O retorno líquido por comprador era cerca de um terço do custo médio de aquisição. A conversão variava quatro vezes entre mercados: perto de 11% nos EUA contra 3% nas páginas traduzidas em mercados de euro."
+        },
+        {
+          "label": "04 / OS CAMINHOS ERRADOS",
+          "title": "Procurei o problema nas telas. Depois meu próprio teste mostrou que eu estava errado.",
+          "body": "Primeiro testei detalhes em que o time acreditava: mostrar parte do resultado antes do pagamento e mudar uma questão difícil de lugar. Nenhum dos dois mudou nada. Depois achei um sinal forte: quem pagava num navegador comum comprava duas vezes mais do que quem estava dentro do Instagram e do Facebook. Desenhei uma tela pedindo para a pessoa trocar de navegador e coloquei no ar como teste. Ela vendeu cerca de metade. Quem estava no navegador comum não comprava por causa do navegador. Já chegava querendo mais.",
+          "tech": "Dois testes A/B com cerca de 1.500 pessoas por braço tiveram intervalos sobrepostos: sem efeito mensurável. O achado do navegador era observacional, e a diferença era de seleção: quem já estava num navegador de verdade chegava por outros caminhos, com mais intenção. O teste controlado (50/50, visitantes de iPhone dentro dos apps) deixou o braço com a tela num índice de 49 contra o controle, com um terço das pessoas abandonando na própria tela; a amostra é pequena, então vale como direção, não como prova. Uma segunda versão com um guia visual fechou a diferença. A lição foi de método: correlação é motivo para rodar um teste, não para colocar no ar.",
           "figure": "tests"
         },
         {
-          "label": "05 / AUTORIA",
-          "title": "Da especificação ao resultado, um ciclo só.",
-          "body": "Escrevi as especificações, revisei cada tela implementada e ajustei o sistema quando o conteúdo real o quebrava. Depois do lançamento, o ciclo era meu: ler os dados, propor a mudança, desenhar o teste, ler o resultado."
+          "label": "05 / A VIRADA",
+          "title": "Quem não comprava lia mais a página do que quem comprava.",
+          "body": "Parei de perguntar qual tela estava errada e fui olhar o que as pessoas faziam. Quem comprava decidia em cerca de um minuto, na primeira tela. Quem ia embora rolava a página mais para baixo, como quem procura um motivo para pagar. E os compradores que cancelavam escreviam a mesma frase em várias línguas: eu só queria o meu resultado. Vinham buscar um número e encontravam uma assinatura. O problema era a promessa, não a página.",
+          "tech": "Um funil de seções vistas no checkout: 90% veem o bloco de pagamento em até cinco segundos e só 18% interagem com ele. O tempo mediano é de 33 segundos para quem não compra e de 64 segundos até a compra para quem compra. Quem não compra chega à prévia do relatório em 53% dos casos, contra 29% de quem compra, e ao rodapé em 21% contra 7%. Os motivos de cancelamento (31 textos) e os pedidos de reembolso (13 casos) se concentram em não querer ou não perceber a assinatura. Essas vozes são só de compradores; ninguém que saiu sem pagar foi ouvido, e essa é a principal lacuna da evidência. Em termos de IHC: o modelo mental da pessoa era uma compra única, e o modelo do sistema era uma assinatura.",
+          "figure": "reach"
+        },
+        {
+          "label": "06 / O NOVO ACORDO",
+          "title": "Quatro movimentos para refazer o acordo.",
+          "body": "Se o problema era a promessa, a solução era cumpri-la, e deixar claro tudo o que está em volta dela.",
+          "tech": "Cada movimento tem uma base de antes e depois salva no momento em que entrou no ar. Entrega: 20 dos 33 compradores que nunca chegaram ao app tinham parado numa tela extra, que eu removi; 78% dos novos compradores chegam ao app, contra 69% antes (23 compradores até aqui). Oferta: os extras oferecidos depois do pagamento foram aceitos zero vezes em mais de 60 exibições, então levei esses itens para dentro do checkout como um segundo plano, mostrado primeiro e já selecionado (efeitos de padrão, ancoragem e ordem); um preço de entrada mais alto rendeu cerca de 2,5 vezes mais por visitante na primeira leitura, com poucas compras por braço. Cobrança: as novas tentativas fora do ciclo tinham recuperado 7 de 104 assinantes e geravam disputas de fraude; troquei por uma oferta que a pessoa aceita ou ignora, e incluí um aviso cerca de um dia antes da primeira cobrança. As ofertas por e-mail chegavam a 11 de 723 compradores por causa de uma trava de consentimento; hoje chegam a todos, com descadastro em um clique.",
+          "points": [
+            "Entregar o que foi prometido. Um caminho do pagamento até o app sem telas sem saída, e o relatório completo enviado por e-mail.",
+            "Deixar a oferta fácil de ler. O plano mais completo aparece primeiro, o que era oferecido depois do pagamento foi para dentro do checkout, e o preço de entrada está em teste.",
+            "Ser honesto sobre a cobrança. Um aviso um dia antes da primeira cobrança. Quando o cartão falha, uma oferta que a pessoa escolhe, e não uma cobrança surpresa.",
+            "Dar motivo para ficar. Uma tela inicial com testes, materiais para imprimir e um desafio diário, tudo incluído."
+          ]
+        },
+        {
+          "label": "07 / AUTORIA",
+          "title": "Decisões minhas, colocadas no ar com IA.",
+          "body": "As perguntas, as hipóteses e as decisões foram minhas, inclusive as que contrariaram as minhas próprias ideias. Dirigi a implementação e a análise de dados com ferramentas de IA para código, revisei o que voltava e aprovei cada mudança que foi para produção.",
+          "tech": "As mudanças entraram como pull requests revisados, com testes e migrações de banco. Cada mudança fica registrada com a hora em que entrou no ar e os números de antes, para que as leituras seguintes atribuam o efeito em vez de supor. Eu defino as perguntas, as regras de parada e o que conta como evidência; as ferramentas fazem as consultas e o código."
         }
       ],
-      "outcome": "O MindYoung está no ar. Minha contribuição inclui identidade, design system, telas e experiência de aquisição.",
+      "outcome": "O MindYoung está no ar em nove idiomas. O caminho do pagamento até o app funciona, a cobrança é transparente e a oferta está em teste. Se o produto se paga é o que está sendo lido agora, à medida que os primeiros compradores do novo acordo chegam à primeira cobrança semanal.",
+      "outcomeTech": "Metas da leitura atual: retenção na primeira cobrança de 37% para pelo menos 42%, cancelamento dentro do trial de 30% para 25% ou menos, e envio de cartão no checkout de 6% rumo a 10%. Com essas taxas o produto se paga nas campanhas mais baratas. A leitura é honesta sobre o tamanho da amostra: nada aqui é dado como resultado antes de a turma amadurecer.",
       "caption": "Tela de exemplo de treino publicada no site do MindYoung.",
       "extraCaption": "Mascote do MindYoung."
     }
