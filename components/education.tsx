@@ -3,8 +3,13 @@ import type { Lang } from '@/lib/projects';
 const studies = [
   {
     institution: 'UX Design Institute × ESPM',
-    en: ['International UX Design certification', 'In progress · 2026–2027'],
-    pt: ['Certificação Internacional em UX Design', 'Em andamento · 2026–2027'],
+    en: ['International UX Design certification', 'Certified · 2026'],
+    pt: ['Certificação Internacional em UX Design', 'Certificação concluída · 2026'],
+  },
+  {
+    institution: 'Lorenna Mello',
+    en: ['Discovery Sprint · UX research', 'Certificate · 2026 · 24 h'],
+    pt: ['Discovery Sprint · pesquisa em UX', 'Certificado · 2026 · 24 h'],
   },
   {
     institution: 'Tera',
@@ -12,14 +17,9 @@ const studies = [
     pt: ['Digital Product Design', '2023–2024'],
   },
   {
-    institution: 'Lorenna Mello',
-    en: ['UX Research', 'Course'],
-    pt: ['UX Research', 'Curso'],
-  },
-  {
     institution: 'FIAP',
-    en: ['Systems Analysis and Development', 'Curso Superior de Tecnologia (CST) · Expected Aug 2027'],
-    pt: ['Análise e Desenvolvimento de Sistemas', 'Curso Superior de Tecnologia (CST) · Previsão: ago. 2027'],
+    en: ['Systems Analysis and Development', 'Curso Superior de Tecnologia (CST) · Expected mid-2027'],
+    pt: ['Análise e Desenvolvimento de Sistemas', 'Curso Superior de Tecnologia (CST) · Previsão: meados de 2027'],
   },
 ];
 
